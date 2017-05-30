@@ -1,0 +1,12 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Abstract}{2}{section.2}
+\contentsline {section}{\numberline {2}Introduction}{3}{section.5}
+\contentsline {subsection}{\numberline {2.1}Project Objectives}{3}{subsection.6}
+\contentsline {section}{\numberline {3}Background}{3}{section.7}
+\contentsline {subsection}{\numberline {3.1}Related Work}{3}{subsection.8}
+\contentsline {subsubsection}{\numberline {3.1.1}SLAM basic}{3}{subsubsection.9}
+\contentsline {subsubsection}{\numberline {3.1.2}Kinectfusion}{6}{subsubsection.12}
+\contentsline {subsubsection}{\numberline {3.1.3}Keyframe-Based Visual-Inertial SLAM Using Nonlinear Optimization}{8}{subsubsection.15}
+\contentsline {subsubsection}{\numberline {3.1.4}Elasticfusion}{9}{subsubsection.20}
+\contentsline {section}{\numberline {4}Project Plan}{11}{section.21}
+\contentsline {section}{\numberline {5}Evaluation plan}{13}{section.23}
