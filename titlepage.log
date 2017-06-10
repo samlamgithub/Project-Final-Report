@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  10 JUN 2017 13:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  10 JUN 2017 14:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -239,7 +239,7 @@ Overfull \hbox (33.95393pt too wide) in paragraph at lines 35--35
 <recently read> \reportauthor 
                               
 l.36 \reportauthor
-                  ~(CID: \cid) % Your name
+                  ~(CID: \cid) \\% Your name
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -253,7 +253,7 @@ Missing character: There is no D in font nullfont!
 Missing character: There is no : in font nullfont!
 ! Undefined control sequence.
 l.36 \reportauthor~(CID: \cid
-                             ) % Your name
+                             ) \\% Your name
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -261,16 +261,21 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 Missing character: There is no ) in font nullfont!
+Missing character: There is no E in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no : in font nullfont!
 ! Undefined control sequence.
-l.37 \reportsupervisor
-                      ~(Supervisor: \supervisor)\\
+l.37 Email: \email
+                  \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Missing character: There is no ( in font nullfont!
 Missing character: There is no S in font nullfont!
 Missing character: There is no u in font nullfont!
 Missing character: There is no p in font nullfont!
@@ -279,19 +284,41 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no v in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
-Missing character: There is no o in font nullfont!
-Missing character: There is no r in font nullfont!
-Missing character: There is no : in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no y in font nullfont!
 ! Undefined control sequence.
-l.37 \reportsupervisor~(Supervisor: \supervisor
-                                               )\\
+l.38 Supervised by \supervisor
+                              \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Missing character: There is no ) in font nullfont!
+Missing character: There is no S in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no : in font nullfont!
+! Undefined control sequence.
+l.39 Second marker: \secondmarker
+                                 \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 Missing character: There is no D in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no t in font nullfont!
@@ -300,7 +327,7 @@ Missing character: There is no : in font nullfont!
 ! Undefined control sequence.
 \@date ->\today 
                 
-l.41 Date: \@date
+l.43 Date: \@date
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -315,7 +342,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.50 \end{titlepage}
+l.52 \end{titlepage}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
