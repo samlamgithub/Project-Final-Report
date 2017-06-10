@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  10 JUN 2017 14:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  10 JUN 2017 14:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1422,189 +1422,184 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--31
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
-
- []
-
-(./report.toc
-LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 3.
-
- (/usr/local/texlive/2016/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
+LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 36
+.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
-) [2])
+) [2] [3]
+(./report.toc)
 \tf@toc=\write7
 \openout7 = `report.toc'.
 
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 52--53
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 54--55
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--72
+Underfull \hbox (badness 10000) in paragraph at lines 67--78
 
  []
 
 
 Underfull \vbox (badness 1122) has occurred while \output is active []
 
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+ [6]
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
-<figures/slamStructure.jpeg, id=173, 1832.8475pt x 672.5125pt>
+<figures/slamStructure.jpeg, id=181, 1832.8475pt x 672.5125pt>
 File: figures/slamStructure.jpeg Graphic file (type jpg)
 
 <use figures/slamStructure.jpeg>
-Package pdftex.def Info: figures/slamStructure.jpeg used on input line 81.
+Package pdftex.def Info: figures/slamStructure.jpeg used on input line 87.
 (pdftex.def)             Requested size: 306.71924pt x 112.54007pt.
 
-<figures/factorgraph.jpeg, id=178, 1013.7875pt x 644.4075pt>
+<figures/factorgraph.jpeg, id=186, 1013.7875pt x 644.4075pt>
 File: figures/factorgraph.jpeg Graphic file (type jpg)
 
 <use figures/factorgraph.jpeg>
-Package pdftex.def Info: figures/factorgraph.jpeg used on input line 94.
+Package pdftex.def Info: figures/factorgraph.jpeg used on input line 100.
 (pdftex.def)             Requested size: 306.71924pt x 194.956pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--116
+Underfull \hbox (badness 10000) in paragraph at lines 83--122
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--116
+Underfull \hbox (badness 10000) in paragraph at lines 83--122
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--116
+Underfull \hbox (badness 10000) in paragraph at lines 83--122
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--116
+Underfull \hbox (badness 10000) in paragraph at lines 83--122
 
  []
 
-[5]
+[7]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6 <./figures/slamStructure.jpeg>]
+[8 <./figures/slamStructure.jpeg>]
 Underfull \vbox (badness 5652) has occurred while \output is active []
 
- [7 <./figures/factorgraph.jpeg>]
+ [9 <./figures/factorgraph.jpeg>]
 
-Package natbib Warning: Citation `chen1992object' on page 8 undefined on input 
-line 120.
+Package natbib Warning: Citation `chen1992object' on page 10 undefined on input
+ line 126.
 
 
-Package natbib Warning: Citation `besl1992method' on page 8 undefined on input 
-line 120.
+Package natbib Warning: Citation `besl1992method' on page 10 undefined on input
+ line 126.
 
-<figures/kinec.jpeg, id=206, 1027.84pt x 479.7925pt>
+<figures/kinec.jpeg, id=214, 1027.84pt x 479.7925pt>
 File: figures/kinec.jpeg Graphic file (type jpg)
  <use figures/kinec.jpeg>
-Package pdftex.def Info: figures/kinec.jpeg used on input line 123.
+Package pdftex.def Info: figures/kinec.jpeg used on input line 129.
 (pdftex.def)             Requested size: 306.71924pt x 143.17746pt.
 
-<figures/kin.jpeg, id=211, 292.4526pt x 242.8272pt>
+<figures/kin.jpeg, id=219, 292.4526pt x 242.8272pt>
 File: figures/kin.jpeg Graphic file (type jpg)
  <use figures/kin.jpeg>
-Package pdftex.def Info: figures/kin.jpeg used on input line 132.
+Package pdftex.def Info: figures/kin.jpeg used on input line 138.
 (pdftex.def)             Requested size: 219.08614pt x 181.91615pt.
 
-[8]
+[10]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[9 <./figures/kinec.jpeg>] <figures/okvis.jpeg, id=229, 969.6225pt x 353.32pt>
+[11 <./figures/kinec.jpeg>]
+<figures/okvis.jpeg, id=237, 969.6225pt x 353.32pt>
 File: figures/okvis.jpeg Graphic file (type jpg)
-
-<use figures/okvis.jpeg>
-Package pdftex.def Info: figures/okvis.jpeg used on input line 145.
+ <use figures/okvis.jpeg>
+Package pdftex.def Info: figures/okvis.jpeg used on input line 151.
 (pdftex.def)             Requested size: 306.71924pt x 111.76543pt.
- <figures/okvis1.jpeg, id=232, 891.33pt x 423.5825pt>
-File: figures/okvis1.jpeg Graphic file (type jpg)
 
-<use figures/okvis1.jpeg>
-Package pdftex.def Info: figures/okvis1.jpeg used on input line 154.
+<figures/okvis1.jpeg, id=240, 891.33pt x 423.5825pt>
+File: figures/okvis1.jpeg Graphic file (type jpg)
+ <use figures/okvis1.jpeg>
+Package pdftex.def Info: figures/okvis1.jpeg used on input line 160.
 (pdftex.def)             Requested size: 306.71924pt x 145.76125pt.
 
-<figures/okvis2.png, id=235, 492.84125pt x 191.71625pt>
+<figures/okvis2.png, id=243, 492.84125pt x 191.71625pt>
 File: figures/okvis2.png Graphic file (type png)
 
 <use figures/okvis2.png>
-Package pdftex.def Info: figures/okvis2.png used on input line 160.
+Package pdftex.def Info: figures/okvis2.png used on input line 166.
 (pdftex.def)             Requested size: 306.71924pt x 119.3192pt.
- <figures/okvis3.png, id=238, 496.85625pt x 208.78pt>
+ <figures/okvis3.png, id=246, 496.85625pt x 208.78pt>
 File: figures/okvis3.png Graphic file (type png)
 
 <use figures/okvis3.png>
-Package pdftex.def Info: figures/okvis3.png used on input line 166.
+Package pdftex.def Info: figures/okvis3.png used on input line 172.
 (pdftex.def)             Requested size: 306.71924pt x 128.88474pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--171
+Underfull \hbox (badness 10000) in paragraph at lines 147--177
 
  []
 
-[10 <./figures/kin.jpeg> <./figures/okvis.jpeg>]
+[12 <./figures/kin.jpeg> <./figures/okvis.jpeg>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[11 <./figures/okvis1.jpeg> <./figures/okvis2.png>]
-Overfull \hbox (7.93193pt too wide) in paragraph at lines 173--180
+[13 <./figures/okvis1.jpeg> <./figures/okvis2.png>]
+Overfull \hbox (7.93193pt too wide) in paragraph at lines 179--186
 \OT1/bch/m/n/12 After the op-ti-miza-tion, de-for-ma-tion graph is ap-plied to 
 the sur-face by us-ing a weighted
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--180
+Underfull \hbox (badness 10000) in paragraph at lines 179--186
 
  []
 
-[12 <./figures/okvis3.png>]
+[14 <./figures/okvis3.png>]
 
-Package natbib Warning: Citation `klingensmith2015chisel' on page 13 undefined 
-on input line 184.
-
-
-Package natbib Warning: Citation `niessner2013real' on page 13 undefined on inp
-ut line 184.
+Package natbib Warning: Citation `klingensmith2015chisel' on page 15 undefined 
+on input line 190.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Package natbib Warning: Citation `niessner2013real' on page 15 undefined on inp
+ut line 190.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
-[13] [14] [15] <figures/timeline2.png, id=293, 1828.8325pt x 526.96875pt>
+[15] [16] [17] <figures/timeline2.png, id=301, 1828.8325pt x 526.96875pt>
 File: figures/timeline2.png Graphic file (type png)
 
 <use figures/timeline2.png>
-Package pdftex.def Info: figures/timeline2.png used on input line 217.
+Package pdftex.def Info: figures/timeline2.png used on input line 223.
 (pdftex.def)             Requested size: 1828.82806pt x 526.96745pt.
 
 
-LaTeX Warning: Float too large for page by 23.60356pt on input line 220.
+LaTeX Warning: Float too large for page by 23.60356pt on input line 226.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
+Underfull \hbox (badness 10000) in paragraph at lines 235--236
 
  []
 
@@ -1614,33 +1609,33 @@ Missing character: There is no ‹ in font bchr7t!
 Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no ‹ in font bchr7t!
-[16] [17 <./figures/timeline2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 270--271
+[18] [19 <./figures/timeline2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--283
+Underfull \hbox (badness 10000) in paragraph at lines 280--289
 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 285--286
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 289--291
+Underfull \hbox (badness 10000) in paragraph at lines 293--294
 
  []
 
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 292--293
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--297
+
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 
  []
 
@@ -1648,28 +1643,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 292--293
 \tf@brf=\write8
 \openout8 = `report.brf'.
 
- [20])
+ [22])
 
 Package natbib Warning: There were undefined citations.
 
 \tf@thm=\write9
 \openout9 = `report.thm'.
 
-[21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
+[23]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 305.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 305.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 305.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 305.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: C54A01FD2E30FD9CA67EB111846A0122;1261.
 Package rerunfilecheck Info: File `report.brf' has not changed.
-(rerunfilecheck)             Checksum: F0816CE5B8E07970A157D7BF992F1C39;1823.
+(rerunfilecheck)             Checksum: C5EB7FEE44061C8CE4AE0DCC3A74802D;1828.
  ) 
 Here is how much of TeX's memory you used:
- 23228 strings out of 493014
- 426034 string characters out of 6133350
- 498600 words of memory out of 5000000
+ 23230 strings out of 493014
+ 426048 string characters out of 6133350
+ 498606 words of memory out of 5000000
  26182 multiletter control sequences out of 15000+600000
  62568 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1683,10 +1678,10 @@ ive/2016/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive
 texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2016/texmf-
 dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2016/texmf-dist
 /fonts/type1/public/kpfonts/jkpsy.pfb>
-Output written on report.pdf (21 pages, 1086306 bytes).
+Output written on report.pdf (23 pages, 1087266 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
- 301 compressed objects within 4 object streams
- 65 named destinations out of 1000 (max. 500000)
+ 379 PDF objects out of 1000 (max. 8388607)
+ 308 compressed objects within 4 object streams
+ 67 named destinations out of 1000 (max. 500000)
  231 words of extra memory for PDF output out of 10000 (max. 10000000)
 
