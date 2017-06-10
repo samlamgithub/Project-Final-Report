@@ -1,8 +1,9 @@
 \documentclass[12pt,twoside]{article}
 \newcommand{\reporttitle}{ElasticFusion on the Google Tango Tablet}
 \newcommand{\reportauthor}{Jiahao Lin}
-\newcommand{\reporttype}{Project Interim Report}
+\newcommand{\reporttype}{Final Project Report}
 \newcommand{\cid}{00837321}
+\newcommand{\supervisor}{Dr Stefan Leutenegger}
 
 % include files that load packages and define macros
 \input{includes} % various packages needed for maths etc.
@@ -16,21 +17,59 @@
 % front page
 \input{titlepage}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+
+\section{Abstract}
+Abstract\\
+The abstract is a very brief summary of the report's contents. It should be about half a page long. Somebody unfamiliar with your project should have a good idea of what it's about having read the abstract alone and will know whether it will be of interest to them. Note that the abstract is a summary of the entire project including its conclusions. A common mistake is to provide only introductory elements in the abstract without saying what has been achieved.\\
+
+=============\\
+
+In recent years, Google has released an augmented reality Computing platform, Tango\footnote{\url{https://get.google.com/tango/}}. Supporting by with this platform, Google's Tango tablet is an Android device that equip with sensors that enable computer vision functionalities, Including NVIDIA Tegra K1 processor, 4MP color camera, fisheye-lens (motion-tracking) camera, Inertial Measurement Unit (IMU), and Infra-Red projector with RGB-IR camera for integrated depth sensing. Given this cheap commodity mobile hardware and software, a fully self-contained 3D dense surface reconstruction solution can be built by applying state-of-the-art RGB-D SLAM (Simultaneous Localization And Mapping) algorithms on the hardware. This means that high quality 3D room-scale scanning using portable device in  real time would become possible.\\
+In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2015elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}}, is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, therefore drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. This is particularly useful in 3D surface reconstruction. Also, the current code exist for ElasticFusion made heavily use of GPU programming, in which CUDA is mainly used in the tracking process, which is supported by the NVIDIA Tegra K1 processor on Google tango tablet to enable fast calculation. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet.\\
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Acknowledgements}
+It is usual to thank those individuals who have provided particularly useful assistance, technical or otherwise, during your project. Your supervisor will obviously be pleased to be acknowledged as he or she will have invested quite a lot of time overseeing your progress.\\
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \tableofcontents
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Abstract}
-In recent years, Google has released an augmented reality Computing platform, Tango\footnote{\url{https://get.google.com/tango/}}. Supporting by with this platform, Google's Tango tablet is an Android device that equip with sensors that enable computer vision functionalities, Including NVIDIA Tegra K1 processor, 4MP color camera, fisheye-lens (motion-tracking) camera, Inertial Measurement Unit (IMU), and Infra-Red projector with RGB-IR camera for integrated depth sensing. Given this cheap commodity mobile hardware and software, a fully self-contained 3D dense surface reconstruction solution can be built by applying state-of-the-art RGB-D SLAM (Simultaneous Localization And Mapping) algorithms on the hardware. This means that high quality 3D room-scale scanning using portable device in  real time would become possible.\\
-In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2015elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}}, is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, therefore drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. This is particularly useful in 3D surface reconstruction. Also, the current code exist for ElasticFusion made heavily use of GPU programming, in which CUDA is mainly used in the tracking process, which is supported by the NVIDIA Tegra K1 processor on Google tango tablet to enable fast calculation. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet.\\
+
+\section{Contents page}
+This should list the main chapters and (sub)sections of your report. Choose self-explanatory chapter and section titles and use double spacing for clarity. If possible you should include page numbers indicating where each chapter/section begins. Try to avoid too many levels of subheading - three is sufficient.\\
+
 
 \section{Introduction}
+This is one of the most important components of the report. It should begin with a clear statement of what the project is about so that the nature and scope of the project can be understood by a lay reader. It should summarise everything you set out to achieve, provide a clear summary of the project's background, relevance and main contributions. It should explain the motivation for the project (i.e., why the problem is important) and identify the issues to be addressed (i.e., why the problem is difficult). The introduction should set the scene for the project and should provide the reader with a summary of the key things to look out for in the remainder of the report. When detailing the contributions it is helpful to provide pointers to the section(s) of the report that provide the relevant technical details. The introduction itself should be largely non-technical. It is sometimes useful to state the main objectives of the project as part of the introduction. However, avoid the temptation to list low-level objectives one after another in the introduction and then later, in the evaluation section (see below), say something like "All the objectives of the project have been met blah blah...". A project that meets all its objectives is, by definition, weak and unambitious. Concentrate instead on the big issues, e.g. the main questions (scientific or otherwise) that the project sets out to answer.\\
+
+=============\\
+
 \subsection{Project Objectives}
 The objectives of this project is to develop a fully self-contained mobile dense 3D surface reconstruction solution running on Google Tango Tablet. The 3D colored depth map should be rendered on screen in real time from the tablet's viewpoint, and after the 3D scanning stopped the 3D map created should be able saved on device to allow for later use or shown on other devices. The main point of this solution is to produce high quality reconstructed surface map that avoids misalignment, which is often caused by loopy motion of the scanning device during the process. When doing 3D reconstruction, simple fusion of 3D point clouds would produce drifts caused by accumulating errors during the process, therefore by applying ElasticFusion algorithm to the solution, even extremely loopy trajectories of the tablet and long duration of scanning process will not decrease accuracy of the map. On the contrary, revisit areas that has previously been mapped will only help maintain the global consistency of the map by ElasticFusion Algorithm. The part of algorithm that made this possible is the local and   global loop closure checking after camera tracking process, which will be discussed in detail later. In our solution, we intend to use Android Native Development Kit (NDK) to allow the use of Tango C API, which makes it possible to reuse some of the existing code for ElasticFusion. If the development of the solution is successful, an augmented reality application can be created as demo to illustrate the interaction of virtual object with scanned 3D surface map.
 
+
 \section{Background}
+The background section of the report should set the project into context by relating it to existing published work which you read at the start of the project when your approach and methods were being considered. There are usually many ways of solving a given problem, and you shouldn't just pick one at random. Describe and evaluate as many alternative approaches as possible. The published work may be in the form of research papers, articles, text books, technical manuals, or even existing software or hardware of which you have had hands-on experience. Your must acknowledge the sources of your inspiration. You are expected to have seen and thought about other people's ideas; your contribution will be putting them into practice in some other context. However, avoid plagiarism: if you take another person's work as your own and do not cite your sources of information/inspiration you are being dishonest; in other words you are cheating. When referring to other pieces of work, cite the sources where they are referred to or used, rather than just listing them at the end. Make sure you read and digest the Department's plagiarism document .\\
+In writing the Background chapter you must demonstrate your capability of analysis, synthesis and critical judgement. Analysis is shown by explaining how the proposed solution operates in your own words as well as its benefits and consequences. Synthesis is shown through the organisation of your Related Work section and through identifying and generalising common aspects across different solutions. Critical judgement is shown by discussing the limitations of the solutions proposed both in terms of their disadvantages and limits of applicability.\\
+Typically you can look for Background work using different search engines including:\\
+* Google Scholar
+* IEEExplore
+* ACM Digital Library
+* Citeseer
+* Science Direct
+Note 1: Often the terms Background, Related Work or State of the Art are used interchangeably.\\
+Note 2: Keyword search is wonderful, but you need the right Keywords.\\
+Note 2: IEEExplore, ACM Digital Library and Science Direct require you to be on the College network to download the PDF of papers. If at home, use VPN.\\
+
+=============\\
 
 \subsection{Related Work}
 \subsubsection{SLAM basic}
@@ -74,11 +113,10 @@ signed-distance function (TSDF) function that stores distance information relati
 \\
 Comparing feature-based and dense SLAM methods, for the purpose of this project, we will use dense SLAM algorithm such as Elasticfusion\citep{whelan2015elasticfusion} for 3D reconstruction, since it maintains a dense 3D surfel map that make use of all the information about the environment from sensor thus more robust for localization and mapping.\\
 
-
 \subsubsection{Kinectfusion}
 KinectFusion\cite{newcombe2011kinectfusion} is a dense RGB-D SLAM method that enables high quality 3D reconstruction and interaction in real time.
 This method make use of mobile low cost RGB-D camera, scanning the environment in real time and acquire 3D point information about the space. During the reconstructing process, holes caused by absence of depth measurement in original 3D point cloud is filled, and model is more refined by repetitive scanning over time.\\
-Firstly the 3D points reading are then stored in a 3D vertex map and their normal vectors are calculated by reprojection of neighbouring vertexes. After that the camera pose is tracked by  using Iterative Closest Point (ICP) algorithm to align current 3D points with the previous frame. In ICP algorithm, first the corresponding point of each current 3D point is found by doing  projective data association, which reprojects each previous point into image coordinates and use this to look up current vertexes that may be correspondence points. In the second part these correspondences are tested by calculated distance and angle between them and reject any outliers that are beyond certain threshold. Please be noted that the running of ICP in real time is because the use of GPU to parallel processing a current vertex per thread, according to the original paper.\\
+Firstly the 3D points reading are then stored in a 3D vertex map and their normal vectors are calculated by reprojection of neighbouring vertexes. After that the camera pose is tracked by  using Iterative Closest Point (ICP)\citep{chen1992object}\citep{besl1992method} algorithm to align current 3D points with the previous frame. In ICP algorithm, first the corresponding point of each current 3D point is found by doing  projective data association, which reprojects each previous point into image coordinates and use this to look up current vertexes that may be correspondence points. In the second part these correspondences are tested by calculated distance and angle between them and reject any outliers that are beyond certain threshold. Please be noted that the running of ICP in real time is because the use of GPU to parallel processing a current vertex per thread, according to the original paper.\\
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/kinec}
@@ -130,7 +168,6 @@ In the visual frontend, a sparse map of frames and landmarks is stored. For each
 \end{figure}
 In the marginalization process, initially the first $N+1$ frames forms the marginalization window, as shown in Fig \ref{fig:okvis1}. When a new frame is inserted into the marginalization window, there are two ways to marginalize old state. If the oldest frame in temporal window is not a keyframe, then the state of that frame with its measurements, speed and biases will be dropped, as shown in Fig \ref{fig:okvis2}. On the other hand if it is a keyframe, landmarks that are visible in first temporal frame but in most recent keyframe is also dropped, as shown in Fig \ref{fig:okvis3}.\\
 
-
 \subsubsection{Elasticfusion}
 Elasticfusion\cite{whelan2015elasticfusion} is a RGB-D dense SLAM method for 3D reconstruction in room scale without using pose graph , it also use surfels to represent the map instead of voxel grid. In the scanning process, it iteratively check for local and global loop closures and refine the map by using a deformation graph to apply non rigid deformation to the surface. However, while this approach has achieved great results in room scale, it may be difficult to use it on bigger or outdoor scenes.\\
 In the surfel map, each surfel stores information about local surface area around the center to reduce holes on the surface, these information includes position, normal, color and radius. The radius is larger as distance between image center and surfel is longer. The surfels are extracted from point cloud using the same method as in \citep{keller2013real}. But differently, in here the surfels are divided into active and inactive parts. Inactive parts are the surfels that have not been observed for a given time period. OpenGL shading language is used to manage the surfel map and update, fusion and render the view. \\
@@ -141,7 +178,21 @@ If no global loop closure is found then local model to model loop closure is che
 After the optimization, deformation graph is applied to the surface by using a weighted distance method to calculate the transformation of surfel by its influencing nodes. The new surfel map is then updated and new image under current viewpoint is rendered by OpenGL.\\ 
 
 
-\section{Project Plan}
+\subsection{Related Solution}
+\subsubsection{CHISEL}
+CHISEL\citep{klingensmith2015chisel} is a a system for large scale 3D reconstruction solution in real time on Google Tango. It uses dynamic spatially-hashed truncated signed distance field\citep{niessner2013real} to represent the map and combine visual and odometry data as odometry frontend. To save memory and computation power, space that does not contain surfaces is culled out. By using space carving, even though Tango's depth sensor provides data with high noise, high quality reconstruction is still achieved in large scenes. To generalise the solution onto other mobile devices that does not have a powerful GPU, no parallel processing is used to utilise the general purpose GPU provided on Google Tango tablet.\\
+In the pose estimation stage, CHISEL uses the pose estimated provided by Tango platform as a black box, by try to register each depth scan with the model, poses are optimised in the same way as using ICP algorithm, this allows small drifts between frames to be recovered, however during long process of scanning large scene, drifts will still occur due to the lack of global loop closure.\\
+Since the map is stored using spatially-hashed data structure, insert and look up is  very fast. The map is divided into chunks, and each chunk is a fixed grid of 
+voxels. These chunks are then spatially-hashed into a spatial 3D hash map. When looking for chunks that need to be updated or drawn, a camera frustum is created for culling chunks that do not intersect with the frustum or not have a depth data, the rest of chunks left is then processed for update or drawn.
+For fusing depth scan data into the model, projection mapping is used to compare the depth value on image with the projected visual hull of a voxel, the result is then used to update the TSDF value and weight of that voxel.
+In the rendering stage, incremental Marching Cubes is used to generate triangle meshes for the chunk when it is been updated by a depth scan, triangles are generated at the zero isosurface of the TSDF volxel grid.\\
+CHISEL has shown a nice approach to scanning large scene for high quality 3D reconstruction, however it fails to maintain global consistency of the map by lacking detection of global loop closure. 
+
+
+\section{Body of report}
+The central part of the report usually consists of three of four chapters detailing the technical work undertaken during the project. The structure of these chapters is highly project dependent. They can reflect the chronological development of the project, e.g. design, implementation, experimentation, optimisation, evaluation etc. although this is not always the best approach. However you choose to structure this part of the report, you should make it clear how you arrived at your chosen approach in preference to the other alternatives documented in the background. If you have built a new piece of software you should describe and justify the design of your program at some high level, possibly using an approved graphical formalism such as UML. It should also document any interesting problems with, or features of, your implementation. Integration and testing are also important to discuss in some cases. You need to discuss the content of these sections thoroughly with your supervisor.\\
+
+============\\
 The plan of this project is to start with simple sample project on Google Tango Tablet, using the Tango C API, based on exist C++ code for Okvis\cite{leutenegger2015keyframe}, to iteratively build out the solution step by step, so that milestones are available if a certain stage is unable to complete before the project deadline.\\
 In this project the goal is run ElasticFusion\citep{whelan2015elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2015elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
 First, we need to set up a simple demo Google Tango Android application for motion tacking that output real time pose data into the logs.\\
@@ -157,6 +208,7 @@ It will be the ideal case if the above is all achieved before the project deadli
 However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
 The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
 
+
 \newpage
 
 \begin{figure}
@@ -168,7 +220,13 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 
 \newpage
 
-\section{Evaluation plan}
+\section{Evaluation}
+
+
+Be warned that many projects fall down through poor evaluation. Simply building a system and documenting its design and functionality is not enough to gain top marks. It is extremely important that you evaluate what you have done both in absolute terms and in comparison with existing techniques, software, hardware etc. This might involve quantitative evaluation, for example based on numerical results, performance etc. or something more qualitative such as expressibility, functionality, ease-of-use etc. At some point you should also evaluate the strengths and weaknesses of what you have done. Avoid statements like "The project has been a complete success and we have solved all the problems asssociated with blah...; - you will be shot down immediately! It is important to understand that there is no such thing as a perfect project. Even the very best pieces of work have their limitations and you are expected to provide a proper critical appraisal of what you have done.\\
+
+=============\\
+
 
 The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2015elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
 In order to measure the performance of this solution by quantity and quality. Both algorithm and computational performance need to be benchmarked.\\
@@ -200,7 +258,37 @@ Computational Performance
 ​The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2015elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
 In order to measure the performance of this solution by quantity and quality. Both algorithm and computational performance need to be benchmarked.\\
 For the algorithm, trajectory accuracy can be tested using sample data sets to provide RGB-D input, then the trajectory output can be compared with the ground truth data that is obtained by using industrial standard system. The root mean square distance between every estimated pose and ground truth pose can be calculated to provide error at each timepoint. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. However, since the post data and image input are provided by Tango platform, a way is needed to fed the benchmark data into Tango.\\
+For computational Performance, we can simply plot the frame rate during the process of 3D scanning to check if it is within the acceptable range for real time SLAM algorithm.\\
+​The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2015elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
+In order to measure the performance of this solution by quantity and quality. Both algorithm and computational performance need to be benchmarked.\\
+For the algorithm, trajectory accuracy can be tested using sample data sets to provide RGB-D input, then the trajectory output can be compared with the ground truth data that is obtained by using industrial standard system. The root mean square distance between every estimated pose and ground truth pose can be calculated to provide error at each timepoint. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. However, since the post data and image input are provided by Tango platform, a way is needed to fed the benchmark data into Tango.\\
 For computational Performance, we can simply plot the frame rate during the process of 3D scanning to check if it is within the acceptable range for real time SLAM algorithm.
+
+
+\section{Conclusions and Future Work}
+The project's conclusions should list the things which have been learnt as a result of the work you have done. For example, "The use of overloading in C++ provides a very elegant mechanism for transparent parallelisation of sequential programs", or "The overheads of linear-time n-body algorithms makes them computationally less efficient than O(n log n) algorithms for systems with less than 100000 particles". Avoid tedious personal reflections like "I learned a lot about C++ programming...", or "Simulating colliding galaxies can be real fun...". It is common to finish the report by listing ways in which the project can be taken further. This might, for example, be a plan for doing the project better if you had a chance to do it again, turning the project deliverables into a more polished end product, or extending the project into a programme for an MPhil or PhD.\\
+
+
+\section{Bibliography}
+This consists of a list of all the books, articles, manuals etc. used in the project and referred to in the report. You should provide enough information to allow the reader to find the source. In particular references must contain all the information regarding the publication of the paper and must be consistently formatted. Usually this means:\\
+* For journals: Authors, Title, Journal, volume number, issue number, page number, publisher, month, year.
+* For conferences: Authors, Title, Conference name, Place where held, publisher, page number, month, year.
+* For technical reports: Authors, Title, institution, Technical report number, month, year.
+* For web references: Authors, Title, Web-reference, date accessed.
+* URLs are optional for published work but preferred.\\
+A weakness of many reports is inadequate citation of a source of information. It's easy to get this right so there are no excuses. Each entry in the bibliography should list the author(s) and title of the piece of work and should give full details of where it can be found. For example:\\
+1 Bennett, A.J., Field, A.J. and Harrison, P.G., "Modelling and Validation of Shared Memory Coherency Protocols", Performance Evaluation, 1996, Vol. 27  28, 1996, pp. 541-562. rather than just listing the source as "Performance Evaluation 1996".
+Using a reference management programme can make your life simpler.See for example Bibdesk,JabRef,RefWorks, etc.\\
+
+\section{Appendix}
+The appendices contain information which is peripheral to the main body of the report. Information typically included are things like parts of the code, tables, proofs, test cases or any other material which would break up the theme of the text if it appeared in situ. You should try to bind all your material in a single volume if possible.\\
+\section{User Guide}
+For projects which result in a new piece of software you should provide a proper user guide providing easily understood instructions on how to use it. A particularly useful approach is to treat the user guide as a walk-through of a typical session, or set of sessions, which collectively display all the features of your system. Technical details of how the package works should be in the body of the report. Keep it concise and simple. The extensive use of diagrams illustrating the package in action prove particularly helpful. The user guide is sometimes included as a chapter in the main body of the report, but is often better in an appendix.\\
+\section{Program Listings}
+Complete program listings should NOT be part of the report except in specific cases at the request of your supervisor. The project report(s) must be bound in a departmental folder and must include a standard title page produced by the project co-ordinator. More of this nearer the date.\\
+You are strongly advised to spend some time looking at the reports of previous project students to get a feel for what's good and bad. In June 1999 we introduced a "Distinguished Project" classification, which is a formal recognition of outstanding projects for which no official prize was awarded. The complete list of prize winners and the other distinguished projects, along with links to the final reports, can be found here.\\
+\section{Word Count}
+There is no word count for the report as such, but ideally you should not exceed the limit of 40,000 words. Generally, our best projects tend to have the word count in the range of 20,000 - 35,000 words with a few going beyond that. This does not include the Appendices.\\
 
 
 
