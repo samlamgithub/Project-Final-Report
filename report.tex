@@ -155,6 +155,7 @@ from raw depth map to rendered view of 3D scenem\cite{newcombe2011kinectfusion}}
     \label{fig:kinec}
 \end{figure}
 \\The structure of KinecFusion is given in Fig \ref{fig:kinec} from original paper. The result of ICP is a transformation matrix from previous camera pose to the current pose, which is later used for converting the coordinates of current vertexes into the global coordinate frame. These coordinate data is then fused into the current model that uses a volumetric representation, as mentioned before. The 3D space is uniform divided into fixed size voxel grid. The geometry of surface is implicitly stores in these voxels by having zero values of Truncated Signed Distance Functions (TSDFs) at the surface, positive value in the front of surface, and negative at the back of it. Also, to improve efficiency and minimise storage usage only a truncated area around the surface is actually stored, thus the name "truncated".\\
+\\
 When integrating the current vertexes into voxel grid, each voxel is perspective projected back onto the image to calculate the difference between it and the measurement depth of this coordinate. The distance difference is then normalized to maximum TSDF distance and updated using weighted average with   previous value. Similar to the implementation of tracking stage, the integration and update process also make use of GPU parallel processing, each thread is assigned a slice of of grid along the $Z-axis$, and sweep through each voxel by its $(x,y)$ position for processing, as shown in Fig \ref{fig:kin}.\\
 \begin{figure}[h]
     \centering
@@ -165,9 +166,9 @@ When integrating the current vertexes into voxel grid, each voxel is perspective
 Finally, in order to render the 3D reconstructed surface raycasting is performed. This is done by having each GPU thread to follow a ray from the camera center along one pixel in the image into the voxel grid in camera coordinate space, the ray is extended until a zero-crossing voxel is met, this voxel represents the surface point observed by this pixel and the position is extracted by doing a trilinear interpolation on this voxel point. And the normal at this position is calculated by find the surface gradent of TSDF values around the position. With these information for each pixel, a live 3D reconstruction view from camera view point can be rendered using camera's pose and intrinsic information.
 
 
-\subsubsection{Keyframe-Based Visual-Inertial SLAM Using
-Nonlinear Optimization}
-Other than using depth sensor with RGB camera, another kind of sensor equipped on the Google Tango table is Inertial Measurement Unit (IMU). Okvis\cite{leutenegger2015keyframe} is a sparse feature-based SLAM approach that tightly coupled IMU measurement with stereo visual measurement using nonlinear optimization.\\
+\subsubsection{Keyframe-Based Visual-Inertial SLAM Using Nonlinear Optimization}
+Other than using depth sensor with RGB camera, another kind of sensor equipped on the Google Tango tablet is Inertial Measurement Unit (IMU). Okvis\cite{leutenegger2015keyframe} is a sparse feature-based SLAM approach that tightly coupled IMU measurement with stereo visual measurement using nonlinear optimization.\\
+\\
 Usually in optimization-based visual SLAM, the structure of geometry is to relate camera poses using landmarks, and optimization is performed to minimize the error of landmark reprojection in different observing frames. However, in visual inertial SLAM, the IMU measurement is used to add additional constraint between camera poses and speed and estimation biases from gyroscopes and accelerometers. The structure graph from original paper is shown in Fig \ref{fig:kinec} with detail labelling of different variables and constraints.\\
 \begin{figure}[h]
     \centering
@@ -176,8 +177,10 @@ Usually in optimization-based visual SLAM, the structure of geometry is to relat
     \label{fig:okvis}
 \end{figure}\\
 In order to tightly couple the visual and inertial measurements, a joint nonlinear cost function that contains both visual reprojection error term and IMU error term is created. These both errors are eliminated by optimizing this one error function.\\
+\\
 To reduce complexity and ensuring real time operation, a fixed size temporal window of robots poses and relative states is maintained, and old robot poses will be marginalized out as new frames are inserted.\\
 In the visual frontend, a sparse map of frames and landmarks is stored. For each new frame, keypoints are extracted using SSE(Streaming SIMD Extensions)-optimized Harris corner detector and BRISK(Binary Robust Invariant Scalable Keypoints) descriptor, their 3D positions are then triangulated by stereo and put into the sparse map. During the process landmarks and keypoints are brute-forcely matched and outliers are rejected by using predicted pose from IMU data. In the optimization window, two kind of frames is maintained, first is a temporal window of the S most recent frames, second is N keyframes in the past. A frame is determined as keyframe if the number of matched points with previous frame is less than 50 to 60\%  of the number of detected keypoints.\\
+\\
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/okvis1}
@@ -221,10 +224,13 @@ After the optimization, deformation graph is applied to the surface by using a w
 
 \subsubsection{CHISEL}
 CHISEL\citep{klingensmith2015chisel} is a a system for large scale 3D reconstruction solution in real time on Google Tango. It uses dynamic spatially-hashed truncated signed distance field\citep{niessner2013real} to represent the map and combine visual and odometry data as odometry frontend. To save memory and computation power, space that does not contain surfaces is culled out. By using space carving, even though Tango's depth sensor provides data with high noise, high quality reconstruction is still achieved in large scenes. To generalise the solution onto other mobile devices that does not have a powerful GPU, no parallel processing is used to utilise the general purpose GPU provided on Google Tango tablet.\\
+\\
 In the pose estimation stage, CHISEL uses the pose estimated provided by Tango platform as a black box, by try to register each depth scan with the model, poses are optimised in the same way as using ICP algorithm, this allows small drifts between frames to be recovered, however during long process of scanning large scene, drifts will still occur due to the lack of global loop closure.\\
-Since the map is stored using spatially-hashed data structure, insert and look up is  very fast. The map is divided into chunks, and each chunk is a fixed grid of 
-voxels. These chunks are then spatially-hashed into a spatial 3D hash map. When looking for chunks that need to be updated or drawn, a camera frustum is created for culling chunks that do not intersect with the frustum or not have a depth data, the rest of chunks left is then processed for update or drawn.
+\\
+Since the map is stored using spatially-hashed data structure, insert and look up is  very fast. The map is divided into chunks, and each chunk is a fixed grid of voxels. These chunks are then spatially-hashed into a spatial 3D hash map. When looking for chunks that need to be updated or drawn, a camera frustum is created for culling chunks that do not intersect with the frustum or not have a depth data, the rest of chunks left is then processed for update or drawn.
+\\
 For fusing depth scan data into the model, projection mapping is used to compare the depth value on image with the projected visual hull of a voxel, the result is then used to update the TSDF value and weight of that voxel.
+\\
 In the rendering stage, incremental Marching Cubes is used to generate triangle meshes for the chunk when it is been updated by a depth scan, triangles are generated at the zero isosurface of the TSDF volxel grid.\\
 CHISEL has shown a nice approach to scanning large scene for high quality 3D reconstruction, however it fails to maintain global consistency of the map by lacking detection of global loop closure. 
 

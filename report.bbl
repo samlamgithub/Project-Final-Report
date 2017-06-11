@@ -1,10 +1,11 @@
 \begin{thebibliography}{10}
 
-\bibitem{whelan2015elasticfusion}
-Thomas Whelan, Stefan Leutenegger, Renato~F Salas-Moreno, Ben Glocker, and
-  Andrew~J Davison.
-\newblock Elasticfusion: Dense slam without a pose graph.
-\newblock {\em Proc. Robotics: Science and Systems, Rome, Italy}, 2015.
+\bibitem{whelan2016elasticfusion}
+Thomas Whelan, Renato~F Salas-Moreno, Ben Glocker, Andrew~J Davison, and Stefan
+  Leutenegger.
+\newblock Elasticfusion: Real-time dense slam and light source estimation.
+\newblock {\em The International Journal of Robotics Research}, page
+  0278364916669237, 2016.
 
 \bibitem{cadena2016past}
 Cesar Cadena, Luca Carlone, Henry Carrillo, Yasir Latif, Davide Scaramuzza,
