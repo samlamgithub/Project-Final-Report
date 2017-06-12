@@ -4,8 +4,7 @@
 Thomas Whelan, Renato~F Salas-Moreno, Ben Glocker, Andrew~J Davison, and Stefan
   Leutenegger.
 \newblock Elasticfusion: Real-time dense slam and light source estimation.
-\newblock {\em The International Journal of Robotics Research}, page
-  0278364916669237, 2016.
+\newblock {\em The International Journal of Robotics Research}, 2016.
 
 \bibitem{cadena2016past}
 Cesar Cadena, Luca Carlone, Henry Carrillo, Yasir Latif, Davide Scaramuzza,
@@ -61,19 +60,19 @@ Maik Keller, Damien Lefloch, Martin Lambers, Shahram Izadi, Tim Weyrich, and
 \newblock In {\em 3DTV-Conference, 2013 International Conference on}, pages
   1--8. IEEE, 2013.
 
-\bibitem{newcombe2015dynamicfusion}
-Richard~A Newcombe, Dieter Fox, and Steven~M Seitz.
-\newblock Dynamicfusion: Reconstruction and tracking of non-rigid scenes in
-  real-time.
-\newblock In {\em Proceedings of the IEEE conference on computer vision and
-  pattern recognition}, pages 343--352, 2015.
-
 \bibitem{glocker2015real}
 Ben Glocker, Jamie Shotton, Antonio Criminisi, and Shahram Izadi.
 \newblock Real-time rgb-d camera relocalization via randomized ferns for
   keyframe encoding.
 \newblock {\em IEEE transactions on visualization and computer graphics},
   21(5):571--583, 2015.
+
+\bibitem{newcombe2015dynamicfusion}
+Richard~A Newcombe, Dieter Fox, and Steven~M Seitz.
+\newblock Dynamicfusion: Reconstruction and tracking of non-rigid scenes in
+  real-time.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 343--352, 2015.
 
 \bibitem{klingensmith2015chisel}
 Matthew Klingensmith, Ivan Dryanovski, Siddhartha Srinivasa, and Jizhong Xiao.

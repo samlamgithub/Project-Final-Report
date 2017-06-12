@@ -61,8 +61,13 @@ This is one of the most important components of the report. It should begin with
 
 ==========\\
 
-The main objective of this project is to develop a fully self-contained mobile dense 3D surface reconstruction solution running on Google Tango Tablet using the ElasticFusion algorithm. Ideally the 3D surface reconstructed should be rendered on screen in real time from the tablet's viewpoint when user is holding the tablet to scan the room, and after the scanning stopped the 3D map created should be able saved on device to allow for later use or shown on other devices. The motivation of behind this project is the lacking of high quality 3D surface reconstruction application on mobile device. Applications for 3D reconstruction currently exist on Tango Platform mostly use volumetric representation, and can only produce coarse model of surrounding space, we have shown a screen shot of 3D mesh created using Google Tango's demo mesh builder application. Also the existing applications fail to produce surface map without misalignments during the scanning process, which is often caused by loopy motion of the scanning device in the process. When doing 3D reconstruction, simple fusion of 3D point clouds would produce drifts caused by errors accumulating over time, therefore by applying ElasticFusion algorithm to the solution, even extremely loopy trajectories of the tablet and long duration of scanning process would not result in decrease of accuracy of the map. On the contrary, revisit areas that has previously been mapped will only help to maintain the global consistency of the map. The part of algorithm that made this possible in ElasticFusion is the local and   global loop closure checking after camera tracking process, which will be discussed in detail later.\\
-\\
+The main objective of this project is to develop a fully self-contained mobile dense 3D surface reconstruction solution running on Google Tango Tablet using the ElasticFusion algorithm. Ideally the 3D surface reconstructed should be rendered on screen in real time from the tablet's viewpoint when user is holding the tablet to scan the room, and after the scanning stopped the 3D map created should be able saved on device to allow for later use or shown on other devices. The motivation of behind this project is the lacking of high quality 3D surface reconstruction application on mobile device. Applications for 3D reconstruction currently exist on Tango Platform mostly use volumetric representation, and can only produce coarse model of surrounding space, a screen shot of using 3D mesh created using Google Tango's demo mesh builder application is shown in Fig \ref{fig:ScreenshotTango5}. Also the existing applications fail to produce surface map without misalignments during the scanning process, which is often caused by loopy motion of the scanning device in the process. When doing 3D reconstruction, simple fusion of 3D point clouds would produce drifts caused by errors accumulating over time, therefore by applying ElasticFusion algorithm to the solution, even extremely loopy trajectories of the tablet and long duration of scanning process would not result in decrease of accuracy of the map. On the contrary, revisit areas that has previously been mapped will only help to maintain the global consistency of the map. The part of algorithm that made this possible in ElasticFusion is the local and   global loop closure checking after camera tracking process, which will be discussed in detail later.\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango5}
+    \caption{ScreenshotTango5}
+    \label{fig:ScreenshotTango5}
+\end{figure}
 Previously, ElasticFusion can only be run on a desktop computer with powerful graphic card, using a raw dataset that is given, or connect the computer to a RGB-D camera such as Microsoft Kinect or ASUS
 Xtion Pro Live or Intel RealSense 3D Camera. That makes it non convenient for a user to scan the space he or she is currently in for 3D reconstruction, therefore the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)." is recommended for a desktop computer, therefore one of important problem in this project is that Tango tablet's processing power is still not strong enough to run ElasticFusion for real time application. However, the attempt make in this project have still shown the possibility of running a state of the art SLAM  algorithm on mobile device.\\
 \\
@@ -201,23 +206,65 @@ In the visual frontend, a sparse map of frames and landmarks is stored. For each
 \end{figure}
 In the marginalization process, initially the first $N+1$ frames forms the marginalization window, as shown in Fig \ref{fig:okvis1}. When a new frame is inserted into the marginalization window, there are two ways to marginalize old state. If the oldest frame in temporal window is not a keyframe, then the state of that frame with its measurements, speed and biases will be dropped, as shown in Fig \ref{fig:okvis2}. On the other hand if it is a keyframe, landmarks that are visible in first temporal frame but in most recent keyframe is also dropped, as shown in Fig \ref{fig:okvis3}.\\
 
+
+
+
+
 \subsubsection{Elasticfusion}
-Elasticfusion\cite{whelan2016elasticfusion} is a RGB-D dense SLAM method for 3D reconstruction in room scale without using pose graph , it also use surfels to represent the map instead of voxel grid. In the scanning process, it iteratively check for local and global loop closures and refine the map by using a deformation graph to apply non rigid deformation to the surface. However, while this approach has achieved great results in room scale, it may be difficult to use it on bigger or outdoor scenes.\\
+Elasticfusion\cite{whelan2016elasticfusion} is a RGB-D dense SLAM method for 3D reconstruction in room scale without using pose graph  it also use surfels to represent the map instead of voxel grid such as in KinectFusion\cite{newcombe2011kinectfusion}. In the scanning process, it iteratively check for local and global loop closures and refine the map by using a deformation graph to apply non rigid deformation to the surface. However, while this approach has achieved great results in room scale, it may be difficult to be used on bigger or outdoor scenes due to complex light condition and size of memory needed to store the surfels.\\
 \\
-In the surfel map, each surfel stores information about local surface area around the center to reduce holes on the surface, these information includes position, normal, color and radius. The radius is larger as distance between image center and surfel is longer. The surfels are extracted from point cloud using the same method as in \citep{keller2013real}. But differently, in here the surfels are divided into active and inactive parts. Inactive parts are the surfels that have not been observed for a given time period. OpenGL shading language is used to manage the surfel map and update, fusion and render the view. \\
+In the surfel map, each surfel stores the information about a local surface area around the center of the surfel, the surfels are lay out in a wat that holes on the surface are minimised. The information about a surfel include its position, normal vector, color, weight and radius. The radius is larger as distance between image center and surfel is greater. The surfels are extracted from point cloud using the similar method as in \citep{keller2013real}, illustrated in Fig \ref{fig:surfel2}, but differently, in here the surfels are divided into active and inactive parts. Only active surfels are used for camera pose estimation and depth map fusion, while the inactive parts are the surfels that have not been observed for a given time period and can be reactivated in a local loop closure. In ElasticFusion, OpenGL shading language is used to manage the surfel map and update, fuse and render the view. \\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/surfel2}
+    \caption{surfel2}
+    \label{fig:surfel2}
+\end{figure}
+The detail structure of ElasticFusion is shown Fig \ref{fig:elas1} in the original paper. From the graph can be seen that firstly in the camera pose estimation step, dense frame-to-model camera tracking is used, geometric and photometric pose estimations are combined into a joint cost function to for minimization. Geometric error is calculated using frame to model projective data association and ICP algorithm as in kinecFusion\citep{newcombe2011kinectfusion}, and photometric error is gain by calculating the intensity difference between current RGB image and backprojected image from the model. Note that here in the tracking process only active surfels are used.\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/elas1}
+    \caption{elas1}
+    \label{fig:elas1}
+\end{figure}
+After camera pose tracking for each frame, an active predicted model is produced, this model is then rendered into an image for global loop cloure checking, to try recover from drifts produced by accumulating error, and realign the camera pose. To enable global loop closure checking, key frame information from past is stored in a randomized fern encoding database using same technique as in \cite{glocker2015real}, it allows storing and matching frames without putting redundant information into the database. If a high quality match between the current predicted view of active model and a frame in fern database is found, points are sampled from matched frame and active view to construct constraints that are used to register the surface together and optimize the deformation graph.\\
 \\
-First, in camera pose tracking step, dense frame-to model camera tracking is used, geometric and photometric pose estimations are combined into a joint cost function to be minimised. geometric error is calculated using frame to model projective data association and ICP algorithm as in kinecFusion\citep{newcombe2011kinectfusion}, and photometric error is gain by calculating the intensity difference between current RGB image and backprojected image. Noted that here in the tracking process only active surfels are used.\\
+If no global loop closure is found then local model to model loop closure is checked by try to register the currently predicted inactive model with active model under the current frame, similar method is used when high quality alignment is found, constraints are extracted and fed into  the deformation graph, then the inactive surfels in this alignment is reactivated to allow for fusion into the map.\\
 \\
-The realignment of map is done by applying non rigid deformation using deformation graph, it is constructed for each frame for efficiency with nodes sampled uniformly from the surfels which is same as in DynamicFusion\citep{newcombe2015dynamicfusion}. Each node have a rotation matrix and position vector that represents optimization parameter and neighbourhood of each node forms the edge of them. Each surfel has a set of influencing nodes that affects the deformation of that surfel.\\
+The realignment of map is done by applying non rigid deformation using a deformation graph. Deformation graph  is constructed each frame for efficiency, with nodes sampled uniformly from the surfels using similar method as in DynamicFusion\citep{newcombe2015dynamicfusion}, this is illustrated in Fig \ref{fig:surfel1} to shown the relation between surfel and deformation graph noded. Each node have a rotation matrix and position vector that represents optimization parameter and neighbourhood of each node forms the edge of the graph. Each surfel has a set of influencing nodes that affects the deformation of that surfel.\\
 \\
-After camera pose tracking for each frame, global loop cloure is checked to recover from drifts and realign the camera pose. The frame information from past is stored in a randomized fern encoding database using same technique as\cite{glocker2015real}, it allows storing and matching frames without putting redundent information into the database. If a high quality matched is found, points are sampled from surfels to build constraints that are used to optimize the deformation graph.\\
-\\
-If no global loop closure is found then local model to model loop closure is checked by try to register the part of inactive model with active model under the same frame, similar method is used when high quality alignment is found, constraints are extracted and fed into  the deformation graph, then the inactive surfels in this alignment is reactivated to allow for fusion into the map.\\
-\\
-After the optimization, deformation graph is applied to the surface by using a weighted distance method to calculate the transformation of surfel by its influencing nodes. The new surfel map is then updated and new image under current viewpoint is rendered by OpenGL.\\ 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/surfel1}
+    \caption{surfel1}
+    \label{fig:surfel1}
+\end{figure}
+The optimization of deformation of the
+model ˆM and pose update Given a set of surface correspondences Q and relative correspondences
+R (later expanded upon in Sections 5 and 6) the
+parameters of the deformation graph can be optimised to reflect
+a surface registration in the surfel mode five cost function maximises rigidity in the deformation:  ensures a smooth deformation across the graph:
+inimises the error on the
+set of position constraints the fourth cost function
+“pins” the inactive area of the model in place ensuring that
+we are always deforming the active area of the model into the
+inactive coordinate system:
 
 
+The final cost function uses the set of relative
+constraints R to prevent previous surface registrations from
+being pulled apart by subsequent global loop closures. during a global loop closure
 
+After the optimization, deformation graph is applied to the surface by using a weighted distance method to calculate the transformation of each surfel by its influencing nodes. Model is then deformed using this transformation to reflect the registration of surfaces in loop closure. Finally, the current camera data is fused into the latest updated model to update the surfel map under current viewpoint.\\
+Before new frame of data come in, the current active model is rendered to an image using the latest predicted pose to prepare for tracking, and also being decided whether this frame will added to the fern database.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/loopclosure}
+    \caption{loopclosure}
+    \label{fig:loopclosure}
+\end{figure}
 
 \subsection{Related Work}
 
@@ -234,9 +281,32 @@ For fusing depth scan data into the model, projection mapping is used to compare
 In the rendering stage, incremental Marching Cubes is used to generate triangle meshes for the chunk when it is been updated by a depth scan, triangles are generated at the zero isosurface of the TSDF volxel grid.\\
 CHISEL has shown a nice approach to scanning large scene for high quality 3D reconstruction, however it fails to maintain global consistency of the map by lacking detection of global loop closure. 
 
+CHISEL cannot guarantee global map consistency, and drifts
+over time. Many previous works [38, 39] have combined
+sparse keypoint mapping, visual odometry and dense reconstruction
+to reduce pose drift. Future research must adapt
+SLAM techniques combining visual inertial odometry, sparse
+landmark localization and dense 3D reconstruction in a way
+that is efficient enough to allow real-time relocalization and
+loop closure on a mobile device.
 
 
-\subsubsection{CHISEL}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/CHISEL1}
+    \caption{CHISEL1}
+    \label{fig:CHISEL1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/CHISEL2}
+    \caption{CHISEL2}
+    \label{fig: }
+\end{figure}
+
+
+\subsubsection{ORB SLAM on mobile devices}
 \begin{verbatim}
 https://github.com/victorprad/InfiniTAM    cuda
 https://github.com/FangGet/ORB_SLAM2_Android   clapack
@@ -281,33 +351,11 @@ However, extension and optimization could be done if more time is given and basi
 The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/loopclosure}
-    \caption{loopclosure}
-    \label{fig:loopclosure}
-\end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/slamStructure}
-    \caption{slamStructure}
-    \label{fig:slamStructure}
-\end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/surfel1}
-    \caption{surfel1}
-    \label{fig:surfel1}
-\end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/surfel2}
-    \caption{surfel2}
-    \label{fig:surfel2}
-\end{figure}
+
+
 
 \begin{figure}[h]
     \centering
