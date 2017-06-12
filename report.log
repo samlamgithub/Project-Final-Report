@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  12 JUN 2017 12:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  12 JUN 2017 15:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1237,16 +1237,13 @@ Package: ntheorem 2011/08/15 1.33
 \c@definition=\count164
 \c@proof=\count165
 \c@elimination@steps=\count166
-) (./notation.tex) (./report.aux
-
-LaTeX Warning: Label `fig:CHISEL1' multiply defined.
-
-)
+) (./notation.tex) (./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 16.
 LaTeX Font Info:    Try loading font information for OML+jkp on input line 16.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/kpfonts/omljkp.fd
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    ... okay on input line 16.
@@ -1648,187 +1645,192 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: figures/surfel2.jpeg Graphic file (type jpg)
 
 <use figures/surfel2.jpeg>
-Package pdftex.def Info: figures/surfel2.jpeg used on input line 219.
+Package pdftex.def Info: figures/surfel2.jpeg used on input line 220.
 (pdftex.def)             Requested size: 219.08614pt x 244.15184pt.
 
 <figures/elas1.png, id=284, 1632.0975pt x 727.71875pt>
 File: figures/elas1.png Graphic file (type png)
  <use figures/elas1.png>
-Package pdftex.def Info: figures/elas1.png used on input line 226.
+Package pdftex.def Info: figures/elas1.png used on input line 228.
 (pdftex.def)             Requested size: 438.17227pt x 195.36517pt.
 
 <figures/surfel1.jpeg, id=288, 209.1012pt x 264.99pt>
 File: figures/surfel1.jpeg Graphic file (type jpg)
 
 <use figures/surfel1.jpeg>
-Package pdftex.def Info: figures/surfel1.jpeg used on input line 238.
+Package pdftex.def Info: figures/surfel1.jpeg used on input line 240.
 (pdftex.def)             Requested size: 219.08614pt x 277.64928pt.
-Missing character: There is no À in font bchr7t!
-Missing character: There is no Ü in font bchr7t!
-Missing character: There is no ‚ in font bchr7t!
-Missing character: There is no Ä in font bchr7t!
-Missing character: There is no ú in font bchr7t!
-Missing character: There is no ‚ in font bchr7t!
-Missing character: There is no Ä in font bchr7t!
-Missing character: There is no ù in font bchr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--252
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--252
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--252
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--252
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [15 <./figures/okvis.jpeg>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[16 <./figures/okvis1.jpeg> <./figures/okvis2.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 2368) has occurred while \output is active []
-
- [17 <./figures/okvis3.png> <./figures/surfel2.jpeg>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 1418) has occurred while \output is active []
-
- [18 <./figures/elas1.png>]
-Overfull \hbox (7.93193pt too wide) in paragraph at lines 258--260
-[]\OT1/bch/m/n/12 After the op-ti-miza-tion, de-for-ma-tion graph is ap-plied t
-o the sur-face by us-ing a weighted
- []
-
-<figures/loopclosure.jpeg, id=320, 1564.84625pt x 388.45125pt>
+<figures/loopclosure.jpeg, id=290, 1564.84625pt x 388.45125pt>
 File: figures/loopclosure.jpeg Graphic file (type jpg)
 
 <use figures/loopclosure.jpeg>
-Package pdftex.def Info: figures/loopclosure.jpeg used on input line 264.
+Package pdftex.def Info: figures/loopclosure.jpeg used on input line 251.
 (pdftex.def)             Requested size: 306.71924pt x 76.13591pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--283
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--283
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
+
+ []
+
+
+Overfull \hbox (7.93193pt too wide) in paragraph at lines 214--255
+\OT1/bch/m/n/12 After the op-ti-miza-tion, de-for-ma-tion graph is ap-plied to 
+the sur-face by us-ing a weighted
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--255
 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19 <./figures/surfel1.jpeg> <./figures/loopclosure.jpeg>]
-<figures/CHISEL1.jpeg, id=330, 852.18375pt x 473.77pt>
+ [15 <./figures/okvis.jpeg>] [16 <./figures/okvis1.jpeg> <./figures/okvis2.png>
+]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[17 <./figures/okvis3.png> <./figures/surfel2.jpeg>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 4792) has occurred while \output is active []
+
+ [18 <./figures/elas1.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19 <./figures/surfel1.jpeg>]
+Underfull \hbox (badness 10000) in paragraph at lines 261--271
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--271
+
+ []
+
+[20 <./figures/loopclosure.jpeg>]
+<figures/CHISEL1.jpeg, id=337, 852.18375pt x 473.77pt>
 File: figures/CHISEL1.jpeg Graphic file (type jpg)
 
 <use figures/CHISEL1.jpeg>
-Package pdftex.def Info: figures/CHISEL1.jpeg used on input line 296.
+Package pdftex.def Info: figures/CHISEL1.jpeg used on input line 284.
 (pdftex.def)             Requested size: 306.71924pt x 170.52092pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/CHISEL2.jpeg, id=331, 948.54375pt x 758.835pt>
+<figures/CHISEL2.jpeg, id=338, 948.54375pt x 758.835pt>
 File: figures/CHISEL2.jpeg Graphic file (type jpg)
 
 <use figures/CHISEL2.jpeg>
-Package pdftex.def Info: figures/CHISEL2.jpeg used on input line 303.
+Package pdftex.def Info: figures/CHISEL2.jpeg used on input line 291.
 (pdftex.def)             Requested size: 306.71924pt x 245.36794pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[20] [21 <./figures/CHISEL1.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+ [21 <./figures/CHISEL1.jpeg> <./figures/CHISEL2.jpeg>] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 313--314
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 327--328
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
 
  []
 
-[22 <./figures/CHISEL2.jpeg>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [23]
-<figures/Screenshot1.png, id=359, 1927.2pt x 1084.05pt>
+[23] <figures/Screenshot1.png, id=360, 1927.2pt x 1084.05pt>
 File: figures/Screenshot1.png Graphic file (type png)
 
 <use figures/Screenshot1.png>
-Package pdftex.def Info: figures/Screenshot1.png used on input line 362.
-(pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
-
-<figures/Screenshot2.png, id=360, 1927.2pt x 1084.05pt>
-File: figures/Screenshot2.png Graphic file (type png)
-
-<use figures/Screenshot2.png>
-Package pdftex.def Info: figures/Screenshot2.png used on input line 369.
-(pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
-
-<figures/Screenshot3.png, id=361, 1927.2pt x 1084.05pt>
-File: figures/Screenshot3.png Graphic file (type png)
-
-<use figures/Screenshot3.png>
-Package pdftex.def Info: figures/Screenshot3.png used on input line 376.
+Package pdftex.def Info: figures/Screenshot1.png used on input line 350.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/ScreenshotTango1.png, id=362, 1927.2pt x 1204.5pt>
+<figures/Screenshot2.png, id=361, 1927.2pt x 1084.05pt>
+File: figures/Screenshot2.png Graphic file (type png)
+
+<use figures/Screenshot2.png>
+Package pdftex.def Info: figures/Screenshot2.png used on input line 357.
+(pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/Screenshot3.png, id=362, 1927.2pt x 1084.05pt>
+File: figures/Screenshot3.png Graphic file (type png)
+
+<use figures/Screenshot3.png>
+Package pdftex.def Info: figures/Screenshot3.png used on input line 364.
+(pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/ScreenshotTango1.png, id=363, 1927.2pt x 1204.5pt>
 File: figures/ScreenshotTango1.png Graphic file (type png)
 
 <use figures/ScreenshotTango1.png>
-Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 383.
+Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 371.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[24 <./figures/Screenshot1.png> <./figures/Screenshot2.png>]
-<figures/timeline2.png, id=370, 1828.8325pt x 526.96875pt>
+[24] <figures/timeline2.png, id=369, 1828.8325pt x 526.96875pt>
 File: figures/timeline2.png Graphic file (type png)
 
 <use figures/timeline2.png>
-Package pdftex.def Info: figures/timeline2.png used on input line 393.
+Package pdftex.def Info: figures/timeline2.png used on input line 381.
 (pdftex.def)             Requested size: 1828.82806pt x 526.96745pt.
 
 
-LaTeX Warning: Float too large for page by 23.60356pt on input line 396.
+LaTeX Warning: Float too large for page by 23.60356pt on input line 384.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 405--406
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 
  []
 
-[25 <./figures/Screenshot3.png> <./figures/ScreenshotTango1.png>] [26 <./figure
-s/timeline2.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 393--394
+
+ []
+
+[25 <./figures/Screenshot1.png> <./figures/Screenshot2.png>] [26 <./figures/Scr
+eenshot3.png> <./figures/ScreenshotTango1.png>] [27 <./figures/timeline2.png>]
 Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ã in font bchr7t!
@@ -1836,36 +1838,33 @@ Missing character: There is no ‚ in font bchr7t!
 Missing character: There is no Ä in font bchr7t!
 Missing character: There is no ã in font bchr7t!
 
-Underfull \vbox (badness 4505) has occurred while \output is active []
-
- [27]
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 448--449
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
 
  []
 
 [29]
-Underfull \hbox (badness 10000) in paragraph at lines 454--463
+Underfull \hbox (badness 10000) in paragraph at lines 442--451
 
  []
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 468--469
+Underfull \hbox (badness 10000) in paragraph at lines 456--457
 
  []
 
 [31]
-Underfull \hbox (badness 10000) in paragraph at lines 473--474
+Underfull \hbox (badness 10000) in paragraph at lines 461--462
 
  []
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 479--481
+Underfull \hbox (badness 10000) in paragraph at lines 467--469
 
  []
 
 [33]
-Underfull \hbox (badness 10000) in paragraph at lines 485--486
+Underfull \hbox (badness 10000) in paragraph at lines 473--474
 
  []
 
@@ -1878,25 +1877,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 485--486
 \openout9 = `report.thm'.
 
  [35]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 492.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 492.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 480.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 480.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 492.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 492.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 480.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 480.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 948DBF87699B73F2D2F705EC8DC2E372;1317.
 Package rerunfilecheck Info: File `report.brf' has not changed.
-(rerunfilecheck)             Checksum: 1285507EDA82BD91A3050BC0E977CE01;2145.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
+(rerunfilecheck)             Checksum: 9A1898789E257B69ED0F295FA09E1611;2145.
  ) 
 Here is how much of TeX's memory you used:
- 23344 strings out of 493014
- 428411 string characters out of 6133350
- 500151 words of memory out of 5000000
- 26256 multiletter control sequences out of 15000+600000
+ 23345 strings out of 493014
+ 428418 string characters out of 6133350
+ 500153 words of memory out of 5000000
+ 26257 multiletter control sequences out of 15000+600000
  62737 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,12n,77p,27875b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1910,10 +1905,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2016/texmf-d
 ist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2016/texmf-dist/
 fonts/type1/public/kpfonts/jkpsy.pfb>
-Output written on report.pdf (35 pages, 5360023 bytes).
+Output written on report.pdf (35 pages, 5360697 bytes).
 PDF statistics:
- 478 PDF objects out of 1000 (max. 8388607)
- 380 compressed objects within 4 object streams
+ 479 PDF objects out of 1000 (max. 8388607)
+ 381 compressed objects within 4 object streams
  95 named destinations out of 1000 (max. 500000)
  278 words of extra memory for PDF output out of 10000 (max. 10000000)
 
