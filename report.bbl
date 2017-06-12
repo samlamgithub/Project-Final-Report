@@ -105,6 +105,18 @@ Dorian G{\'a}lvez-L{\'o}pez and Juan~D Tardos.
 \newblock Bags of binary words for fast place recognition in image sequences.
 \newblock {\em IEEE Transactions on Robotics}, 28(5):1188--1197, 2012.
 
+\bibitem{engel2014lsd}
+Jakob Engel, Thomas Sch{\"o}ps, and Daniel Cremers.
+\newblock Lsd-slam: Large-scale direct monocular slam.
+\newblock In {\em European Conference on Computer Vision}, pages 834--849.
+  Springer, 2014.
+
+\bibitem{schops2014semi}
+Thomas Sch{\"o}ps, Jakob Engel, and Daniel Cremers.
+\newblock Semi-dense visual odometry for ar on a smartphone.
+\newblock In {\em Mixed and Augmented Reality (ISMAR), 2014 IEEE International
+  Symposium on}, pages 145--150. IEEE, 2014.
+
 \bibitem{ceres-solver}
 Sameer Agarwal, Keir Mierle, and Others.
 \newblock Ceres solver.

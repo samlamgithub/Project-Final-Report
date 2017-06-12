@@ -321,7 +321,7 @@ ORB-SLAM system is divided into three thread performing different functions, the
 Since ORB-SLAM2 is a robust SLAM system with robust tracking and loop closure function, there has been many work to implement it on mobile devices using its open source code. Here a few of these work that is open sourced on Github is listed with its dependencies used.
 \begin{itemize}
    \item \verb|ORB_SLAM2_Android|\footnote{\url{https://github.com/FangGet/ORB_SLAM2_Android}} ported ORGB-SLAM2 on Android, using DBoW2\footnote{\url{https://github.com/dorian3d/DBoW2}} for loop detection, clapack\footnote{\url{http://www.netlib.org/clapack/}} and eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} for math calculation, and g2o\footnote{\url{https://github.com/RainerKuemmerle/g2o}} for graph optimization and OpenCV for Android. Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} was in the original open source code for visualization and user interface and is removed in this implementation.
-   \item \verb|ORB-SLAM-Android|\footnote{\url{https://github.com/castoryan/ORB-SLAM-Android}} is also an implementation of ORB-SLAM on Android using DBoW2 and g2o
+   \item \verb|ORB-SLAM-Android|\footnote{\url{https://github.com/castoryan/ORB-SLAM-Android}} is also an implementation of ORB-SLAM on Android using DBoW2 and g2o.
    \item \verb|ORB_SLAM_iOS|\footnote{\url{https://github.com/egoist-sx/ORB_SLAM_iOS}} is implemented on iOS platform with dependencies ported in the same way.
   \end{itemize}
 \begin{figure}[h]
@@ -340,47 +340,15 @@ Since ORB-SLAM2 is a robust SLAM system with robust tracking and loop closure fu
 
 
 \subsubsection{LSD SLAM}
- ceres solver
-\citep{ceres-solver}
-https://github.com/ceres-solver/ceres-solver
-http://ceres-solver.org/
-
-LSD-SLAM: Large-Scale Direct Monocular SLAM
-
-\begin{verbatim}
-lsd slam: \footnote{https://github.com/tum-vision/lsd_slam} 
-\end{verbatim}
-
-
-engel2014lsd schops2014semi
-
-LSD-SLAM is a novel, direct monocular SLAM technique: Instead of using keypoints, it directly operates on image intensities both for tracking and mapping. The camera is tracked using direct image alignment, while geometry is estimated in the form of semi-dense depth maps, obtained by filtering over many pixelwise stereo comparisons. We then build a Sim(3) pose-graph of keyframes, which allows to build scale-drift corrected, large-scale maps including loop-closures. LSD-SLAM runs in real-time on a CPU, and even on a modern smartphone.
-
-
-ll experiments are conducted on a Sony Xperia Z1, which is
-equipped with a 2.3 GHz quad-core CPU. While the processing
-power of mobile devices has increased rapidly in the last years,
-mobile processors based on the ARM architecture are generally
-still much slower than their desktop counterparts; we currently do
-not use GPU or DSP features for tracking or mapping. In order
-to achieve real-time performance, i.e. tracking with at least 30 fps
-under these conditions, two steps were crucial: (1) separation of
-mapping and tracking resolution and choice of a suitable compromise,
-and (2) NEON optimization of computation-heavy algorithmic
-steps.
+LSD-SLAM(Large-Scale Direct Monocular SLAM)\citep{engel2014lsd}\footnote{\url{https://github.com/tum-vision/lsd_slam}} is a real time direct monocular SLAM system. It uses pixel intensities of input image to track the pose directly, the alignment two images is done by minimising photometric error using Gauss-Newton algorithm. And depth map is estimated using extended Kalman filter (EKF), a Sim(3) pose-graph of keyframes is maintained to allow for loop closure, using g2o library to optimize the pose graph, this corrects drift occur during the process. As the result, a semi-dense 3D map of point clouds is reconstructed in high accuracy. The structure of LSD-SLAM is shown in Fig \ref{fig: lsdslam1} using the graph from original paper.\\
+\\
+LSD-SLAM not only runs a desktop CPU in real time, it can also run on a modern smartphone for AR application without any GPU acceleration. In this paper \citep{schops2014semi}, an AR application is built on top of direct semi-dense visual odometry using LSD SLAM. In this experiment the application runs on Sony Xperia Z1 smartphone with Android platform, real time performance of at least 30 fps frame rate is reached makes it  capable of used as interactive application, this is due to the separation of tracking and mapping part in the application, and also using NEON optimization for computational heavy parts. The structure of application is shown in Fig \ref{fig: lsdar2}, also Fig \ref{fig: lsdar1} shows the virtual object added in AR application, depth map estimated from the current image and collision mesh created for virtual object to interact with. Both pictures are from the original paper.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/lsdslam1}
     \caption{lsdslam1}
     \label{fig: lsdslam1}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/lsdslam2}
-    \caption{lsdslam2}
-    \label{fig: lsdslam2}
 \end{figure}
 
 \begin{figure}[h]
@@ -398,8 +366,6 @@ steps.
 \end{figure}
 
 
-
-
 \subsubsection{VINS-Mobile}
 Monocular Visual-Inertial State Estimator on Mobile Phones
 
@@ -411,7 +377,44 @@ http://www.ece.ust.hk/~eeshaojie/ismar2017peiliang.pdf
 https://github.com/HKUST-Aerial-Robotics/VINS-Mobile
 \end{verbatim}
 
+Monocular Visual-Inertial State Estimator on Mobile Phones
+ VINS-Mono: A Robust and Versatile Monocular Visual-Inertial State Estimator 
+ 
+ We use ceres solver for non-linear optimization and DBow for loop detection.
+
+
+ceres solver
+\citep{ceres-solver}
+https://github.com/ceres-solver/ceres-solver
+http://ceres-solver.org/
+
+VINS-Mobile is a real-time monocular visual-inertial state estimator developed by members of the HKUST Aerial Robotics Group. It runs on compatible iOS devices, and provides localization services for augmented reality (AR) applications. It is also tested for state estimation and feedback control for autonomous drones. VINS-Mobile uses sliding window optimization-based formulation for providing high-accuracy visual-inertial odometry with automatic initialization and failure recovery. The accumulated odometry errors are corrected in real-time using global pose graph SLAM. An AR demonstration is provided to showcase its capability.
+
+Monocular Visual-Inertial State Estimation for Mobile Augmented Reality, P.Li et al (submitted to ISMAR 2017)
+Robust Initialization of Monocular Visual-Inertial Estimation on Aerial Robots, T.Qin et al (submitted to IROS 2017)
+Monocular Visual-Inertial State Estimation With Online Initialization and Camera-IMU Extrinsic Calibration, Z.Yang et al (T-ASE 2017)
+
 \citep{yang2017monocular}
+
+
+loop closure: DBoW2
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/vin1}
+    \caption{vin1}
+    \label{fig: vin1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/vin2}
+    \caption{vin2}
+    \label{fig: vin2}
+\end{figure}
+
+
 
 
 \newpage
