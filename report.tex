@@ -38,9 +38,9 @@ Also, since the Tango platform on the tablet provides pose estimation feature, t
 \newpage
 
 \section{Acknowledgements}
-I would like to express my deepest appreciation to all those who provided me the possibility to complete this report. A special gratitude I give to my project supervisor, Dr. Stefan Leutenegger, for his patient overseeing and guidance throughout this project, also his time and effort invested to give useful advices.\\
+Firstly I would like to express my deepest appreciation to all those who provided me the possibility to complete this report. A special gratitude I give to my project supervisor, Dr. Stefan Leutenegger, for his patient overseeing and guidance throughout this project, also his time and effort invested to give useful advices.\\
 \\
-I would also like to thank my friends for accepting nothing less than excellence from me. Last but not the least, I would like to thank my parents for supporting me spiritually throughout the progress of this project and my life in general.
+Secondly I would also like to thank my friends for accepting nothing less than excellence from me. Last but not the least, I would like to thank my parents for supporting me spiritually throughout the progress of this project and my life in general.
 
 \newpage
 
@@ -340,7 +340,7 @@ Since ORB-SLAM2 is a robust SLAM system with robust tracking and loop closure fu
 
 
 \subsubsection{LSD SLAM}
-LSD-SLAM(Large-Scale Direct Monocular SLAM)\citep{engel2014lsd}\footnote{\url{https://github.com/tum-vision/lsd_slam}} is a real time direct monocular SLAM system. It uses pixel intensities of input image to track the pose directly, the alignment two images is done by minimising photometric error using Gauss-Newton algorithm. And depth map is estimated using extended Kalman filter (EKF), a Sim(3) pose-graph of keyframes is maintained to allow for loop closure, using g2o library to optimize the pose graph, this corrects drift occur during the process. As the result, a semi-dense 3D map of point clouds is reconstructed in high accuracy. The structure of LSD-SLAM is shown in Fig \ref{fig: lsdslam1} using the graph from original paper.\\
+LSD-SLAM(Large-Scale Direct Monocular SLAM)\citep{engel2014lsd}\footnote{\url{https://github.com/tum-vision/lsd_slam}} is a real time direct monocular SLAM system. It uses pixel intensities of input image to track the pose directly, the alignment two images is done by minimising photometric error using Gauss-Newton algorithm. And depth map is estimated using extended Kalman filter (EKF), a $Sim(3)$ pose-graph of keyframes is maintained to allow for loop closure, using g2o library to optimize the pose graph, this corrects drift occur during the process. As the result, a semi-dense 3D map of point clouds is reconstructed in high accuracy. The structure of LSD-SLAM is shown in Fig \ref{fig: lsdslam1} using the graph from original paper.\\
 \\
 LSD-SLAM not only runs a desktop CPU in real time, it can also run on a modern smartphone for AR application without any GPU acceleration. In this paper \citep{schops2014semi}, an AR application is built on top of direct semi-dense visual odometry using LSD SLAM. In this experiment the application runs on Sony Xperia Z1 smartphone with Android platform, real time performance of at least 30 fps frame rate is reached makes it  capable of used as interactive application, this is due to the separation of tracking and mapping part in the application, and also using NEON optimization for computational heavy parts. The structure of application is shown in Fig \ref{fig: lsdar2}, also Fig \ref{fig: lsdar1} shows the virtual object added in AR application, depth map estimated from the current image and collision mesh created for virtual object to interact with. Both pictures are from the original paper.
 
@@ -367,38 +367,11 @@ LSD-SLAM not only runs a desktop CPU in real time, it can also run on a modern s
 
 
 \subsubsection{VINS-Mobile}
-Monocular Visual-Inertial State Estimator on Mobile Phones
-
-http://www.ece.ust.hk/~eeshaojie/ismar2017peiliang.pdf
-
- HKUST Aerial Robotics Group
-
-\begin{verbatim}
-https://github.com/HKUST-Aerial-Robotics/VINS-Mobile
-\end{verbatim}
-
-Monocular Visual-Inertial State Estimator on Mobile Phones
- VINS-Mono: A Robust and Versatile Monocular Visual-Inertial State Estimator 
- 
- We use ceres solver for non-linear optimization and DBow for loop detection.
-
-
-ceres solver
-\citep{ceres-solver}
-https://github.com/ceres-solver/ceres-solver
-http://ceres-solver.org/
-
-VINS-Mobile is a real-time monocular visual-inertial state estimator developed by members of the HKUST Aerial Robotics Group. It runs on compatible iOS devices, and provides localization services for augmented reality (AR) applications. It is also tested for state estimation and feedback control for autonomous drones. VINS-Mobile uses sliding window optimization-based formulation for providing high-accuracy visual-inertial odometry with automatic initialization and failure recovery. The accumulated odometry errors are corrected in real-time using global pose graph SLAM. An AR demonstration is provided to showcase its capability.
-
-Monocular Visual-Inertial State Estimation for Mobile Augmented Reality, P.Li et al (submitted to ISMAR 2017)
-Robust Initialization of Monocular Visual-Inertial Estimation on Aerial Robots, T.Qin et al (submitted to IROS 2017)
-Monocular Visual-Inertial State Estimation With Online Initialization and Camera-IMU Extrinsic Calibration, Z.Yang et al (T-ASE 2017)
-
-\citep{yang2017monocular}
-
-
-loop closure: DBoW2
-
+VINS-Mobile\citep{yang2017monocular} is a open source\footnote{\url{https://github.com/HKUST-Aerial-Robotics/VINS-Mobile}} real time Monocular Visual-Inertial State Estimator on mobile devices developed by members in HKUST Aerial Robotics Group. It can run on iOS devices for providing localization function in AR (augmented reality) applications and also on UAV (Unmanned aerial vehicle) for state estimation.\\
+\\
+It provides highly accurate visual-inertial odometry by using sliding window optimization, and also enables automatic initialization, relocalisation and loop closure function. The drift error accumulated over time is corrected by optimise the global pose graph maintained. In this picture Fig \ref{fig: vin1} from the paper \footnote{\url{http://www.ece.ust.hk/~eeshaojie/ismar2017peiliang.pdf}} can be seen that the virtual object added in the AR application remains in place even after the camera have travelled a long loopy trajectory.\\
+\\
+The program uses ceres solver\citep{ceres-solver} from Google\footnote{\url{https://github.com/ceres-solver/ceres-solver}} for non-linear optimization in state estimation stage, the loop closure function is implemented using bag of words method DBoW2\footnote{\url{https://github.com/dorian3d/DBoW2}} similar to ORB-SLAM's loop detection function. The screenshot of AR application is shown in Fig \ref{fig: vin2} and the structure of the application is shown in Fig \ref{fig: vin3}. Both pictures are from the original paper.\\
 
 \begin{figure}[h]
     \centering
@@ -415,15 +388,26 @@ loop closure: DBoW2
 \end{figure}
 
 
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/vin3}
+    \caption{vin3}
+    \label{fig: vin3}
+\end{figure}
 
 \newpage
 
 
-\section{Body of report}
+
+
+\section{Project Implementation}
 The central part of the report usually consists of three of four chapters detailing the technical work undertaken during the project. The structure of these chapters is highly project dependent. They can reflect the chronological development of the project, e.g. design, implementation, experimentation, optimisation, evaluation etc. although this is not always the best approach. However you choose to structure this part of the report, you should make it clear how you arrived at your chosen approach in preference to the other alternatives documented in the background. If you have built a new piece of software you should describe and justify the design of your program at some high level, possibly using an approved graphical formalism such as UML. It should also document any interesting problems with, or features of, your implementation. Integration and testing are also important to discuss in some cases. You need to discuss the content of these sections thoroughly with your supervisor.\\
 
 ============\\
+
+\subsection{Tango Platform}
+
+\subsection{Logging data from Tango}
 
 
 Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
@@ -450,6 +434,57 @@ However, extension and optimization could be done if more time is given and basi
 The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
 
 
+
+\subsection{Compiling ElasticFusion on Tango}
+
+
+\subsubsection{Dependencies}
+
+
+\subsubsection{OpenCV}
+
+\subsubsection{CUDA}
+
+
+
+\subsubsection{Pangolin}
+
+Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} 
+
+
+\subsubsection{SuiteSparse}
+
+\footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}} 
+
+\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} 
+
+\subsubsection{OpenGL}
+
+
+
+\subsubsection{Eigen}
+
+
+
+\newpage
+
+
+
+\subsection{Running ElasticFusion on Tango}
+
+\subsubsection{Running ElasticFusion with pose on Tango}
+
+\subsubsection{Running ElasticFusion dataset on Tango}
+
+\subsubsection{Running Tango dataset on Tango}
+
+\newpage
+
+
+
+\subsection{Combine ElasticFusion with pose from Tango in Loop closure mode}
+
+\newpage
 
 
 
@@ -485,6 +520,8 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 \end{figure}
 
 
+
+
 \newpage
 
 \begin{figure}
@@ -496,12 +533,15 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 
 \newpage
 
+
 \section{Evaluation}
 
-
+\subsubsection{Hardware limitation}
 Be warned that many projects fall down through poor evaluation. Simply building a system and documenting its design and functionality is not enough to gain top marks. It is extremely important that you evaluate what you have done both in absolute terms and in comparison with existing techniques, software, hardware etc. This might involve quantitative evaluation, for example based on numerical results, performance etc. or something more qualitative such as expressibility, functionality, ease-of-use etc. At some point you should also evaluate the strengths and weaknesses of what you have done. Avoid statements like "The project has been a complete success and we have solved all the problems asssociated with blah...; - you will be shot down immediately! It is important to understand that there is no such thing as a perfect project. Even the very best pieces of work have their limitations and you are expected to provide a proper critical appraisal of what you have done.\\
 
 =============\\
+
+depth sensor noise\\
 
 
 The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2016elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
@@ -541,10 +581,18 @@ For the algorithm, trajectory accuracy can be tested using sample data sets to p
 For computational Performance, we can simply plot the frame rate during the process of 3D scanning to check if it is within the acceptable range for real time SLAM algorithm.
 
 
+\subsubsection{Software limitation}
+
+
 \newpage
 
 \section{Conclusions and Future Work}
 The project's conclusions should list the things which have been learnt as a result of the work you have done. For example, "The use of overloading in C++ provides a very elegant mechanism for transparent parallelisation of sequential programs", or "The overheads of linear-time n-body algorithms makes them computationally less efficient than O(n log n) algorithms for systems with less than 100000 particles". Avoid tedious personal reflections like "I learned a lot about C++ programming...", or "Simulating colliding galaxies can be real fun...". It is common to finish the report by listing ways in which the project can be taken further. This might, for example, be a plan for doing the project better if you had a chance to do it again, turning the project deliverables into a more polished end product, or extending the project into a programme for an MPhil or PhD.\\
+
+
+optimization \\
+slow, GPU, memmory\\
+resolution, \\
 
 
 \newpage

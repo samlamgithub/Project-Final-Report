@@ -117,16 +117,16 @@ Thomas Sch{\"o}ps, Jakob Engel, and Daniel Cremers.
 \newblock In {\em Mixed and Augmented Reality (ISMAR), 2014 IEEE International
   Symposium on}, pages 145--150. IEEE, 2014.
 
-\bibitem{ceres-solver}
-Sameer Agarwal, Keir Mierle, and Others.
-\newblock Ceres solver.
-\newblock \url{http://ceres-solver.org}.
-
 \bibitem{yang2017monocular}
 Zhenfei Yang and Shaojie Shen.
 \newblock Monocular visual--inertial state estimation with online
   initialization and camera--imu extrinsic calibration.
 \newblock {\em IEEE Transactions on Automation Science and Engineering},
   14(1):39--51, 2017.
+
+\bibitem{ceres-solver}
+Sameer Agarwal, Keir Mierle, and Others.
+\newblock Ceres solver.
+\newblock \url{http://ceres-solver.org}.
 
 \end{thebibliography}

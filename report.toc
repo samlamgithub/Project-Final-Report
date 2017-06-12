@@ -1,24 +1,41 @@
 \select@language {english}
 \contentsline {section}{\numberline {1}Abstract}{2}{section.1}
 \contentsline {section}{\numberline {2}Acknowledgements}{4}{section.4}
-\contentsline {section}{\numberline {3}Introduction}{6}{section.6}
-\contentsline {section}{\numberline {4}Background}{9}{section.10}
-\contentsline {subsection}{\numberline {4.1}SLAM papers}{9}{subsection.11}
-\contentsline {subsubsection}{\numberline {4.1.1}Past, Present, and Future of Simultaneous Localization And Mapping: Towards the Robust Perception Age}{9}{subsubsection.12}
-\contentsline {subsubsection}{\numberline {4.1.2}Kinectfusion}{13}{subsubsection.15}
-\contentsline {subsubsection}{\numberline {4.1.3}Keyframe-Based Visual-Inertial SLAM Using Nonlinear Optimization}{14}{subsubsection.18}
-\contentsline {subsubsection}{\numberline {4.1.4}Elasticfusion}{16}{subsubsection.23}
-\contentsline {subsection}{\numberline {4.2}Related Work}{20}{subsection.28}
-\contentsline {subsubsection}{\numberline {4.2.1}CHISEL}{20}{subsubsection.29}
-\contentsline {subsubsection}{\numberline {4.2.2}InfiniTAM}{21}{subsubsection.32}
-\contentsline {subsubsection}{\numberline {4.2.3}ORB-SLAM on mobile devices}{22}{subsubsection.36}
-\contentsline {subsubsection}{\numberline {4.2.4}LSD SLAM}{25}{subsubsection.48}
-\contentsline {subsubsection}{\numberline {4.2.5}VINS-Mobile}{25}{subsubsection.53}
-\contentsline {section}{\numberline {5}Body of report}{28}{section.56}
-\contentsline {section}{\numberline {6}Evaluation}{30}{section.62}
-\contentsline {section}{\numberline {7}Conclusions and Future Work}{32}{section.63}
-\contentsline {section}{\numberline {8}Bibliography}{33}{section.64}
-\contentsline {section}{\numberline {9}Appendix}{34}{section.65}
-\contentsline {section}{\numberline {10}User Guide}{35}{section.66}
-\contentsline {section}{\numberline {11}Program Listings}{36}{section.67}
-\contentsline {section}{\numberline {12}Word Count}{37}{section.68}
+\contentsline {section}{\numberline {3}Introduction}{7}{section.6}
+\contentsline {section}{\numberline {4}Background}{10}{section.10}
+\contentsline {subsection}{\numberline {4.1}SLAM papers}{10}{subsection.11}
+\contentsline {subsubsection}{\numberline {4.1.1}Past, Present, and Future of Simultaneous Localization And Mapping: Towards the Robust Perception Age}{10}{subsubsection.12}
+\contentsline {subsubsection}{\numberline {4.1.2}Kinectfusion}{14}{subsubsection.15}
+\contentsline {subsubsection}{\numberline {4.1.3}Keyframe-Based Visual-Inertial SLAM Using Nonlinear Optimization}{15}{subsubsection.18}
+\contentsline {subsubsection}{\numberline {4.1.4}Elasticfusion}{17}{subsubsection.23}
+\contentsline {subsection}{\numberline {4.2}Related Work}{21}{subsection.28}
+\contentsline {subsubsection}{\numberline {4.2.1}CHISEL}{21}{subsubsection.29}
+\contentsline {subsubsection}{\numberline {4.2.2}InfiniTAM}{22}{subsubsection.32}
+\contentsline {subsubsection}{\numberline {4.2.3}ORB-SLAM on mobile devices}{23}{subsubsection.36}
+\contentsline {subsubsection}{\numberline {4.2.4}LSD SLAM}{26}{subsubsection.48}
+\contentsline {subsubsection}{\numberline {4.2.5}VINS-Mobile}{26}{subsubsection.53}
+\contentsline {section}{\numberline {5}Project Implementation}{29}{section.61}
+\contentsline {subsection}{\numberline {5.1}Tango Platform}{29}{subsection.62}
+\contentsline {subsection}{\numberline {5.2}Logging data from Tango}{29}{subsection.63}
+\contentsline {subsection}{\numberline {5.3}Compiling ElasticFusion on Tango}{31}{subsection.64}
+\contentsline {subsubsection}{\numberline {5.3.1}Dependencies}{31}{subsubsection.65}
+\contentsline {subsubsection}{\numberline {5.3.2}OpenCV}{31}{subsubsection.66}
+\contentsline {subsubsection}{\numberline {5.3.3}CUDA}{31}{subsubsection.67}
+\contentsline {subsubsection}{\numberline {5.3.4}Pangolin}{31}{subsubsection.68}
+\contentsline {subsubsection}{\numberline {5.3.5}SuiteSparse}{31}{subsubsection.70}
+\contentsline {subsubsection}{\numberline {5.3.6}OpenGL}{31}{subsubsection.73}
+\contentsline {subsubsection}{\numberline {5.3.7}Eigen}{31}{subsubsection.74}
+\contentsline {subsection}{\numberline {5.4}Running ElasticFusion on Tango}{32}{subsection.75}
+\contentsline {subsubsection}{\numberline {5.4.1}Running ElasticFusion with pose on Tango}{32}{subsubsection.76}
+\contentsline {subsubsection}{\numberline {5.4.2}Running ElasticFusion dataset on Tango}{32}{subsubsection.77}
+\contentsline {subsubsection}{\numberline {5.4.3}Running Tango dataset on Tango}{32}{subsubsection.78}
+\contentsline {subsection}{\numberline {5.5}Combine ElasticFusion with pose from Tango in Loop closure mode}{33}{subsection.79}
+\contentsline {section}{\numberline {6}Evaluation}{34}{section.85}
+\contentsline {subsubsection}{\numberline {6.0.1}Hardware limitation}{34}{subsubsection.86}
+\contentsline {subsubsection}{\numberline {6.0.2}Software limitation}{35}{subsubsection.87}
+\contentsline {section}{\numberline {7}Conclusions and Future Work}{36}{section.88}
+\contentsline {section}{\numberline {8}Bibliography}{37}{section.89}
+\contentsline {section}{\numberline {9}Appendix}{38}{section.90}
+\contentsline {section}{\numberline {10}User Guide}{39}{section.91}
+\contentsline {section}{\numberline {11}Program Listings}{40}{section.92}
+\contentsline {section}{\numberline {12}Word Count}{41}{section.93}
