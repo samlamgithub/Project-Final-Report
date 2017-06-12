@@ -258,26 +258,16 @@ Before new frame of data come in, the current active model is rendered to an ima
 This section gives some SLAM systems that have been implemented on mobile devices, such as Android phone or tablet, and Apple iPhone or iPad. However, most of these systems mainly focus on the state estimation part of SLAM rather then the mapping part, which means they are not able to be used for 3D surface reconstruction purpose.
 
 \subsubsection{CHISEL}
-CHISEL\citep{klingensmith2015chisel} is a a system for large scale 3D reconstruction solution in real time on Google Tango. It uses dynamic spatially-hashed truncated signed distance field\citep{niessner2013real} to represent the map and combine visual and odometry data as odometry frontend. To save memory and computation power, space that does not contain surfaces is culled out. By using space carving, even though Tango's depth sensor provides data with high noise, high quality reconstruction is still achieved in large scenes. To generalise the solution onto other mobile devices that does not have a powerful GPU, no parallel processing is used to utilise the general purpose GPU provided on Google Tango tablet.\\
+CHISEL\citep{klingensmith2015chisel} is a large scale dense 3D reconstruction solution implemented on Google Tango Devices. The graph from the original paper that shows CHISEL application running on the Googlt Tango phone can be seen at Fig \ref{fig:CHISEL1}. It uses dynamic spatially-hashed truncated signed distance field\citep{niessner2013real} to represent the map and useds the visual-inertial odometry provided by Tango as frontend for localization. To save memory and computation power, space that does not contain surfaces is culled out. By using space carving, even though Tango's depth sensor provides data with high noise, reconstruction with an accuracy of 2-3 cm is still achieved in large scenes, the Fig \ref{fig:CHISEL2} show a picture of global map reconstructed by CHISEL form the original paper, from this picture can be seen that CHISEL is able to scan and reconstruct the area of a flat with relatively high quality detail. To generalise the solution onto other mobile devices that does not have a powerful GPU,in CHISEL no parallel processing is used to utilise the powerful general purpose GPU provided on Google Tango tablet.\\
 \\
-In the pose estimation stage, CHISEL uses the pose estimated provided by Tango platform as a black box, by try to register each depth scan with the model, poses are optimised in the same way as using ICP algorithm, this allows small drifts between frames to be recovered, however during long process of scanning large scene, drifts will still occur due to the lack of global loop closure.\\
+In the pose estimation stage, CHISEL uses the pose estimated provided by Tango platform as a black box, by try to register each depth scan with the model, poses are optimised in the same way as using ICP algorithm, this allows small drifts between frames to be recovered, however during long process of scanning large scene, drifts will still build up overtime due to the lack of loop closure process.\\
 \\
-Since the map is stored using spatially-hashed data structure, insert and look up is  very fast. The map is divided into chunks, and each chunk is a fixed grid of voxels. These chunks are then spatially-hashed into a spatial 3D hash map. When looking for chunks that need to be updated or drawn, a camera frustum is created for culling chunks that do not intersect with the frustum or not have a depth data, the rest of chunks left is then processed for update or drawn.
+Since the map is stored using spatially-hashed data structure, insert and look up is very fast. The map is divided into chunks, and each chunk is a fixed grid of voxels. These chunks are then spatially-hashed into a spatial 3D hash map. When looking for chunks that need to be updated or drawn, a camera frustum is created for culling chunks that do not intersect with the frustum or not have a depth data, the rest of chunks left is then processed for update or drawn.\\
 \\
-For fusing depth scan data into the model, projection mapping is used to compare the depth value on image with the projected visual hull of a voxel, the result is then used to update the TSDF value and weight of that voxel.
+For fusing depth scan data into the model, projection mapping is used to compare the depth value on image with the projected visual hull of a voxel, the result is then used to update the TSDF value and weight of that voxel.\\
 \\
 In the rendering stage, incremental Marching Cubes is used to generate triangle meshes for the chunk when it is been updated by a depth scan, triangles are generated at the zero isosurface of the TSDF volxel grid.\\
-CHISEL has shown a nice approach to scanning large scene for high quality 3D reconstruction, however it fails to maintain global consistency of the map by lacking detection of global loop closure. 
-
-CHISEL cannot guarantee global map consistency, and drifts
-over time. Many previous works [38, 39] have combined
-sparse keypoint mapping, visual odometry and dense reconstruction
-to reduce pose drift. Future research must adapt
-SLAM techniques combining visual inertial odometry, sparse
-landmark localization and dense 3D reconstruction in a way
-that is efficient enough to allow real-time relocalization and
-loop closure on a mobile device.
-
+CHISEL has shown a nice memory-efficient approach to scanning large scene for high quality 3D reconstruction, however it fails to maintain global consistency of the global map, therefore drifts will increase over time due to lacking detection of global loop closure. Despite that, CHISEL provides a great example for utilising the Tango platform as a dense SLAM frontend for 3D reconstruction purpose.
 
 \begin{figure}[h]
     \centering
@@ -290,24 +280,86 @@ loop closure on a mobile device.
     \centering
     \includegraphics[width=0.7\textwidth]{figures/CHISEL2}
     \caption{CHISEL2}
-    \label{fig: }
+    \label{fig: CHISEL2}
+\end{figure}
+
+
+\subsubsection{InfiniTAM}
+InfiniTAM\citep{InfiniTAM_ISMAR_2015} is an open source cross-platform real time large scale RGB-D SLAM framework publish by University of Oxford\footnote{\url{https://github.com/victorprad/InfiniTAM}}. It provides both dense fixed size 3D volume like the one used in KinectFusion\citep{newcombe2011kinectfusion} and sparse volume using voxel block hashing method\citep{niessner2013real}. The design of the framework also enables other representations, such as octrees, to be added easily.\\
+\\
+InfiniTAM is optimised to run at high frame rate in multiple platform, with NVIDIA Titan X graphics card on desktop computer, it can run at over 1000 fps(frame per second), on iOS platform it utilise Apple Metal Graphics API to reach over 25 fps of frame rate. Also on Android devices with NVIDIA K1 processor such as NVIDIA Shield Tablet and Google Tango Tablet, by using NVIDIA CUDA to for parallel data processing on GPU the frame rate is able to reach over 40 fps.\\
+\\
+The architecture designed for InfiniTAM makes it easy to extend functionalities and add new features. Also the C++ source code for InfiniTAM is provided on Github for both pure CPU and GPU implementations. The Android version of InfiniTAM is similar to ElasticFusion since it also use both OpenGL and CUDA in the program, it has provided an example of dense 3D reconstruction solution on mobile device using volumetric space representation and CUDA for GPU acceleration. The sample screen shot of using InfiniTAM from the official website is given below at Fig \ref{fig: InfiniTAM}.\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/InfiniTAM}
+    \caption{InfiniTAM}
+    \label{fig: InfiniTAM}
 \end{figure}
 
 
 \subsubsection{ORB SLAM on mobile devices}
+
+ORB-SLAM2 is a real-time SLAM library for Monocular, Stereo and RGB-D cameras that computes the camera trajectory and a sparse 3D reconstruction (in the stereo and RGB-D case with true scale). It is able to detect loops and relocalize the camera in real time. We provide examples to run the SLAM system in 
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/orb1}
+    \caption{orb1}
+    \label{fig: orb1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/orb2}
+    \caption{orb2}
+    \label{fig: orb2}
+\end{figure}
+
+
 \begin{verbatim}
-https://github.com/victorprad/InfiniTAM    cuda
+orb: \citep{mur2016orb}
+
+
+DBow2 : loop closure （description） vocabulary tree geometric verification
+https://github.com/dorian3d/DBoW2
+\citep{galvez2012bags}
+
+https://github.com/raulmur/ORB_SLAM2
+\end{verbatim}
+
+\begin{verbatim}
+
 https://github.com/FangGet/ORB_SLAM2_Android   clapack
 https://github.com/castoryan/ORB-SLAM-Android  ceres solver 
-https://github.com/HKUST-Aerial-Robotics/VINS-Mobile
 https://github.com/ygx2011/ORB_SLAM-IOS
 https://github.com/egoist-sx/ORB_SLAM_iOS
 https://github.com/Bigdatascholar/ORB-SLAM-Android-app
 https://github.com/jokereactive/ORB_Android
+
+
 \end{verbatim}
 
 
+
+\subsubsection{VINS-Mobile}
+Monocular Visual-Inertial State Estimator on Mobile Phones
+
+http://www.ece.ust.hk/~eeshaojie/ismar2017peiliang.pdf
+
+ HKUST Aerial Robotics Group
+
+\begin{verbatim}
+https://github.com/HKUST-Aerial-Robotics/VINS-Mobile
+\end{verbatim}
+
+\citep{yang2017monocular}
+
+
 \newpage
+
 
 \section{Body of report}
 The central part of the report usually consists of three of four chapters detailing the technical work undertaken during the project. The structure of these chapters is highly project dependent. They can reflect the chronological development of the project, e.g. design, implementation, experimentation, optimisation, evaluation etc. although this is not always the best approach. However you choose to structure this part of the report, you should make it clear how you arrived at your chosen approach in preference to the other alternatives documented in the background. If you have built a new piece of software you should describe and justify the design of your program at some high level, possibly using an approved graphical formalism such as UML. It should also document any interesting problems with, or features of, your implementation. Integration and testing are also important to discuss in some cases. You need to discuss the content of these sections thoroughly with your supervisor.\\

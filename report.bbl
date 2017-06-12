@@ -86,4 +86,19 @@ Matthias Nie{\ss}ner, Michael Zollh{\"o}fer, Shahram Izadi, and Marc
 \newblock Real-time 3d reconstruction at scale using voxel hashing.
 \newblock {\em ACM Transactions on Graphics (TOG)}, 32(6):169, 2013.
 
+\bibitem{InfiniTAM_ISMAR_2015}
+O.~Kahler, V.~A. Prisacariu, C.~Y. Ren, X.~Sun, P.~H.~S Torr, and D.~W. Murray.
+\newblock {Very High Frame Rate Volumetric Integration of Depth Images on
+  Mobile Device}.
+\newblock {\em {IEEE Transactions on Visualization and Computer Graphics
+  (Proceedings International Symposium on Mixed and Augmented Reality 2015}},
+  22(11), 2015.
+
+\bibitem{yang2017monocular}
+Zhenfei Yang and Shaojie Shen.
+\newblock Monocular visual--inertial state estimation with online
+  initialization and camera--imu extrinsic calibration.
+\newblock {\em IEEE Transactions on Automation Science and Engineering},
+  14(1):39--51, 2017.
+
 \end{thebibliography}
