@@ -1,46 +1,49 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: report.aux
 The style file: unsrt.bst
 Database file #1: mybi.bib
-You've used 20 entries,
+Warning--entry type for "tango" isn't style-file defined
+--line 31 of file mybi.bib
+You've used 22 entries,
             1791 wiz_defined-function locations,
-            563 strings with 7739 characters,
-and the built_in function-call counts, 5635 in all, are:
-= -- 511
-> -- 270
-< -- 7
-+ -- 97
-- -- 77
-* -- 374
-:= -- 851
-add.period$ -- 66
-call.type$ -- 20
-change.case$ -- 19
+            571 strings with 7958 characters,
+and the built_in function-call counts, 6151 in all, are:
+= -- 560
+> -- 288
+< -- 8
++ -- 104
+- -- 82
+* -- 398
+:= -- 920
+add.period$ -- 72
+call.type$ -- 22
+change.case$ -- 21
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 259
-empty$ -- 535
-format.name$ -- 77
-if$ -- 1295
+cite$ -- 22
+duplicate$ -- 285
+empty$ -- 591
+format.name$ -- 82
+if$ -- 1422
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 20
-newline$ -- 103
-num.names$ -- 20
-pop$ -- 75
+int.to.str$ -- 22
+missing$ -- 21
+newline$ -- 112
+num.names$ -- 22
+pop$ -- 88
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 143
+skip$ -- 161
 stack$ -- 0
-substring$ -- 381
-swap$ -- 89
-text.length$ -- 7
+substring$ -- 413
+swap$ -- 101
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 54
-width$ -- 22
-write$ -- 222
+while$ -- 59
+width$ -- 24
+write$ -- 242
+(There was 1 warning)

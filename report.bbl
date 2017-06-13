@@ -1,5 +1,9 @@
 \begin{thebibliography}{10}
 
+\bibitem{tango}
+Google.
+\newblock Google project tango, 2017.
+
 \bibitem{whelan2016elasticfusion}
 Thomas Whelan, Renato~F Salas-Moreno, Ben Glocker, Andrew~J Davison, and Stefan
   Leutenegger.
@@ -128,5 +132,10 @@ Zhenfei Yang and Shaojie Shen.
 Sameer Agarwal, Keir Mierle, and Others.
 \newblock Ceres solver.
 \newblock \url{http://ceres-solver.org}.
+
+\bibitem{kottas2013consistency}
+Dimitrios~G Kottas, Joel~A Hesch, Sean~L Bowman, and Stergios~I Roumeliotis.
+\newblock On the consistency of vision-aided inertial navigation.
+\newblock In {\em Experimental Robotics}, pages 303--317. Springer, 2013.
 
 \end{thebibliography}
