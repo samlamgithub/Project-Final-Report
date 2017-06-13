@@ -407,8 +407,6 @@ The central part of the report usually consists of three of four chapters detail
 
 \subsection{Tango Platform}
 
-\subsection{Logging data from Tango}
-
 
 Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
 laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
@@ -416,22 +414,41 @@ laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
 requirement:\\
 A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7).  3500 GFLOPS\\
 Nvidia Tegra K1  approx = GT620-GT540\\
+\\
 make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
 ==\\
+\\
 The plan of this project is to start with simple sample project on Google Tango Tablet, using the Tango C API, based on exist C++ code for Okvis\cite{leutenegger2015keyframe}, to iteratively build out the solution step by step, so that milestones are available if a certain stage is unable to complete before the project deadline.\\
+\\
 In this project the goal is run ElasticFusion\citep{whelan2016elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2016elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
+\\
 First, we need to set up a simple demo Google Tango Android application for motion tacking that output real time pose data into the logs.\\
+\\
 Then camera frames needed to be rendered on screen in real time with buttons to resume and pause the rendering.\\
+\\
 Next step is to make use of the mesh builder in Tango 3D Reconstruction Library for fusing point clouds and use OpenGL to render it on screen from the camera view point.\\
+\\
 After that we can build out the structs and functions for surfel map and global map representation used in ElasticFusion\cite{whelan2016elasticfusion}, in which the surfels are divided into active and inactive types according the time it is last observed.\\
+\\
 With the surfel map classes, integration with Tango could be done by try to extract surfels from point cloud data and then render the surfels into the screen.\\
+\\
 Then the structs and functions for deformation graph, its nodes and surface constraints will be built to allow for non rigid deformation of the surface.\\
+\\
 In order to perform the optimization using surface constraints, global and local loop closure needs to be done. For global loop closure, ElasticFusion\cite{whelan2016elasticfusion} uses randomised fern encoding database to store frame information and check for match frames. Therefore fern and frame structs and this store, lookup mechanism needs to be implemented.\\
+\\
 With global loop closure in place, this can be tested out by manually triggering the loop closing and see whether deformation graph is applied, which will cause the surfaces to be realigned, and camera pose be updated.\\
+\\
 If this is successful, local loop closure can also be done using model-to-model tracking by trying to register the active and inactive point clouds together under the current frame view point. This is done by using the same tracking and optimization process in global loop sure.\\
+\\
 It will be the ideal case if the above is all achieved before the project deadline, since this is a very challenging project. And if at a certain stage it is realised that it could not be done before the deadline, the progress can be fall back to the previous milestone and start clean up and report write up.\\ 
+\\
 However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
-The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
+\\
+
+
+\subsection{Logging data from Tango}
+
+
 
 
 
@@ -514,6 +531,38 @@ Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
 \begin{figure}[h]
     \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot9}
+    \caption{Screenshot9}
+    \label{fig:Screenshot9}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot10}
+    \caption{Screenshot10}
+    \label{fig:Screenshot10}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot11}
+    \caption{Screenshot11}
+    \label{fig:Screenshot11}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot14}
+    \caption{Screenshot14}
+    \label{fig:Screenshot14}
+\end{figure}
+
+
+
+\begin{figure}[h]
+    \centering
     \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango1}
     \caption{ScreenshotTango1}
     \label{fig:ScreenshotTango1}
@@ -523,6 +572,8 @@ Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
 
 \newpage
+
+The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
 
 \begin{figure}
 \centering
