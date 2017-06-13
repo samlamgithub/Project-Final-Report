@@ -16,26 +16,26 @@
 \contentsline {subsubsection}{\numberline {4.2.5}VINS-Mobile}{26}{subsubsection.53}
 \contentsline {section}{\numberline {5}Project Implementation}{29}{section.61}
 \contentsline {subsection}{\numberline {5.1}Tango Platform}{29}{subsection.62}
-\contentsline {subsection}{\numberline {5.2}Logging data from Tango}{31}{subsection.63}
-\contentsline {subsection}{\numberline {5.3}Compiling ElasticFusion on Tango}{31}{subsection.64}
-\contentsline {subsubsection}{\numberline {5.3.1}Dependencies}{31}{subsubsection.65}
-\contentsline {subsubsection}{\numberline {5.3.2}OpenCV}{31}{subsubsection.66}
-\contentsline {subsubsection}{\numberline {5.3.3}CUDA}{31}{subsubsection.67}
-\contentsline {subsubsection}{\numberline {5.3.4}Pangolin}{31}{subsubsection.68}
-\contentsline {subsubsection}{\numberline {5.3.5}SuiteSparse}{31}{subsubsection.70}
-\contentsline {subsubsection}{\numberline {5.3.6}OpenGL}{31}{subsubsection.73}
-\contentsline {subsubsection}{\numberline {5.3.7}Eigen}{31}{subsubsection.74}
-\contentsline {subsection}{\numberline {5.4}Running ElasticFusion on Tango}{32}{subsection.75}
-\contentsline {subsubsection}{\numberline {5.4.1}Running ElasticFusion with pose on Tango}{32}{subsubsection.76}
-\contentsline {subsubsection}{\numberline {5.4.2}Running ElasticFusion dataset on Tango}{32}{subsubsection.77}
-\contentsline {subsubsection}{\numberline {5.4.3}Running Tango dataset on Tango}{32}{subsubsection.78}
-\contentsline {subsection}{\numberline {5.5}Combine ElasticFusion with pose from Tango in Loop closure mode}{33}{subsection.79}
-\contentsline {section}{\numberline {6}Evaluation}{35}{section.89}
-\contentsline {subsubsection}{\numberline {6.0.1}Hardware limitation}{35}{subsubsection.90}
-\contentsline {subsubsection}{\numberline {6.0.2}Software limitation}{36}{subsubsection.91}
-\contentsline {section}{\numberline {7}Conclusions and Future Work}{37}{section.92}
-\contentsline {section}{\numberline {8}Bibliography}{38}{section.93}
-\contentsline {section}{\numberline {9}Appendix}{39}{section.94}
-\contentsline {section}{\numberline {10}User Guide}{40}{section.95}
-\contentsline {section}{\numberline {11}Program Listings}{41}{section.96}
-\contentsline {section}{\numberline {12}Word Count}{42}{section.97}
+\contentsline {subsection}{\numberline {5.2}Logging data from Tango}{38}{subsection.255}
+\contentsline {subsection}{\numberline {5.3}Compiling ElasticFusion on Tango}{38}{subsection.256}
+\contentsline {subsubsection}{\numberline {5.3.1}Dependencies}{38}{subsubsection.257}
+\contentsline {subsubsection}{\numberline {5.3.2}OpenCV}{38}{subsubsection.258}
+\contentsline {subsubsection}{\numberline {5.3.3}CUDA}{38}{subsubsection.259}
+\contentsline {subsubsection}{\numberline {5.3.4}Pangolin}{38}{subsubsection.260}
+\contentsline {subsubsection}{\numberline {5.3.5}SuiteSparse}{38}{subsubsection.262}
+\contentsline {subsubsection}{\numberline {5.3.6}OpenGL}{39}{subsubsection.265}
+\contentsline {subsubsection}{\numberline {5.3.7}Eigen}{39}{subsubsection.266}
+\contentsline {subsection}{\numberline {5.4}Running ElasticFusion on Tango}{40}{subsection.267}
+\contentsline {subsubsection}{\numberline {5.4.1}Running ElasticFusion with pose on Tango}{40}{subsubsection.268}
+\contentsline {subsubsection}{\numberline {5.4.2}Running ElasticFusion dataset on Tango}{40}{subsubsection.269}
+\contentsline {subsubsection}{\numberline {5.4.3}Running Tango dataset on Tango}{40}{subsubsection.270}
+\contentsline {subsection}{\numberline {5.5}Combine ElasticFusion with pose from Tango in Loop closure mode}{41}{subsection.271}
+\contentsline {section}{\numberline {6}Evaluation}{43}{section.281}
+\contentsline {subsubsection}{\numberline {6.0.1}Hardware limitation}{43}{subsubsection.282}
+\contentsline {subsubsection}{\numberline {6.0.2}Software limitation}{44}{subsubsection.283}
+\contentsline {section}{\numberline {7}Conclusions and Future Work}{45}{section.284}
+\contentsline {section}{\numberline {8}Bibliography}{46}{section.285}
+\contentsline {section}{\numberline {9}Appendix}{47}{section.286}
+\contentsline {section}{\numberline {10}User Guide}{48}{section.287}
+\contentsline {section}{\numberline {11}Program Listings}{49}{section.288}
+\contentsline {section}{\numberline {12}Word Count}{50}{section.289}

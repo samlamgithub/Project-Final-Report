@@ -15,26 +15,26 @@
 \BOOKMARK [3][]{subsubsection.53}{4.2.5 VINS-Mobile}{subsection.28}% 15
 \BOOKMARK [1][]{section.61}{5 Project Implementation}{}% 16
 \BOOKMARK [2][]{subsection.62}{5.1 Tango Platform}{section.61}% 17
-\BOOKMARK [2][]{subsection.63}{5.2 Logging data from Tango}{section.61}% 18
-\BOOKMARK [2][]{subsection.64}{5.3 Compiling ElasticFusion on Tango}{section.61}% 19
-\BOOKMARK [3][]{subsubsection.65}{5.3.1 Dependencies}{subsection.64}% 20
-\BOOKMARK [3][]{subsubsection.66}{5.3.2 OpenCV}{subsection.64}% 21
-\BOOKMARK [3][]{subsubsection.67}{5.3.3 CUDA}{subsection.64}% 22
-\BOOKMARK [3][]{subsubsection.68}{5.3.4 Pangolin}{subsection.64}% 23
-\BOOKMARK [3][]{subsubsection.70}{5.3.5 SuiteSparse}{subsection.64}% 24
-\BOOKMARK [3][]{subsubsection.73}{5.3.6 OpenGL}{subsection.64}% 25
-\BOOKMARK [3][]{subsubsection.74}{5.3.7 Eigen}{subsection.64}% 26
-\BOOKMARK [2][]{subsection.75}{5.4 Running ElasticFusion on Tango}{section.61}% 27
-\BOOKMARK [3][]{subsubsection.76}{5.4.1 Running ElasticFusion with pose on Tango}{subsection.75}% 28
-\BOOKMARK [3][]{subsubsection.77}{5.4.2 Running ElasticFusion dataset on Tango}{subsection.75}% 29
-\BOOKMARK [3][]{subsubsection.78}{5.4.3 Running Tango dataset on Tango}{subsection.75}% 30
-\BOOKMARK [2][]{subsection.79}{5.5 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.61}% 31
-\BOOKMARK [1][]{section.89}{6 Evaluation}{}% 32
-\BOOKMARK [2][]{subsubsection.90}{6.0.1 Hardware limitation}{section.89}% 33
-\BOOKMARK [3][]{subsubsection.91}{6.0.2 Software limitation}{subsubsection.90}% 34
-\BOOKMARK [1][]{section.92}{7 Conclusions and Future Work}{}% 35
-\BOOKMARK [1][]{section.93}{8 Bibliography}{}% 36
-\BOOKMARK [1][]{section.94}{9 Appendix}{}% 37
-\BOOKMARK [1][]{section.95}{10 User Guide}{}% 38
-\BOOKMARK [1][]{section.96}{11 Program Listings}{}% 39
-\BOOKMARK [1][]{section.97}{12 Word Count}{}% 40
+\BOOKMARK [2][]{subsection.255}{5.2 Logging data from Tango}{section.61}% 18
+\BOOKMARK [2][]{subsection.256}{5.3 Compiling ElasticFusion on Tango}{section.61}% 19
+\BOOKMARK [3][]{subsubsection.257}{5.3.1 Dependencies}{subsection.256}% 20
+\BOOKMARK [3][]{subsubsection.258}{5.3.2 OpenCV}{subsection.256}% 21
+\BOOKMARK [3][]{subsubsection.259}{5.3.3 CUDA}{subsection.256}% 22
+\BOOKMARK [3][]{subsubsection.260}{5.3.4 Pangolin}{subsection.256}% 23
+\BOOKMARK [3][]{subsubsection.262}{5.3.5 SuiteSparse}{subsection.256}% 24
+\BOOKMARK [3][]{subsubsection.265}{5.3.6 OpenGL}{subsection.256}% 25
+\BOOKMARK [3][]{subsubsection.266}{5.3.7 Eigen}{subsection.256}% 26
+\BOOKMARK [2][]{subsection.267}{5.4 Running ElasticFusion on Tango}{section.61}% 27
+\BOOKMARK [3][]{subsubsection.268}{5.4.1 Running ElasticFusion with pose on Tango}{subsection.267}% 28
+\BOOKMARK [3][]{subsubsection.269}{5.4.2 Running ElasticFusion dataset on Tango}{subsection.267}% 29
+\BOOKMARK [3][]{subsubsection.270}{5.4.3 Running Tango dataset on Tango}{subsection.267}% 30
+\BOOKMARK [2][]{subsection.271}{5.5 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.61}% 31
+\BOOKMARK [1][]{section.281}{6 Evaluation}{}% 32
+\BOOKMARK [2][]{subsubsection.282}{6.0.1 Hardware limitation}{section.281}% 33
+\BOOKMARK [3][]{subsubsection.283}{6.0.2 Software limitation}{subsubsection.282}% 34
+\BOOKMARK [1][]{section.284}{7 Conclusions and Future Work}{}% 35
+\BOOKMARK [1][]{section.285}{8 Bibliography}{}% 36
+\BOOKMARK [1][]{section.286}{9 Appendix}{}% 37
+\BOOKMARK [1][]{section.287}{10 User Guide}{}% 38
+\BOOKMARK [1][]{section.288}{11 Program Listings}{}% 39
+\BOOKMARK [1][]{section.289}{12 Word Count}{}% 40

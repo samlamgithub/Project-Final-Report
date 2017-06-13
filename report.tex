@@ -7,6 +7,16 @@
 \newcommand{\supervisor}{Dr Stefan Leutenegger}
 \newcommand{\secondmarker}{Professor Andrew Davison}
 
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+
 % include files that load packages and define macros
 \input{includes} % various packages needed for maths etc.
 \input{notation} % short-hand notation and macros
@@ -68,8 +78,7 @@ The main objective of this project is to develop a fully self-contained mobile d
     \caption{ScreenshotTango5}
     \label{fig:ScreenshotTango5}
 \end{figure}
-Previously, ElasticFusion can only be run on a desktop computer with powerful graphic card, using a raw dataset that is given, or connect the computer to a RGB-D camera such as Microsoft Kinect or ASUS
-Xtion Pro Live or Intel RealSense 3D Camera. That makes it non convenient for a user to scan the space he or she is currently in for 3D reconstruction, therefore the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)." is recommended for a desktop computer, therefore one of important problem in this project is that Tango tablet's processing power is still not strong enough to run ElasticFusion for real time application. However, the attempt make in this project have still shown the possibility of running a state of the art SLAM  algorithm on mobile device.\\
+Previously, ElasticFusion can only be run on a desktop computer with powerful graphic card, using a raw dataset that is given, or connect the computer to a RGB-D camera such as Microsoft Kinect or ASUS Xtion Pro Live or Intel RealSense 3D Camera. That makes it non convenient for a user to scan the space he or she is currently in for 3D reconstruction, therefore the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)." is recommended for a desktop computer, therefore one of important problem in this project is that Tango tablet's processing power is still not strong enough to run ElasticFusion for real time application. However, the attempt make in this project have still shown the possibility of running a state of the art SLAM  algorithm on mobile device.\\
 \\
 In the original design for this project, if the development of this solution is successful, an augmented reality application could be created as demo to illustrate the interaction of virtual object with scanned 3D surface map. But after various experiments in this project, a conclusion that ElasticFusion could not be run on Tango tablet as a real time application drawn, due to processing power and depth sensor accuracy problem, although due to time and effort limitations, the ElasticFusion on Tango application produces in this project still produce incorrect reconstruction model and the program has not been optimized. Despite all the above, the contribution of this project still includes the attempt made to implement this solution, and the possibility of using Tango tablet as a pure scanning device for recording data, and let the data to be processed on other computers for doing 3D surface reconstruction.\\
 \\
@@ -390,7 +399,7 @@ The program uses ceres solver\citep{ceres-solver} from Google\footnote{\url{http
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/vin3}
+    \includegraphics[width=0.9\textwidth]{figures/vin3}
     \caption{vin3}
     \label{fig: vin3}
 \end{figure}
@@ -407,10 +416,27 @@ The central part of the report usually consists of three of four chapters detail
 
 \subsection{Tango Platform}
 
+Tango is a platform that uses computer vision to give devices the ability to understand their position relative to the world around them. It’s similar to how you use your eyes to find your way to a room, and then to know where you are in the room and where the floor, the walls, and objects around you are. These physical relationships are an essential part of how we move through our daily lives. Tango gives mobile devices this kind of understanding by using three core technologies: Motion Tracking, Area Learning, and Depth Perception.\\
+\\
+Google Tango\footnote{\url{https://get.google.com/tango/}} is an augmented reality computing platform by Google that give mobile devices the ability to sense 3D space information. Equipped with this platform Google's Tango tablet is an Android device that carry sensors including 4MP(Mega Pixel) color camera, Inertial Measurement Unit (IMU), and Infra-Red depth camera. it also carrys NVIDIA Tegra K1 processor which provides more powerful computational power than other mobile devices. Given this cheap commodity mobile hardware and software, this project aims to build a fully self-contained 3D dense surface reconstruction solution using  state-of-the-art RGB-D(csolor and depth) SLAM (Simultaneous Localization And Mapping) algorithms.\\
+\\
+In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2016elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}} at Imperial College London is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, so that drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet. Also, the current code exist for ElasticFusion running on desktop computer made heavily use of CUDA(Compute Unified Device Architecture) for GPU general data processing, which is supported by the NVIDIA Tegra K1 processer on Google Tango tablet.\\
+\\
+Tango offers APIs in C and Java, and an SDK for Unity. \\
+\\
+This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
+\\
+Also, since the Tango platform on the tablet provides pose estimation feature, this pose is simply feed into the ElasticFusion program run on the tablet, so that the ElasticFusion part doesn't need to waste time and processing power to execute the camera tracking part. However, the pose provided by Tango is not accurate enough and during the reconstruction process ElasticFusion will alter the pose if global or local loop closure happens, in this project a simply way to correct pose input to ElasticFusion by Tango is developed to  over come this problem. \\
+\\
+the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)."\\
 
+
+\\
 Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
 laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
-=====\\
+
+=======\\
+
 requirement:\\
 A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7).  3500 GFLOPS\\
 Nvidia Tegra K1  approx = GT620-GT540\\
@@ -444,6 +470,260 @@ It will be the ideal case if the above is all achieved before the project deadli
 \\
 However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
 \\
+
+\begin{lstlisting}
+struct PoseData {
+    double orientation[4];
+    double translation[3];
+}
+\end{lstlisting}
+
+A quaternion that defines the rotation of the target frame with respect to the base frame.\\
+A 3D vector that defines the translation of the target frame with respect to the base frame.\\
+An actual pose struct contains other fields, such as a timestamp and a copy of the frame pair, \\
+
+Frames of Reference\\
+
+ $ SE(3)$\\
+$\mathfrak{so}(3)$
+
+global pose of the camera $\mat P_t$ (w.r.t. a global frame $\xrightarrow{F_G}$) \\ 
+
+a transformation matrix where: $\mat P_t = \begin{bmatrix}
+& R_t & t_t\\
+0 & 0 & 0 & 1
+\end{bmatrix} \quad  \in \mathbb{S}\E(3). $ \\
+with rotation $\mat R_t \in SO(3)$ and translation $\vec t_t \in \mathbb{R}^3$.
+
+
+\begin{lstlisting}
+TangoErrorType TangoService_connectOnPoseAvailable(
+    uint32_t count, const TangoCoordinateFramePair* frames,
+    void (*TangoService_onPoseAvailable)(void* context,
+                                         const TangoPoseData* pose)
+\end{lstlisting}
+
+\begin{lstlisting}
+TangoErrorType TangoSupport_updatePointCloud(TangoSupportPointCloudManager *manager, const TangoPointCloud *point_cloud)
+\end{lstlisting}
+
+\begin{lstlisting}
+/// Get the intrinsic calibration parameters for a given camera. The intrinsics
+/// are as specified by the TangoCameraIntrinsics struct and are accessed via
+/// the API.
+/// @param camera_id The camera ID to retrieve the calibration intrinsics for.
+/// @param intrinsics A TangoCameraIntrinsics struct that must be allocated
+///     before calling, and is filled with calibration intrinsics for the camera
+///     @p camera_id upon successful return.
+/// @return @c TANGO_SUCCESS on successfully retrieving calibration intrinsics,
+///     @c TANGO_INVALID if the @p camera_id is out of range or if intrinsics
+///     argument was @c NULL, or @c TANGO_ERROR if an internal error occurs
+///     while getting intrinsics.
+TangoErrorType TangoService_getCameraIntrinsics(TangoCameraId camera_id,
+    TangoCameraIntrinsics* intrinsics);
+\end{lstlisting}
+
+\begin{lstlisting}
+/// Connect a Texture ID to a camera; the camera is selected by specifying a
+/// TangoCameraId. Currently only @c TANGO_CAMERA_COLOR and
+/// @c TANGO_CAMERA_FISHEYE are supported.
+/// The texture must be the ID of a texture that has been allocated and
+/// initialized by the calling application. The TangoConfig flag
+/// config_enable_color_camera must be set to true for connectTextureId
+/// to succeed after TangoService_connect() is called.
+///
+/// @param id The ID of the camera to connect this texture to. Only
+///     @c TANGO_CAMERA_COLOR and @c TANGO_CAMERA_FISHEYE are supported.
+/// @param context The context returned during the onFrameAvailable callback.
+/// @param tex The texture ID of the texture to connect the camera to. Must be
+///     a valid texture in the applicaton.
+/// @return @c TANGO_INVALID if the camera ID is not valid, or @c TANGO_ERROR if
+///     an internal error occurred.
+TangoErrorType TangoService_connectTextureId(
+    TangoCameraId id, unsigned int tex, void* context,
+    TangoService_OnTextureAvailable callback);
+\end{lstlisting}
+
+\begin{lstlisting}
+TangoErrorType TangoSupport_createPointCloudManager(
+  size_t max_points,
+  TangoSupportPointCloudManager **manager
+)
+\end{lstlisting}
+
+
+\begin{lstlisting}
+/// Update the texture that has been connected to camera referenced by
+/// @p TangoCameraId. The texture is updated with the latest image from the
+/// camera.
+/// If timestamp is not @c NULL, it will be filled with the image timestamp.
+/// @param id The ID of the camera to connect this texture to. Only
+///     @c TANGO_CAMERA_COLOR and @c TANGO_CAMERA_FISHEYE are supported.
+/// @param timestamp Upon return, if not NULL upon calling, timestamp contains
+///     the timestamp of the image that has been pushed to the connected
+///     texture.
+/// @return @c TANGO_INVALID if @p id is out of range or if a texture ID was
+///     never associated with the camera; @c TANGO_SUCCESS otherwise.
+TangoErrorType TangoService_updateTexture(TangoCameraId id, double* timestamp);
+\end{lstlisting}
+
+
+\begin{lstlisting}
+TangoErrorType TangoSupport_getLatestPointCloudAndNewDataFlag(
+  TangoSupportPointCloudManager *manager,
+  TangoPointCloud **latest_point_cloud,
+  bool *new_data
+)
+\end{lstlisting}
+
+
+\begin{lstlisting}
+/// Update a GL_TEXTURE_EXTERNAL_OES texture to the latest camera
+/// image available.
+///
+/// If timestamp is not NULL, it will be filled with the image
+/// timestamp. The texture passed in must be of type @c
+/// GL_TEXTURE_EXTERNAL_OES. This is not checked.
+///
+/// @param id The ID of the camera to use for the update. Only @c
+///    TANGO_CAMERA_COLOR and @c TANGO_CAMERA_FISHEYE are supported.
+/// @param tex Texture to update. This texture must be of type @c
+///    GL_TEXTURE_EXTERNAL_OES.
+/// @param timestamp Upon return, if not NULL upon calling, timestamp
+///     contains the timestamp of the image that has been pushed to the
+///    texture.
+/// @return @c TANGO_INVALID if @p id is out of range or if @c tex is not a
+///     texture ID; @c TANGO_SUCCESS otherwise.
+TangoErrorType TangoService_updateTextureExternalOes(TangoCameraId id,
+                                                     unsigned int tex,
+                                                     double* timestamp);
+\end{lstlisting}
+
+
+
+                                          
+\begin{lstlisting}
+/// Get a pose at a given timestamp from the base to the target frame.
+///
+/// All poses returned are marked as @c TANGO_POSE_VALID (in the
+/// status_code field on TangoPoseData) even if they were marked as
+/// @c TANGO_POSE_INITIALIZING in the callback poses.
+/// To determine when initialization is complete, register a callback using
+/// TangoService_connectOnPoseAvailable() and wait until you receive valid data.
+///
+/// If no pose can be returned, the status_code of the returned pose will be
+/// @c TANGO_POSE_INVALID.
+///
+/// @param timestamp Time specified in seconds. If not set to 0.0, getPoseAtTime
+///     retrieves the interpolated pose closest to this timestamp. If set to
+///     0.0, the most recent pose estimate for the target-base pair is returned.
+///     The time of the returned pose is contained in the pose output structure
+///     and may differ from the queried timestamp.
+/// @param frame A pair of coordinate frames specifying the transformation to be
+///     queried for. For example, typical device motion is given by a target
+///     frame of @c TANGO_COORDINATE_FRAME_DEVICE and a base frame of
+///     @c TANGO_COORDINATE_FRAME_START_OF_SERVICE.
+/// @param pose The pose of target with respect to base frame of reference. Must
+///     be allocated by the caller, and is overwritten upon return.
+/// @return @c TANGO_SUCCESS if a pose was returned successfully. Check the
+///     @c status_code attribute on the returned @c pose to see if it is
+///     valid. Returns @c TANGO_INVALID if the base and target frame are the
+///     same, or if the base or the target frame is not valid, or if
+///     timestamp is less than 0, or if the service has not yet begun running
+///     (TangoService_connect() has not completed).
+TangoErrorType TangoService_getPoseAtTime(double timestamp,
+                                          TangoCoordinateFramePair frame,
+                                          TangoPoseData* pose);
+\end{lstlisting}
+
+
+\begin{lstlisting}
+TangoErrorType TangoSupport_calculateRelativePose(double base_timestamp, TangoCoordinateFrameType base_frame, double target_timestamp, TangoCoordinateFrameType target_frame, TangoPoseData *base_frame_T_target_frame)
+\end{lstlisting}
+
+
+\begin{lstlisting}
+\end{lstlisting}
+
+
+
+\begin{lstlisting}
+TangoErrorType TangoService_connectOnPointCloudAvailable(void(*)(void *context, const TangoPointCloud *cloud) 
+\end{lstlisting}
+
+\begin{lstlisting}
+/// The TangoPoseData struct contains pose information returned from motion
+/// tracking.
+/// The device pose is given using Android conventions.
+/// See the Android
+/// <a href="http://developer.android.com/guide/topics/sensors/sensors_overview.html#sensors-coords">
+/// Sensor Overview</a> page for more information.
+typedef struct TangoPoseData {
+  ///< Unused. An integer denoting the version of the structure.
+  uint32_t version;
+
+  /// The timestamp of the pose estimate, in seconds.
+  double timestamp;
+
+  /// Orientation, as a quaternion, of the pose of the target frame with
+  /// reference to the base frame.
+  /// Specified as (x,y,z,w) where RotationAngle is in radians:
+  /// @code
+  ///   x = RotationAxis.x * sin(RotationAngle / 2)
+  ///   y = RotationAxis.y * sin(RotationAngle / 2)
+  ///   z = RotationAxis.z * sin(RotationAngle / 2)
+  ///   w = cos(RotationAngle / 2)
+  /// @endcode
+  double orientation[4];
+
+  /// Translation, ordered x, y, z, of the pose of the target frame with
+  /// reference to the base frame.
+  double translation[3];
+  /// The status of the pose, according to the pose lifecycle.
+  TangoPoseStatusType status_code;
+  /// The pair of coordinate frames for this pose. We retrieve a pose for a
+  /// target coordinate frame (such as the Tango device) against a base
+  /// coordinate frame (such as a learned area).
+  TangoCoordinateFramePair frame;
+  uint32_t confidence;   ///< Unused. Integer levels are determined by service.
+  float accuracy;        ///< Unused. Reserved for metric accuracy.
+} TangoPoseData;
+
+/// The TangoTransformation struct contains an orientation and translation
+/// that can be applied to transform a point.
+\end{lstlisting}
+
+
+\begin{lstlisting}
+/// TangoPointCloud contains information returned from the depth sensor.
+typedef struct TangoPointCloud {
+  /// An integer denoting the version of the structure.
+  uint32_t version;
+
+  /// Time of capture of the depth data for this struct (in seconds).
+  double timestamp;
+
+  /// The number of points in depth_data_buffer populated successfully. This
+  /// is variable with each call to the function, and is returned as number of
+  /// (x,y,z,c) points populated.
+  uint32_t num_points;
+
+  /// An array of packed {X, Y, Z, C} values. {X, Y, Z} is a coordinate triplet
+  /// (in meters). C is a confidence value, in the range of [0, 1], where 1
+  /// corresponds to full confidence. +Z points in the direction of the camera's
+  /// optical axis, perpendicular to the plane of the camera. +X points toward
+  /// the user's right, and +Y points toward the bottom of the screen.
+  /// The origin is the focal center of the depth camera.
+  float (*points)[4];
+} TangoPointCloud;
+\end{lstlisting}
+
+
+\textit{tangoAPI}\\
+\\
+\begin{lstlisting}
+Code
+\end{lstlisting}
 
 
 \subsection{Logging data from Tango}
