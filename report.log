@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.10.24)  13 JUN 2017 19:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.10.24)  13 JUN 2017 20:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1950,90 +1950,170 @@ Package pdftex.def Info: figures/vin3.png used on input line 401.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 418--421
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 422--423
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 411--437
+
+ []
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 446--449
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--451
 
  []
 
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <9> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 427.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 455.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 427.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 455.
 
-Underfull \hbox (badness 10000) in paragraph at lines 427--428
+Underfull \hbox (badness 10000) in paragraph at lines 455--456
 
  []
 
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 432.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 460.
 
 (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-)
-<figures/rgbd1.png, id=593, 1927.2pt x 1204.5pt>
+) [30]
+<figures/projectStructure.png, id=617, 2128.95375pt x 1270.7475pt>
+File: figures/projectStructure.png Graphic file (type png)
+
+<use figures/projectStructure.png>
+Package pdftex.def Info: figures/projectStructure.png used on input line 485.
+(pdftex.def)             Requested size: 438.17227pt x 261.5326pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figures/rgbd1.png, id=618, 1927.2pt x 1204.5pt>
 File: figures/rgbd1.png Graphic file (type png)
  <use figures/rgbd1.png>
-Package pdftex.def Info: figures/rgbd1.png used on input line 445.
+Package pdftex.def Info: figures/rgbd1.png used on input line 492.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/rgbd2.png, id=594, 1927.2pt x 1204.5pt>
+<figures/rgbd2.png, id=619, 1927.2pt x 1204.5pt>
 File: figures/rgbd2.png Graphic file (type png)
  <use figures/rgbd2.png>
-Package pdftex.def Info: figures/rgbd2.png used on input line 452.
+Package pdftex.def Info: figures/rgbd2.png used on input line 499.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/rgbd3.png, id=595, 1927.2pt x 1204.5pt>
+<figures/rgbd3.png, id=620, 1927.2pt x 1204.5pt>
 File: figures/rgbd3.png Graphic file (type png)
  <use figures/rgbd3.png>
-Package pdftex.def Info: figures/rgbd3.png used on input line 459.
+Package pdftex.def Info: figures/rgbd3.png used on input line 506.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/rgbd4.png, id=596, 1927.2pt x 1204.5pt>
+<figures/rgbd4.png, id=621, 1927.2pt x 1204.5pt>
 File: figures/rgbd4.png Graphic file (type png)
  <use figures/rgbd4.png>
-Package pdftex.def Info: figures/rgbd4.png used on input line 466.
+Package pdftex.def Info: figures/rgbd4.png used on input line 513.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/rgbd5.png, id=597, 1927.2pt x 1204.5pt>
+<figures/rgbd5.png, id=622, 1927.2pt x 1204.5pt>
 File: figures/rgbd5.png Graphic file (type png)
  <use figures/rgbd5.png>
-Package pdftex.def Info: figures/rgbd5.png used on input line 473.
+Package pdftex.def Info: figures/rgbd5.png used on input line 520.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/rgbd6.png, id=598, 1927.2pt x 1204.5pt>
+<figures/rgbd6.png, id=623, 1927.2pt x 1204.5pt>
 File: figures/rgbd6.png Graphic file (type png)
  <use figures/rgbd6.png>
-Package pdftex.def Info: figures/rgbd6.png used on input line 480.
+Package pdftex.def Info: figures/rgbd6.png used on input line 527.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 487--488
+Underfull \hbox (badness 10000) in paragraph at lines 534--535
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 489--490
+Underfull \hbox (badness 10000) in paragraph at lines 536--537
 
  []
 
@@ -2041,244 +2121,171 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no ™ in font bchr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 493--509
+Underfull \hbox (badness 10000) in paragraph at lines 540--556
 
  []
 
-[29] [30]
-Underfull \hbox (badness 10000) in paragraph at lines 510--511
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
+[31] [32]
+Underfull \hbox (badness 10000) in paragraph at lines 557--558
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
+Underfull \hbox (badness 10000) in paragraph at lines 559--564
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
+Underfull \hbox (badness 10000) in paragraph at lines 559--564
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--545
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [31]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [32]
 [33] [34] [35] [36] [37]
-Underfull \hbox (badness 10000) in paragraph at lines 770--772
+Underfull \hbox (badness 10000) in paragraph at lines 790--792
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--772
+Underfull \hbox (badness 10000) in paragraph at lines 790--792
 
  []
 
-[38] [39] [40] [41] <figures/Screenshot1.png, id=873, 1927.2pt x 1084.05pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+[39] [40] [41] <figures/Screenshot1.png, id=884, 1927.2pt x 1084.05pt>
 File: figures/Screenshot1.png Graphic file (type png)
 
 <use figures/Screenshot1.png>
-Package pdftex.def Info: figures/Screenshot1.png used on input line 841.
+Package pdftex.def Info: figures/Screenshot1.png used on input line 861.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot2.png, id=874, 1927.2pt x 1084.05pt>
+<figures/Screenshot2.png, id=885, 1927.2pt x 1084.05pt>
 File: figures/Screenshot2.png Graphic file (type png)
 
 <use figures/Screenshot2.png>
-Package pdftex.def Info: figures/Screenshot2.png used on input line 848.
+Package pdftex.def Info: figures/Screenshot2.png used on input line 868.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot3.png, id=875, 1927.2pt x 1084.05pt>
+<figures/Screenshot3.png, id=886, 1927.2pt x 1084.05pt>
 File: figures/Screenshot3.png Graphic file (type png)
 
 <use figures/Screenshot3.png>
-Package pdftex.def Info: figures/Screenshot3.png used on input line 855.
+Package pdftex.def Info: figures/Screenshot3.png used on input line 875.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot9.png, id=876, 1927.2pt x 1084.05pt>
+<figures/Screenshot9.png, id=887, 1927.2pt x 1084.05pt>
 File: figures/Screenshot9.png Graphic file (type png)
 
 <use figures/Screenshot9.png>
-Package pdftex.def Info: figures/Screenshot9.png used on input line 862.
+Package pdftex.def Info: figures/Screenshot9.png used on input line 882.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot10.png, id=877, 1927.2pt x 1084.05pt>
+<figures/Screenshot10.png, id=888, 1927.2pt x 1084.05pt>
 File: figures/Screenshot10.png Graphic file (type png)
 
 <use figures/Screenshot10.png>
-Package pdftex.def Info: figures/Screenshot10.png used on input line 870.
+Package pdftex.def Info: figures/Screenshot10.png used on input line 890.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot11.png, id=878, 1927.2pt x 1084.05pt>
+<figures/Screenshot11.png, id=889, 1927.2pt x 1084.05pt>
 File: figures/Screenshot11.png Graphic file (type png)
 
 <use figures/Screenshot11.png>
-Package pdftex.def Info: figures/Screenshot11.png used on input line 877.
+Package pdftex.def Info: figures/Screenshot11.png used on input line 897.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot14.png, id=879, 1927.2pt x 1084.05pt>
+<figures/Screenshot14.png, id=890, 1927.2pt x 1084.05pt>
 File: figures/Screenshot14.png Graphic file (type png)
 
 <use figures/Screenshot14.png>
-Package pdftex.def Info: figures/Screenshot14.png used on input line 885.
+Package pdftex.def Info: figures/Screenshot14.png used on input line 905.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/ScreenshotTango1.png, id=880, 1927.2pt x 1204.5pt>
+<figures/ScreenshotTango1.png, id=891, 1927.2pt x 1204.5pt>
 File: figures/ScreenshotTango1.png Graphic file (type png)
 
 <use figures/ScreenshotTango1.png>
-Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 894.
+Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 914.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/timeline2.png, id=882, 1828.8325pt x 526.96875pt>
+<figures/timeline2.png, id=893, 1828.8325pt x 526.96875pt>
 File: figures/timeline2.png Graphic file (type png)
 
 <use figures/timeline2.png>
-Package pdftex.def Info: figures/timeline2.png used on input line 908.
+Package pdftex.def Info: figures/timeline2.png used on input line 928.
 (pdftex.def)             Requested size: 1828.82806pt x 526.96745pt.
 
 
-LaTeX Warning: Float too large for page by 23.60356pt on input line 911.
+LaTeX Warning: Float too large for page by 23.60356pt on input line 931.
 
 [42]
-Underfull \hbox (badness 10000) in paragraph at lines 926--927
+Underfull \hbox (badness 10000) in paragraph at lines 946--947
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 928--929
+Underfull \hbox (badness 10000) in paragraph at lines 948--949
 
  []
 
@@ -2289,37 +2296,37 @@ Missing character: There is no â in font bchr7t!
 Missing character: There is no € in font bchr7t!
 Missing character: There is no ‹ in font bchr7t!
 [43] [44]
-Underfull \hbox (badness 10000) in paragraph at lines 976--977
+Underfull \hbox (badness 10000) in paragraph at lines 996--997
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 979--982
+Underfull \hbox (badness 10000) in paragraph at lines 999--1002
 
  []
 
 [45]
-Underfull \hbox (badness 10000) in paragraph at lines 987--996
+Underfull \hbox (badness 10000) in paragraph at lines 1007--1016
 
  []
 
 [46]
-Underfull \hbox (badness 10000) in paragraph at lines 1001--1002
+Underfull \hbox (badness 10000) in paragraph at lines 1021--1022
 
  []
 
 [47]
-Underfull \hbox (badness 10000) in paragraph at lines 1006--1007
+Underfull \hbox (badness 10000) in paragraph at lines 1026--1027
 
  []
 
 [48]
-Underfull \hbox (badness 10000) in paragraph at lines 1012--1014
+Underfull \hbox (badness 10000) in paragraph at lines 1032--1034
 
  []
 
 [49]
-Underfull \hbox (badness 10000) in paragraph at lines 1018--1019
+Underfull \hbox (badness 10000) in paragraph at lines 1038--1039
 
  []
 
@@ -2338,33 +2345,34 @@ Underfull \hbox (badness 2495) in paragraph at lines 135--135
 \openout9 = `report.thm'.
 
  [52]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1025.
- [53 <./figures/vin1.png>] [54 <./figures/vin2.png> <./figures/vin3.png> <./fig
-ures/rgbd1.png>] [55 <./figures/rgbd2.png> <./figures/rgbd3.png>]
-[56 <./figures/rgbd4.png> <./figures/rgbd5.png>] [57 <./figures/rgbd6.png> <./f
-igures/Screenshot1.png> <./figures/Screenshot2.png>] [58 <./figures/Screenshot3
-.png> <./figures/Screenshot9.png> <./figures/Screenshot10.png>] [59 <./figures/
-Screenshot11.png> <./figures/Screenshot14.png> <./figures/ScreenshotTango1.png>
-] [60 <./figures/timeline2.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1025.
- (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1025.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1025.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1045.
+ [53 <./figures/vin1.png>] [54 <./figures/vin2.png> <./figures/vin3.png>] [55 <
+./figures/projectStructure.png> <./figures/rgbd1.png>] [56 <./figures/rgbd2.png
+> <./figures/rgbd3.png>] [57 <./figures/rgbd4.png> <./figures/rgbd5.png>] [58 <
+./figures/rgbd6.png> <./figures/Screenshot1.png> <./figures/Screenshot2.png>] [
+59 <./figures/Screenshot3.png> <./figures/Screenshot9.png> <./figures/Screensho
+t10.png>] [60 <./figures/Screenshot11.png> <./figures/Screenshot14.png> <./figu
+res/ScreenshotTango1.png>] [61 <./figures/timeline2.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1045.
+
+(./report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1045.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1045.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: C80848BD7D2A6C33F33A48C11E654559;3211.
+(rerunfilecheck)             Checksum: 68FAC5E7507ED64709841FD4F7AD129A;3211.
 Package rerunfilecheck Info: File `report.brf' has not changed.
-(rerunfilecheck)             Checksum: 131D7FBEFCE556EA0EB1138128C8BAE5;2974.
+(rerunfilecheck)             Checksum: C647E4EC91604F1D4A8853EAC5469A59;2949.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 25074 strings out of 494353
- 452403 string characters out of 6170043
- 721928 words of memory out of 5000000
- 27419 multiletter control sequences out of 15000+600000
+ 25092 strings out of 494353
+ 452733 string characters out of 6170043
+ 736978 words of memory out of 5000000
+ 27424 multiletter control sequences out of 15000+600000
  75439 words of font info for 155 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  64i,12n,77p,28587b,1673s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2382,10 +2390,10 @@ e/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/kpfonts/jkpsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/kpfonts/jkpsyb.pfb>
-Output written on report.pdf (60 pages, 20402923 bytes).
+Output written on report.pdf (61 pages, 20854527 bytes).
 PDF statistics:
- 1118 PDF objects out of 1200 (max. 8388607)
- 957 compressed objects within 10 object streams
- 382 named destinations out of 1000 (max. 500000)
- 570 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1138 PDF objects out of 1200 (max. 8388607)
+ 974 compressed objects within 10 object streams
+ 394 named destinations out of 1000 (max. 500000)
+ 575 words of extra memory for PDF output out of 10000 (max. 10000000)
 
