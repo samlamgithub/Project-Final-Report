@@ -14,31 +14,31 @@
 \BOOKMARK [3][]{subsubsection.47}{4.2.4 LSD SLAM}{subsection.27}% 14
 \BOOKMARK [3][]{subsubsection.52}{4.2.5 VINS-Mobile}{subsection.27}% 15
 \BOOKMARK [1][]{section.60}{5 Project Method Overview}{}% 16
-\BOOKMARK [1][]{section.87}{6 Project Implementation}{}% 17
-\BOOKMARK [2][]{subsection.88}{6.1 Tango Platform}{section.87}% 18
-\BOOKMARK [2][]{subsection.276}{6.2 Logging data from Tango}{section.87}% 19
-\BOOKMARK [2][]{subsection.277}{6.3 Compiling ElasticFusion on Tango}{section.87}% 20
-\BOOKMARK [3][]{subsubsection.278}{6.3.1 Dependencies}{subsection.277}% 21
-\BOOKMARK [3][]{subsubsection.279}{6.3.2 OpenCV}{subsection.277}% 22
-\BOOKMARK [3][]{subsubsection.280}{6.3.3 CUDA}{subsection.277}% 23
-\BOOKMARK [3][]{subsubsection.281}{6.3.4 Pangolin}{subsection.277}% 24
-\BOOKMARK [3][]{subsubsection.283}{6.3.5 SuiteSparse}{subsection.277}% 25
-\BOOKMARK [3][]{subsubsection.286}{6.3.6 OpenGL}{subsection.277}% 26
-\BOOKMARK [3][]{subsubsection.287}{6.3.7 Eigen}{subsection.277}% 27
-\BOOKMARK [2][]{subsection.288}{6.4 Running ElasticFusion on Tango}{section.87}% 28
-\BOOKMARK [3][]{subsubsection.289}{6.4.1 Running ElasticFusion with pose on Tango}{subsection.288}% 29
-\BOOKMARK [3][]{subsubsection.290}{6.4.2 Running ElasticFusion dataset on Tango}{subsection.288}% 30
-\BOOKMARK [3][]{subsubsection.291}{6.4.3 Running Tango dataset on Tango}{subsection.288}% 31
-\BOOKMARK [2][]{subsection.292}{6.5 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.87}% 32
-\BOOKMARK [1][]{section.302}{7 Evaluation}{}% 33
-\BOOKMARK [2][]{subsection.303}{7.1 Reconstruction Accuracy}{section.302}% 34
-\BOOKMARK [2][]{subsection.304}{7.2 depth sensor noise}{section.302}% 35
-\BOOKMARK [2][]{subsection.305}{7.3 Computation power problem}{section.302}% 36
-\BOOKMARK [2][]{subsection.306}{7.4 Optimization problem}{section.302}% 37
-\BOOKMARK [3][]{subsubsection.307}{7.4.1 Software limitation}{subsection.306}% 38
-\BOOKMARK [1][]{section.308}{8 Conclusions and Future Work}{}% 39
-\BOOKMARK [1][]{section.309}{9 Bibliography}{}% 40
-\BOOKMARK [1][]{section.310}{10 Appendix}{}% 41
-\BOOKMARK [1][]{section.311}{11 User Guide}{}% 42
-\BOOKMARK [1][]{section.312}{12 Program Listings}{}% 43
-\BOOKMARK [1][]{section.313}{13 Word Count}{}% 44
+\BOOKMARK [1][]{section.73}{6 Project Implementation}{}% 17
+\BOOKMARK [2][]{subsection.74}{6.1 Tango Platform}{section.73}% 18
+\BOOKMARK [2][]{subsection.277}{6.2 Logging data from Tango}{section.73}% 19
+\BOOKMARK [2][]{subsection.278}{6.3 Compiling ElasticFusion on Tango}{section.73}% 20
+\BOOKMARK [3][]{subsubsection.279}{6.3.1 Dependencies}{subsection.278}% 21
+\BOOKMARK [3][]{subsubsection.280}{6.3.2 OpenCV}{subsection.278}% 22
+\BOOKMARK [3][]{subsubsection.281}{6.3.3 CUDA}{subsection.278}% 23
+\BOOKMARK [3][]{subsubsection.282}{6.3.4 Pangolin}{subsection.278}% 24
+\BOOKMARK [3][]{subsubsection.284}{6.3.5 SuiteSparse}{subsection.278}% 25
+\BOOKMARK [3][]{subsubsection.287}{6.3.6 OpenGL}{subsection.278}% 26
+\BOOKMARK [3][]{subsubsection.288}{6.3.7 Eigen}{subsection.278}% 27
+\BOOKMARK [2][]{subsection.289}{6.4 Running ElasticFusion on Tango}{section.73}% 28
+\BOOKMARK [3][]{subsubsection.290}{6.4.1 Running ElasticFusion with pose on Tango}{subsection.289}% 29
+\BOOKMARK [3][]{subsubsection.291}{6.4.2 Running ElasticFusion dataset on Tango}{subsection.289}% 30
+\BOOKMARK [3][]{subsubsection.292}{6.4.3 Running Tango dataset on Tango}{subsection.289}% 31
+\BOOKMARK [2][]{subsection.293}{6.5 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.73}% 32
+\BOOKMARK [1][]{section.303}{7 Evaluation}{}% 33
+\BOOKMARK [2][]{subsection.304}{7.1 Reconstruction Accuracy}{section.303}% 34
+\BOOKMARK [2][]{subsection.305}{7.2 depth sensor noise}{section.303}% 35
+\BOOKMARK [2][]{subsection.306}{7.3 Computation power problem}{section.303}% 36
+\BOOKMARK [2][]{subsection.307}{7.4 Optimization problem}{section.303}% 37
+\BOOKMARK [3][]{subsubsection.308}{7.4.1 Software limitation}{subsection.307}% 38
+\BOOKMARK [1][]{section.309}{8 Conclusions and Future Work}{}% 39
+\BOOKMARK [1][]{section.310}{9 Bibliography}{}% 40
+\BOOKMARK [1][]{section.311}{10 Appendix}{}% 41
+\BOOKMARK [1][]{section.312}{11 User Guide}{}% 42
+\BOOKMARK [1][]{section.313}{12 Program Listings}{}% 43
+\BOOKMARK [1][]{section.314}{13 Word Count}{}% 44

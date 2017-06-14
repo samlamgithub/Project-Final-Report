@@ -408,77 +408,31 @@ The program uses ceres solver\citep{ceres-solver} from Google\footnote{\url{http
 
 
 \section{Project Method Overview}
-This project develops an Android application running on the Google Tango \citep{tango} 
- tablet that can either logs RGB, depth and pose data from Tango to files, or run ElasticFusion on tablet using data from Tango platform, or run ElasticFusion using data from dataset on the tablet.\\
+This project develops an Android application running on the Google Tango \citep{tango} tablet that can either logs RGB, depth and pose data from Tango to files, or run ElasticFusion on tablet using data from Tango platform, or run ElasticFusion using data from dataset on the tablet.\\
 \\
 The application starts with sample Tango demo applications from Google that uses Tango C API, the code for these applications are most written in C++ under the Java NDK(Native Development Kit) on Android platform, which allows it to use the Tango Client C API, the source code for these demo applications can be found on Github\footnote{\url{https://github.com/googlesamples/tango-examples-c}}.\\
+\\
 One demo application that is useful for this project is the RGB depth sync application\footnote{\url{https://github.com/googlesamples/tango-examples-c/tree/master}}, it make use of both Tango's Motion Tracking and Depth Perception feature. And it calculates a depth map by use an upsample method to match the Tango Point Cloud data with each pixel in the RGB image from color camera, and it renders the RGB image on screen with an overlay of grey scale depth map that can adjust the alpha value. The  screen shot of only RGB image rendered is shown in Fig \ref{fig: rgbd3}, and the screen shot with the depth map overlay set to about 0.5 is shown in Fig \ref{fig: rgbd5}, also screen shot of only depth map rendered(alpha value of 1) is shown in
 Fig \ref{fig: rgbd6}.\\
 \\
-The application developed in this project make use of the code for Advanced Estimation in Robotics (433H) course practical exercise as the basic frame work, it's also an Android application running on the Google Tango tablet. On top of this application, first using the Tango Client C API the RGB image data, Tango Point Cloud data, and Tango Pose data is acquired. The RGB image data from camera is gain as the RGB color value of each pixel, and the Tango Point Cloud data is in the form of an array of 3D point coordinates, where each 3D point represent a pixel in the depth image where depth sensor has a reading. And the Pose data comes in as the latest pose estimated by Tango VIO(Visual Inertial Odometry) frontend using the IMU onboard and mono image from wide angle motion tracking camera, details of technique used in the Tango VIO can be found in \cite{mourikis2007multi} and \cite{kottas2013consistency}, but in this project it is treated as a black box.
- 
-
- firstly the code is combined with the logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}} to write the RGB, depth and pose data in format required by ElasticFusion acquired from Tango into two files on the Tango tablet, which allows ElasticFusion to be run on desktop using these two files as raw dataset. Then the core function part of code for ElasticFusion is ported and adapted to Android with its dependencies changed or removed, so that ElasticFusion can be run on Android while its source remains in C++. One thing worth notice in here is that this project uses an internal version of ElasticFusion source code at Dyson Robotics Lab in Imperial College London, instead of the open source version on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}. The final produced application is able to log the data from sensors on Tango into files, or run ElasticFusion from sensor data in real time, or run ElasticFusion from raw dataset files on the device with or without pose data. This provides various way to do experiments or measure  efficiency during the project. However, due to time and effort limitations, no interface for showing the progress of ElasticFusion running is built, this is different from original planning but the reasons will be explain in detail later. Right now on the screen of the application, interface only shows the image that color camera is taking and a few buttons, screen shot and description will be provided in later section.\\
-
-In this project the goal is run ElasticFusion\citep{whelan2016elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2016elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
+The application developed in this project make use of the code for Advanced Estimation in Robotics (433H) course practical exercise as the basic frame work, it's also an Android application running on the Google Tango tablet. On top of this application, first using the Tango Client C API the RGB image data, Tango Point Cloud data, and Tango Pose data is acquired. The RGB image data from camera is gain as the RGB color value of each pixel, and the Tango Point Cloud data is in the form of an array of 3D point coordinates, where each 3D point represent a pixel in the depth image where depth sensor has a reading. And the Pose data comes in as the latest pose estimated by Tango VIO(Visual Inertial Odometry) frontend using the IMU onboard and mono image from wide angle motion tracking camera, details of technique used in the Tango VIO can be found in \cite{mourikis2007multi} and \cite{kottas2013consistency}, but in this project it is treated as a black box.\\
 \\
-First, we need to set up a simple demo Google Tango Android application for motion tacking that output real time pose data into the logs.\\Then camera frames needed to be rendered on screen in real time with buttons to resume and pause the rendering.\\
-Next step is to make use of the mesh builder in Tango 3D Reconstruction Library for fusing point clouds and use OpenGL to render it on screen from the camera view point.
-After that we can build out the structs and functions for surfel map and global map representation used in ElasticFusion\cite{whelan2016elasticfusion}, in which the surfels are divided into active and inactive types according the time it is last observed.
-With the surfel map classes, integration with Tango could be done by try to extract surfels from point cloud data and then render the surfels into the screen.\\
-Then the structs and functions for deformation graph, its nodes and surface constraints will be built to allow for non rigid deformation of the surface.\\
-In order to perform the optimization using surface constraints, global and local loop closure needs to be done. For global loop closure, ElasticFusion\cite{whelan2016elasticfusion} uses randomised fern encoding database to store frame information and check for match frames. Therefore fern and frame structs and this store, lookup mechanism needs to be implemented.\\
-With global loop closure in place, this can be tested out by manually triggering the loop closing and see whether deformation graph is applied, which will cause the surfaces to be realigned, and camera pose be updated.\\
-If this is successful, local loop closure can also be done using model-to-model tracking by trying to register the active and inactive point clouds together under the current frame view point. This is done by using the same tracking and optimization process in global loop sure.\\
-It will be the ideal case if the above is all achieved before the project deadline, since this is a very challenging project. And if at a certain stage it is realised that it could not be done before the deadline, the progress can be fall back to the previous milestone and start clean up and report write up.\\ 
-However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
+After the Tango Point Cloud Data is acquired, it needs to be process in the same way as in the Tango demo application RGB depth sync, each depth value of 3D point in Tango Point Cloud is upsampled at a window around the point to produce a depth map that is matched with the RGB image.\\
+Then according to which function the user of application choose to run, these data of a frame is stored into a circular buffer of fixed size for use by another thread. If the user choose to log these RGBD and pose data into files, the data logging thread takes the latest frame of data put that was stored in the buffer, and then the depth buffer is compressed using the \textit{compress2} function from zlib library\footnote{\url{http://zlib.net/
+}}. The RGB image data is also compressed into JPEG format using OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}}. After that the RGBD and pose data is written to two files respectively, for later use such as using as dataset for running ElaticFusion on desktop computing.\\
 \\
-
-
-\begin{lstlisting}
-struct PoseData {
-    double orientation[4];
-    double translation[3];
-}
-\end{lstlisting}
-
-A quaternion that defines the rotation of the target frame with respect to the base frame.\\
-A 3D vector that defines the translation of the target frame with respect to the base frame.\\
-An actual pose struct contains other fields, such as a timestamp and a copy of the frame pair, \\
-
-Frames of Reference\\
-
- $ SE(3)$\\
-$\mathfrak{so}(3)$
-
-global pose of the camera $\mat P_t$ (w.r.t. a global frame $\xrightarrow{F}_G$) \\ 
-
-a transformation matrix where: $\mat P_t = \begin{bmatrix}
-& R_t & t_t\\
-0 & 0 & 0 & 1
-\end{bmatrix} \quad  \in \mathbb{S}\E(3). $ \\
-with rotation $\mat R_t \in SO(3)$ and translation $\vec t_t \in \mathbb{R}^3$.
-
-
- MSCKF(Multi-State Constraint Kalman Filter of Mourikis and Roumeliotis)\cite{mourikis2007multi}
- 
- \cite{kottas2013consistency}
-
-Google Tango \citep{tango}
-
-
-\begin{lstlisting}
-struct RGBDdata {
-  double pointCloudTimestamp;
-  uint32_t pointCloudNumpoints;
-  float *pointCloudPoints;
-  uint8_t *image;
-  double colorTimeStamp;
-  int64_t m_lastTimestamp;
-  TangoPoseData pose;
-};
-\end{lstlisting}
-
+The main purpose of this project is allow ElasticFusion run on the Tango tablet for 3D reconstruction with data from Tango as input, therefore the code for ElasticFusion on desktop is ported and adapted to run on Android under NDK environment. The source code of ElasticFusion is available on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}, however in this project an internal version of source code is used. The source code of ElasticFusion included three parts: the Core part contains the code for ElasticFusion algorithm, and can be used as an API for other application, the GIU part is responsible the displaying the user interface of program and handles input setting from the command line, reading from files provided for the program, the there is a GPUTest program that user can test the performance of their GPU for running ElasticFusion.\\
+In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
+Since ElasticFusion program original required high configuration of hardware on desktop, with the processing power on Tango that is much lower than high end desktop computer, all the features of ElasticFusion that requires more processing are turned off on the Tango to make it run faster, such as disabling $\mathfrak{so}(3)$ pre-alignment, use single level tracking pyramid by enabling fast odometry, and disable loop closure detection.\\
+After the user using the device to complete the scanning, the 3D reconstruced surface of the map can be saved into a ply file on the tango tablet, and the saved map can then be viewed using mesh viewing application on the device itself.\\
+Other than running ElasticFusion with data from the Tango tablet, in this project for experimentation purpose the application is also able to use dataset placed on the tablet to run ElasticFusion program, a RGBD data file with pre-specified file name has to be on the tablet before that, and a Pose data file is optional, if the pose data is provided, ElasticFusion will be run using the input pose without using the camera tracking process.\\
+\\
+Originally, in the design of this project, the Android application developed is supposed to render the 3D reconstructed surface on the screen in real time, and augmented reality application can be built on it if the implementation of ElasticFusion on Tango tablet is successful and performance is good enough for interactive application(runs at frame rate higher than 30 Hz). However, during the progress of this project, it is found that ElasticFusion runs poorly and very slowly on the Tango tablet, this is due to the data quality from depth sensor  
+is not very good and also the processing power on the tablet is much less than what ElasticFusion requires, also partly caused by the time and effort limitation, the 3D reconstructed surface by the application on Tango tablet is still not 100 percent correct, and there was no enough time before project deadline for doing optimization of the application.\\
+\\
+However, other this Android application developed, in this project a simple way of running ElasticFusion in close loop mode using input pose is created to allow for the input pose to be corrected so that the current pose stored in the ElasticFusion is consistent with the input pose, and no camera tracking step is need thus processing time and power is saved. The change of applying this method is implemented both in the application on Tango tablet and the desktop version of ElasticFusion.\\
+The overall structure of the Android application developed in this project is shown in graph Fig \ref{fig: projectStructure}, the graph clearly shown three different thread used for different functions and the frontend-backend structure of the SLAM system developed in this application.\\
+\\
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/projectStructure}
@@ -529,6 +483,8 @@ struct RGBDdata {
 \end{figure}
 
 
+\newpage
+
 \section{Project Implementation}
 The central part of the report usually consists of three of four chapters detailing the technical work undertaken during the project. The structure of these chapters is highly project dependent. They can reflect the chronological development of the project, e.g. design, implementation, experimentation, optimisation, evaluation etc. although this is not always the best approach. However you choose to structure this part of the report, you should make it clear how you arrived at your chosen approach in preference to the other alternatives documented in the background. If you have built a new piece of software you should describe and justify the design of your program at some high level, possibly using an approved graphical formalism such as UML. It should also document any interesting problems with, or features of, your implementation. Integration and testing are also important to discuss in some cases. You need to discuss the content of these sections thoroughly with your supervisor.\\
 
@@ -562,6 +518,44 @@ Nvidia Tegra K1  approx = GT620-GT540\\
 make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
 
 
+In this project the goal is run ElasticFusion\citep{whelan2016elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2016elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
+
+\begin{lstlisting}
+struct PoseData {
+    double orientation[4];
+    double translation[3];
+}
+\end{lstlisting}
+
+A quaternion that defines the rotation of the target frame with respect to the base frame.\\
+A 3D vector that defines the translation of the target frame with respect to the base frame.\\
+An actual pose struct contains other fields, such as a timestamp and a copy of the frame pair, \\
+
+Frames of Reference\\
+
+ $ SE(3)$\\
+$\mathfrak{so}(3)$
+
+global pose of the camera $\mat P_t$ (w.r.t. a global frame $\xrightarrow{F}_G$) \\ 
+
+a transformation matrix where: $\mat P_t = \begin{bmatrix}
+& R_t & t_t\\
+0 & 0 & 0 & 1
+\end{bmatrix} \quad  \in \mathbb{S}\E(3). $ \\
+with rotation $\mat R_t \in SO(3)$ and translation $\vec t_t \in \mathbb{R}^3$.
+
+
+\begin{lstlisting}
+struct RGBDdata {
+  double pointCloudTimestamp;
+  uint32_t pointCloudNumpoints;
+  float *pointCloudPoints;
+  uint8_t *image;
+  double colorTimeStamp;
+  int64_t m_lastTimestamp;
+  TangoPoseData pose;
+};
+\end{lstlisting}
 
 \begin{lstlisting}
 TangoErrorType TangoService_connectOnPoseAvailable(
@@ -998,7 +992,8 @@ The project's conclusions should list the things which have been learnt as a res
 optimization \\
 slow, GPU, memmory\\
 resolution, \\
-
+\\
+However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
 
 \newpage
 
