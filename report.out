@@ -16,7 +16,7 @@
 \BOOKMARK [1][]{section.60}{5 Project Method Overview}{}% 16
 \BOOKMARK [1][]{section.73}{6 Project Implementation}{}% 17
 \BOOKMARK [2][]{subsection.74}{6.1 Tango Platform}{section.73}% 18
-\BOOKMARK [2][]{subsection.277}{6.2 Logging data from Tango}{section.73}% 19
+\BOOKMARK [2][]{subsection.267}{6.2 Logging data from Tango}{section.73}% 19
 \BOOKMARK [2][]{subsection.278}{6.3 Compiling ElasticFusion on Tango}{section.73}% 20
 \BOOKMARK [3][]{subsubsection.279}{6.3.1 Dependencies}{subsection.278}% 21
 \BOOKMARK [3][]{subsubsection.280}{6.3.2 OpenCV}{subsection.278}% 22

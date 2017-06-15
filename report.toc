@@ -17,7 +17,7 @@
 \contentsline {section}{\numberline {5}Project Method Overview}{29}{section.60}
 \contentsline {section}{\numberline {6}Project Implementation}{32}{section.73}
 \contentsline {subsection}{\numberline {6.1}Tango Platform}{32}{subsection.74}
-\contentsline {subsection}{\numberline {6.2}Logging data from Tango}{41}{subsection.277}
+\contentsline {subsection}{\numberline {6.2}Logging data from Tango}{41}{subsection.267}
 \contentsline {subsection}{\numberline {6.3}Compiling ElasticFusion on Tango}{41}{subsection.278}
 \contentsline {subsubsection}{\numberline {6.3.1}Dependencies}{41}{subsubsection.279}
 \contentsline {subsubsection}{\numberline {6.3.2}OpenCV}{41}{subsubsection.280}

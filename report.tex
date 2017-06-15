@@ -492,83 +492,28 @@ The central part of the report usually consists of three of four chapters detail
 ============\\
 
 \subsection{Tango Platform}
-Google's Tango\citep{tango} platform provides mobile devices with the abilities to sense the 3D space around the device and allow developers to build augmented reality applications on the device. Tango devices have three main functionalities: Motion Tracking, Area Learning, and Depth Perception, these are achieved using the RGB color camera, IMU (accelerometer and gyroscope), depth sensor and wide angle fisheye lens motion tracking camera on Tango devices. The motion tracking feature mainly estimate current position and pose of device using data from IMU and wide angle camera and techniques that use Kalman filter such as \citep{mourikis2007multi}.\\
-Among all the Tango devices that's released until the date when this report is written, there is the first Tango device the Tango “Peanut” mobile phone, the Tango "Yellostone" tablet, and Lenovo Phab 2 Pro mobile phone with the latest ASUS ZenFone AR phone. All of them are equipped with Android OS\footnote{\url{https://www.android.com/}}, but all the other devices carries Qualcomm processor, except for the "Yellostone" Tango tablet that's used in this project. The "Yellostone" Tango tablet
-
-The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. 
-
-
-a Tango 
-device. The phone device has 2GB of RAM, a quadcore
-CPU, a six-axis , a wide-angle 120◦ field of view tracking camera which refreshes at 60Hz,
-a projective depth sensor which refreshes at 6Hz, and a 4
-megapixel color sensor which refreshes at 30Hz
-
-
-Tango offers APIs in C and Java, and an SDK for Unity. \\
-
-Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
-laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
-
+Google's Tango\citep{tango} platform provides mobile devices with the abilities to sense the 3D space around the device and allow developers to build augmented reality applications on the device. Tango devices have three main functionalities: Motion Tracking, Area Learning, and Depth Perception, these are achieved using the RGB color camera, IMU (accelerometer and gyroscope), depth sensor and wide angle fisheye lens motion tracking camera on Tango devices. The motion tracking feature mainly estimate current position and pose of device using data from IMU and wide angle camera and techniques that use Kalman filter such as \citep{mourikis2007multi}. \\
+\\
+Given the cheap commodity mobile hardware and software, Tango device and tango platform provides the potential to build a fully self-contained 3D dense surface reconstruction solution using state-of-the-art RGB-D(color and depth) SLAM (Simultaneous Localization And Mapping) algorithms in this project. Among all the Tango devices that's released until the date when this report is written, there is the first Tango device the Tango “Peanut” mobile phone, the Tango "Yellostone" tablet, and Lenovo Phab 2 Pro mobile phone with the latest ASUS ZenFone AR phone. All of them are equipped with Android OS\footnote{\url{https://www.android.com/}}, but all the other devices carries Qualcomm processor, except for the "Yellostone" Tango tablet that's used in this project. The "Yellostone" Tango tablet carries Android 4.2.2 (KitKat) OS, this is the latest version of Android update it has until Google has officially stopped support for it. And it's equipped with a quadcore Nvidia Tegra K1 graphics card that supports CUDA(Compute Unified Device Architecture) function, which is used in the ElasticFusion program for camera tracking step. The Nvidia Tegra K1 processor has 192 CUDA cores, and supports CUDA 6.0 and OpenGL ES 3.1. The tablet also has 4GB of RAM shared by the CPU and GPU, an IMU that contains six-axis accelerometer and gyroscope, a wide FOV(field of view) motion tracking camera runs at 60Hz, and a projective depth sensor runs at 3Hz, and lastly a 4 MP RGB camera runs at 30Hz. The unique hardware configuration of the "Yellowstone" tablet mades it the perfect Tango device for this project, since with CUDA supported the ElasticFusion doesn't need a big rewrite for the camera tracking part.\\
+\\
+The Tango SDK for developers is offered in three programming languages: C and Java, Unity. The this project only the C API is used since C++ is what ElasticFusion is originally written, therefore using the Tango C API enables the code for Tango frontend to be combine with ElasticFusion without a huge amount of work for rewriting. Also the program runs faster in C under NDK environment on Android, where performance is crucial for the ElasticFusion program.\\
+\\
+The Motion Tracking feature on Tango platform provides the position and pose of Tango device of a certain frame with respect to a source frame at any time, the position and pose data is encapsulated inside a C++ struct \textit{PoseData}, the simplified version of this structure is given below.
 \begin{lstlisting}
 struct PoseData {
+	double timestamp;
     double orientation[4];
     double translation[3];
 }
 \end{lstlisting}
-
-A quaternion that defines the rotation of the target frame with respect to the base frame.\\
-A 3D vector that defines the translation of the target frame with respect to the base frame.\\
-An actual pose struct contains other fields, such as a timestamp and a copy of the frame pair, \\
-
-Frames of Reference\\
-
- $ SE(3)$\\
-$\mathfrak{so}(3)$
-
-global pose of the camera $\mat P_t$ (w.r.t. a global frame $\xrightarrow{F}_G$) \\
-
-a transformation matrix where: $\mat P_t = \begin{bmatrix}
-& R_t & t_t\\
+The orientation array defines a quaternion that represents the rotation of the target frame with respect to the base frame. And the translation array represents the 3D vector of displacement between the target frame and the base frame. For the pose data to be able to be used by ElasticFusion, it have to be converted to affine transformation matrix, a transformation matrix is a 4 by 4 matrix with a 3 by 3 rotation matrix at left up corner and a 3D translation vector at the right most column. At time \textit{t} the global pose of the camera $\mat P_t$ (w.r.t. global frame $\xrightarrow{\textit{F}}_G$) can be shown below, where rotation matrix is $\mat R_t \in SO(3)$ and translation vector is $\vec t_t \in \mathbb{R}^3$.
+$\mat P_t = \begin{bmatrix}
+& R_t & & t_t\\
 0 & 0 & 0 & 1
 \end{bmatrix} \quad  \in \mathbb{S}\E(3). $ \\
-with rotation $\mat R_t \in SO(3)$ and translation $\vec t_t \in \mathbb{R}^3$.
-
-
-\\ an augmented reality computing platform by Google that give mobile devices the ability to sense 3D space information. Equipped with this platform Google's Tango tablet is an Android device that carry sensors including 4MP(Mega Pixel) color camera, Inertial Measurement Unit (IMU), and Infra-Red depth camera. it also carrys NVIDIA Tegra K1 processor which provides more powerful computational power than other mobile devices. Given this cheap commodity mobile hardware and software, this project aims to build a fully self-contained 3D dense surface reconstruction solution using  state-of-the-art RGB-D(color and depth) SLAM (Simultaneous Localization And Mapping) algorithms.\\
-\\
-In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2016elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}} at Imperial College London is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, so that drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet. Also, the current code exist for ElasticFusion running on desktop computer made heavily use of CUDA(Compute Unified Device Architecture) for GPU general data processing, which is supported by the NVIDIA Tegra K1 processer on Google Tango tablet.\\
-\\This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
-\\
-Also, since the Tango platform on the tablet provides pose estimation feature, this pose is simply feed into the ElasticFusion program run on the tablet, so that the ElasticFusion part doesn't need to waste time and processing power to execute the camera tracking part. However, the pose provided by Tango is not accurate enough and during the reconstruction process ElasticFusion will alter the pose if global or local loop closure happens, in this project a simply way to correct pose input to ElasticFusion by Tango is developed to  over come this problem. \\
-\\
-the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)."\\
 \\
 
 
-=======\\
-
-requirement:\\
-A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7).  3500 GFLOPS\\
-Nvidia Tegra K1  approx = GT620-GT540\\
-\\
-make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
-
-
-In this project the goal is run ElasticFusion\citep{whelan2016elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2016elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
-
-
-\begin{lstlisting}
-struct RGBDdata {
-  double pointCloudTimestamp;
-  uint32_t pointCloudNumpoints;
-  float *pointCloudPoints;
-  uint8_t *image;
-  double colorTimeStamp;
-  int64_t m_lastTimestamp;
-  TangoPoseData pose;
-};
-\end{lstlisting}
 
 \begin{lstlisting}
 TangoErrorType TangoService_connectOnPoseAvailable(
@@ -710,16 +655,9 @@ TangoErrorType TangoService_getPoseAtTime(double timestamp,
                                           TangoPoseData* pose);
 \end{lstlisting}
 
-
 \begin{lstlisting}
 TangoErrorType TangoSupport_calculateRelativePose(double base_timestamp, TangoCoordinateFrameType base_frame, double target_timestamp, TangoCoordinateFrameType target_frame, TangoPoseData *base_frame_T_target_frame)
 \end{lstlisting}
-
-
-\begin{lstlisting}
-\end{lstlisting}
-
-
 
 \begin{lstlisting}
 TangoErrorType TangoService_connectOnPointCloudAvailable(void(*)(void *context, const TangoPointCloud *cloud)
@@ -793,6 +731,32 @@ typedef struct TangoPointCloud {
 \end{lstlisting}
 
 
+In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2016elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}} at Imperial College London is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, so that drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet. Also, the current code exist for ElasticFusion running on desktop computer made heavily use of CUDA(Compute Unified Device Architecture) for GPU general data processing, which is supported by the NVIDIA Tegra K1 processer on Google Tango tablet.\\
+\\This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
+\\
+Also, since the Tango platform on the tablet provides pose estimation feature, this pose is simply feed into the ElasticFusion program run on the tablet, so that the ElasticFusion part doesn't need to waste time and processing power to execute the camera tracking part. However, the pose provided by Tango is not accurate enough and during the reconstruction process ElasticFusion will alter the pose if global or local loop closure happens, in this project a simply way to correct pose input to ElasticFusion by Tango is developed to  over come this problem. \\
+\\
+the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)."\\
+\\
+=======\\
+requirement:\\
+A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7).  3500 GFLOPS\\
+Nvidia Tegra K1  approx = GT620-GT540\\
+\\
+make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
+\\
+In this project the goal is run ElasticFusion\citep{whelan2016elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2016elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
+
+
+An actual pose struct contains other fields, such as a timestamp and a copy of the frame pair, \\
+
+Frames of Reference\\
+
+Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
+laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
+
+
+
 \textit{tangoAPI}\\
 \\
 \begin{lstlisting}
@@ -805,24 +769,65 @@ Code
 \subsection{Logging data from Tango}
 
 
+\begin{lstlisting}
+struct RGBDdata {
+  double pointCloudTimestamp;
+  uint32_t pointCloudNumpoints;
+  float *pointCloudPoints;
+  uint8_t *image;
+  double colorTimeStamp;
+  int64_t m_lastTimestamp;
+  TangoPoseData pose;
+};
+\end{lstlisting}
+
 
 
 
 \subsection{Compiling ElasticFusion on Tango}
 
 
+
+
+
+
+
+
 \subsubsection{Dependencies}
 
 
+
+
+
+
+
 \subsubsection{OpenCV}
+
+
+
+
 
 \subsubsection{CUDA}
 
 
 
+
+
+
+
 \subsubsection{Pangolin}
 
+
+
+
+
 Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
+
+
+
+
+
+
 
 
 \subsubsection{SuiteSparse}
@@ -831,11 +836,28 @@ Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
 \footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
+
+
+
+
+
+
+
+
 \subsubsection{OpenGL}
 
 
 
+
+
+
+
+
+
+
+
 \subsubsection{Eigen}
+
 
 
 
@@ -845,17 +867,59 @@ Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
 \subsection{Running ElasticFusion on Tango}
 
+
+
+
+
+
+
+
+
+
 \subsubsection{Running ElasticFusion with pose on Tango}
+
+
+
+
+
+
 
 \subsubsection{Running ElasticFusion dataset on Tango}
 
+
+
+
+
+
+
+
+
 \subsubsection{Running Tango dataset on Tango}
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 
 
 
 \subsection{Combine ElasticFusion with pose from Tango in Loop closure mode}
+
+
+
+
+
+
+
+
 
 \newpage
 
@@ -929,6 +993,7 @@ Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
 \newpage
 
+
 The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
 
 \begin{figure}
@@ -943,11 +1008,38 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 
 \section{Evaluation}
 
+
 \subsection{Reconstruction Accuracy}
 
+
+
+
+
+
+
+
 \subsection{depth sensor noise}
+
 ，depth点非常sparse。
+
+
+
+
+
+
+
+
 \subsection{Computation power problem}
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Optimization problem}
 
@@ -995,12 +1087,24 @@ For the algorithm, trajectory accuracy can be tested using sample data sets to p
 For computational Performance, we can simply plot the frame rate during the process of 3D scanning to check if it is within the acceptable range for real time SLAM algorithm.
 
 
+
 \subsubsection{Software limitation}
+
+
+
+
 
 
 \newpage
 
+
+
+
+
+
+
 \section{Conclusions and Future Work}
+
 The project's conclusions should list the things which have been learnt as a result of the work you have done. For example, "The use of overloading in C++ provides a very elegant mechanism for transparent parallelisation of sequential programs", or "The overheads of linear-time n-body algorithms makes them computationally less efficient than O(n log n) algorithms for systems with less than 100000 particles". Avoid tedious personal reflections like "I learned a lot about C++ programming...", or "Simulating colliding galaxies can be real fun...". It is common to finish the report by listing ways in which the project can be taken further. This might, for example, be a plan for doing the project better if you had a chance to do it again, turning the project deliverables into a more polished end product, or extending the project into a programme for an MPhil or PhD.\\
 
 ASUS ZenFone AR\\
@@ -1011,9 +1115,17 @@ resolution, \\
 \\
 However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
 
+
+
 \newpage
 
+
+
+
 \section{Bibliography}
+
+
+
 This consists of a list of all the books, articles, manuals etc. used in the project and referred to in the report. You should provide enough information to allow the reader to find the source. In particular references must contain all the information regarding the publication of the paper and must be consistently formatted. Usually this means:\\
 * For journals: Authors, Title, Journal, volume number, issue number, page number, publisher, month, year.
 * For conferences: Authors, Title, Conference name, Place where held, publisher, page number, month, year.
@@ -1027,24 +1139,46 @@ Using a reference management programme can make your life simpler.See for exampl
 
 \newpage
 
+
+
+
+
 \section{Appendix}
+
+
 The appendices contain information which is peripheral to the main body of the report. Information typically included are things like parts of the code, tables, proofs, test cases or any other material which would break up the theme of the text if it appeared in situ. You should try to bind all your material in a single volume if possible.\\
 
 \newpage
 
+
+
+
+
 \section{User Guide}
+
+
+
 For projects which result in a new piece of software you should provide a proper user guide providing easily understood instructions on how to use it. A particularly useful approach is to treat the user guide as a walk-through of a typical session, or set of sessions, which collectively display all the features of your system. Technical details of how the package works should be in the body of the report. Keep it concise and simple. The extensive use of diagrams illustrating the package in action prove particularly helpful. The user guide is sometimes included as a chapter in the main body of the report, but is often better in an appendix.\\
 
 
 \newpage
 
+
+
+
+
 \section{Program Listings}
+
+
 Complete program listings should NOT be part of the report except in specific cases at the request of your supervisor. The project report(s) must be bound in a departmental folder and must include a standard title page produced by the project co-ordinator. More of this nearer the date.\\
 You are strongly advised to spend some time looking at the reports of previous project students to get a feel for what's good and bad. In June 1999 we introduced a "Distinguished Project" classification, which is a formal recognition of outstanding projects for which no official prize was awarded. The complete list of prize winners and the other distinguished projects, along with links to the final reports, can be found here.\\
 
 \newpage
 
 \section{Word Count}
+
+
+
 There is no word count for the report as such, but ideally you should not exceed the limit of 40,000 words. Generally, our best projects tend to have the word count in the range of 20,000 - 35,000 words with a few going beyond that. This does not include the Appendices.\\
 
 
