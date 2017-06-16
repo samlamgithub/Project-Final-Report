@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  16 JUN 2017 02:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  16 JUN 2017 02:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2115,954 +2115,282 @@ LaTeX Font Info:    Try loading font information for U+dsrom on input line 515.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
-! Missing $ inserted.
-<inserted text> 
-                $
-l.516 ...xtit{TangoService_connectOnPoseAvailable}
-                                                   is used, this function ta...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-<recently read> \egroup 
-                        
-l.516 ...xtit{TangoService_connectOnPoseAvailable}
-                                                   is used, this function ta...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.517 \begin{lstlisting}
-                        
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.517 \begin{lstlisting}
-                        
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.517 \begin{lstlisting}
-                        
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.517 \begin{lstlisting}
-                        
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (2670.10751pt too wide) in paragraph at lines 515--517
-\OT1/bch/m/n/12 In the ap-pli-ca-tion, to get the pose of Tango de-vice, the AP
-I func-tion \OT1/bch/m/it/12 TangoService$[]\OML/jkp/m/it/12 onnectOnPoseAvaila
-bleisused; thisfunctiontakeapairofframereference; whichrepresentsthecoordinateo
-fframethatposeisin; inthiscaseis[]and[]; meanstheposewouldbethecurrentdevicepos
-ewithrespecttotheposedeviceisinwhenapplicationstart:Anotherparameterisacallback
-function; thecallbackfunctionwillbecalledwhenanewTangoposeisavailable; andthepo
-sedatawillbegivenintheparameter:Thesignatureofthisfunctionsisgivenbelow:$ 
+[33]
+Overfull \hbox (40.30542pt too wide) in paragraph at lines 523--524
+\OT1/bch/m/n/12 Another way for get-ting pose data from Tango is the func-tion 
+[]\OT1/cmtt/m/n/12 TangoService_getPoseAtTime\OT1/bch/m/n/12 ,
  []
 
-! Undefined control sequence.
-\lst@GetLineInterval ...r \lst@GLI \lst@linerange 
-                                                  \@nil 
-l.517 \begin{lstlisting}
-                        
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
-Runaway argument?
- const TangoCoordinateFramePair* frames, void (*TangoService_onPoseAv\ETC.
-! Paragraph ended before \lst@GLI was complete.
-<to be read again> 
-                   \par 
-l.637 
-      
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
+Underfull \hbox (badness 10000) in paragraph at lines 523--524
 
-[33] [34] [35] [36] <figures/Screenshot1.png, id=703, 1927.2pt x 1084.05pt>
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 529--530
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 542--543
+
+ []
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 556--559
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 556--559
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 567--568
+
+ []
+
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 578--580
+
+ []
+
+
+Overfull \hbox (10.36647pt too wide) in paragraph at lines 583--585
+[]\OT1/cmtt/m/n/12 TangoSupport_getLatestPointCloudAndNewDataFlag\OT1/bch/m/n/1
+2 , it re-turns the lat-est point cloud
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 583--585
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 592--594
+
+ []
+
+[36]
+Overfull \hbox (10.44678pt too wide) in paragraph at lines 597--598
+\OT1/bch/m/n/12 API, func-tion []\OT1/cmtt/m/n/12 TangoService_getCameraIntrins
+ics \OT1/bch/m/n/12 re-turns a []\OT1/cmtt/m/n/12 TangoCameraIntrinsics
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 597--598
+
+ []
+
+[37]
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--654
+
+ []
+
+[38]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39]
+[40] [41] [42] <figures/Screenshot1.png, id=797, 1927.2pt x 1084.05pt>
 File: figures/Screenshot1.png Graphic file (type png)
 
 <use figures/Screenshot1.png>
-Package pdftex.def Info: figures/Screenshot1.png used on input line 805.
+Package pdftex.def Info: figures/Screenshot1.png used on input line 807.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot2.png, id=704, 1927.2pt x 1084.05pt>
+<figures/Screenshot2.png, id=798, 1927.2pt x 1084.05pt>
 File: figures/Screenshot2.png Graphic file (type png)
 
 <use figures/Screenshot2.png>
-Package pdftex.def Info: figures/Screenshot2.png used on input line 812.
+Package pdftex.def Info: figures/Screenshot2.png used on input line 814.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot3.png, id=705, 1927.2pt x 1084.05pt>
+<figures/Screenshot3.png, id=799, 1927.2pt x 1084.05pt>
 File: figures/Screenshot3.png Graphic file (type png)
 
 <use figures/Screenshot3.png>
-Package pdftex.def Info: figures/Screenshot3.png used on input line 819.
+Package pdftex.def Info: figures/Screenshot3.png used on input line 821.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot9.png, id=706, 1927.2pt x 1084.05pt>
+<figures/Screenshot9.png, id=800, 1927.2pt x 1084.05pt>
 File: figures/Screenshot9.png Graphic file (type png)
 
 <use figures/Screenshot9.png>
-Package pdftex.def Info: figures/Screenshot9.png used on input line 826.
+Package pdftex.def Info: figures/Screenshot9.png used on input line 828.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot10.png, id=707, 1927.2pt x 1084.05pt>
+<figures/Screenshot10.png, id=801, 1927.2pt x 1084.05pt>
 File: figures/Screenshot10.png Graphic file (type png)
 
 <use figures/Screenshot10.png>
-Package pdftex.def Info: figures/Screenshot10.png used on input line 834.
+Package pdftex.def Info: figures/Screenshot10.png used on input line 836.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot11.png, id=708, 1927.2pt x 1084.05pt>
+<figures/Screenshot11.png, id=802, 1927.2pt x 1084.05pt>
 File: figures/Screenshot11.png Graphic file (type png)
 
 <use figures/Screenshot11.png>
-Package pdftex.def Info: figures/Screenshot11.png used on input line 841.
+Package pdftex.def Info: figures/Screenshot11.png used on input line 843.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Screenshot14.png, id=709, 1927.2pt x 1084.05pt>
+<figures/Screenshot14.png, id=803, 1927.2pt x 1084.05pt>
 File: figures/Screenshot14.png Graphic file (type png)
 
 <use figures/Screenshot14.png>
-Package pdftex.def Info: figures/Screenshot14.png used on input line 849.
+Package pdftex.def Info: figures/Screenshot14.png used on input line 851.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/ScreenshotTango1.png, id=710, 1927.2pt x 1204.5pt>
+<figures/ScreenshotTango1.png, id=804, 1927.2pt x 1204.5pt>
 File: figures/ScreenshotTango1.png Graphic file (type png)
 
 <use figures/ScreenshotTango1.png>
-Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 858.
+Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 860.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 869--870
-[]\OT1/cmtt/m/it/12 The project timeline is shown in Fig [][]41[][] with each t
-ask corresponding to
- []
-
-<figures/timeline2.png, id=712, 1828.8325pt x 526.96875pt>
+<figures/timeline2.png, id=806, 1828.8325pt x 526.96875pt>
 File: figures/timeline2.png Graphic file (type png)
 
 <use figures/timeline2.png>
-Package pdftex.def Info: figures/timeline2.png used on input line 873.
+Package pdftex.def Info: figures/timeline2.png used on input line 875.
 (pdftex.def)             Requested size: 1828.82806pt x 526.96745pt.
 
 
-LaTeX Warning: Float too large for page by 19.60356pt on input line 876.
+LaTeX Warning: Float too large for page by 23.60356pt on input line 878.
 
-[37]
-Missing character: There is no Ô in font cmitt10!
-Missing character: There is no º in font cmitt10!
-Missing character: There is no å in font cmitt10!
-Missing character: There is no Á in font cmitt10!
-Missing character: There is no Ç in font cmitt10!
-Missing character: There is no π in font cmitt10!
-Missing character: There is no È in font cmitt10!
-Missing character: There is no ù in font cmitt10!
-Missing character: There is no û in font cmitt10!
-Missing character: There is no Â in font cmitt10!
-Missing character: There is no ∏ in font cmitt10!
-Missing character: There is no ∏ in font cmitt10!
-Missing character: There is no „ in font cmitt10!
-Missing character: There is no Ä in font cmitt10!
-Missing character: There is no Ç in font cmitt10!
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 Be warned that many projects fall down through poor evaluatio
-n. Simply
- []
-
-
-Overfull \hbox (40.62332pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 building a system and documenting its design and functionalit
-y is not enough
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 to gain top marks. It is extremely important that you evaluat
-e what you
- []
-
-
-Overfull \hbox (40.62332pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 have done both in absolute terms and in comparison with exist
-ing techniques,
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 software, hardware etc. This might involve quantitative evalu
-ation, for
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 example based on numerical results, performance etc. or somet
-hing more
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 qualitative such as expressibility, functionality, ease-of-us
-e etc. At
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 some point you should also evaluate the strengths and weaknes
-ses of what
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 you have done. Avoid statements like "The project has been a 
-complete
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 success and we have solved all the problems asssociated with 
-blah...; -
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 you will be shot down immediately! It is important to underst
-and that
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 there is no such thing as a perfect project. Even the very be
-st pieces
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 918--919
-\OT1/cmtt/m/it/12 of work have their limitations and you are expected to provid
-e a proper
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 918--919
-
- []
-
+[43]
+Missing character: There is no Ô in font bchr7t!
+Missing character: There is no º in font bchr7t!
+Missing character: There is no å in font bchr7t!
+Missing character: There is no Á in font bchr7t!
+Missing character: There is no Ç in font bchr7t!
+Missing character: There is no π in font bchr7t!
+Missing character: There is no È in font bchr7t!
+Missing character: There is no ù in font bchr7t!
+Missing character: There is no û in font bchr7t!
+Missing character: There is no Â in font bchr7t!
+Missing character: There is no ∏ in font bchr7t!
+Missing character: There is no ∏ in font bchr7t!
+Missing character: There is no „ in font bchr7t!
+Missing character: There is no Ä in font bchr7t!
+Missing character: There is no Ç in font bchr7t!
 
 Underfull \hbox (badness 10000) in paragraph at lines 920--921
 
  []
 
 
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 925--938
-[]\OT1/cmtt/m/it/12 The evaluation of this project is intended to use the same 
-mechanism as
- []
-
-
-Overfull \hbox (59.52315pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 in original ElasticFusion[[]] paper, as the goal of this proj
-ect is to deploying
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 In order to measure the performance of this solution by quant
-ity and quality.
- []
-
-
-Overfull \hbox (59.52315pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 Both A. Trajectory Estimation To evaluate the trajectory esti
-mation performance
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 of our approach we test our system on the RGB-D benchmark of 
-Sturm et al.
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 [22]. This benchmark provides synchronised ground truth poses
- for an RGB-D
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 sensor moved through a scene, captured with a highly precise 
-motion capture
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 system. We use the absolute trajectory (ATE) root-mean-square
- error metric
- []
-
-
-Overfull \hbox (53.2232pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 (RMSE) in our comparison, which measures the root-mean-square
- of the Euclidean
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 925--938
-\OT1/cmtt/m/it/12 distances between all estimated camera poses and the ground t
-ruth poses
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 940--948
-[]\OT1/cmtt/m/it/12 B. Surface Estimation We evaluate the surface reconstructio
-n results of
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 940--948
-\OT1/cmtt/m/it/12 our approach on the This benchmark provides ground truth pose
-s for a camera
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 940--948
-\OT1/cmtt/m/it/12 moved through a synthetic environment as well as a ground tru
-th 3D model
- []
-
-[38]
-Missing character: There is no ‚ in font cmitt10!
-Missing character: There is no Ä in font cmitt10!
-Missing character: There is no ã in font cmitt10!
-Missing character: There is no ‚ in font cmitt10!
-Missing character: There is no Ä in font cmitt10!
-Missing character: There is no ã in font cmitt10!
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-[]\OT1/cmtt/m/it/12 The evaluation of this project is intended to use the same 
-mechanism as
- []
-
-
-Overfull \hbox (59.52315pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 in original ElasticFusion[[]] paper, as the goal of this proj
-ect is to deploying
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 In order to measure the performance of this solution by quant
-ity and quality.
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 For the algorithm, trajectory accuracy can be tested using sa
-mple data
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 sets to provide RGB-D input, then the trajectory output can b
-e compared
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 with the ground truth data that is obtained by using industri
-al standard
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 system. The root mean square distance between every estimated
- pose and
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 ground truth pose can be calculated to provide error at each 
-timepoint.
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 In the 3D reconstruction part, similar method can be used to 
-compare the
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 reconstructed surface to benchmark data for accuracy estimati
-on. However,
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 since the post data and image input are provided by Tango pla
-tform, a way
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 For computational Performance, we can simply plot the frame r
-ate during
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 the process of 3D scanning to check if it is within the accep
-table range
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 The evaluation of this project is intended to use the same me
-chanism as
- []
-
-
-Overfull \hbox (59.52315pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 in original ElasticFusion[[]] paper, as the goal of this proj
-ect is to deploying
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 In order to measure the performance of this solution by quant
-ity and quality.
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 For the algorithm, trajectory accuracy can be tested using sa
-mple data
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 sets to provide RGB-D input, then the trajectory output can b
-e compared
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 with the ground truth data that is obtained by using industri
-al standard
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 system. The root mean square distance between every estimated
- pose and
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 ground truth pose can be calculated to provide error at each 
-timepoint.
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 In the 3D reconstruction part, similar method can be used to 
-compare the
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 reconstructed surface to benchmark data for accuracy estimati
-on. However,
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 since the post data and image input are provided by Tango pla
-tform, a way
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 For computational Performance, we can simply plot the frame r
-ate during
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 952--960
-\OT1/cmtt/m/it/12 the process of 3D scanning to check if it is within the accep
-table range
- []
-
-[39]
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 The project's conclusions should list the things which have b
-een learnt
- []
-
-
-Overfull \hbox (40.62332pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 as a result of the work you have done. For example, "The use 
-of overloading
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 in C++ provides a very elegant mechanism for transparent para
-llelisation
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 of sequential programs", or "The overheads of linear-time n-b
-ody algorithms
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 makes them computationally less efficient than O(n log n) alg
-orithms for
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 systems with less than 100000 particles". Avoid tedious perso
-nal reflections
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 like "I learned a lot about C++ programming...", or "Simulati
-ng colliding
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 galaxies can be real fun...". It is common to finish the repo
-rt by listing
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 ways in which the project can be taken further. This might, f
-or example,
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 be a plan for doing the project better if you had a chance to
- do it again,
- []
-
-
-Overfull \hbox (59.52315pt too wide) in paragraph at lines 980--981
-\OT1/cmtt/m/it/12 turning the project deliverables into a more polished end pro
-duct, or extending
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 980--981
+Underfull \hbox (badness 10000) in paragraph at lines 922--923
 
  []
 
-
+Missing character: There is no ‚ in font bchr7t!
+Missing character: There is no Ä in font bchr7t!
+Missing character: There is no ã in font bchr7t!
+Missing character: There is no ‚ in font bchr7t!
+Missing character: There is no Ä in font bchr7t!
+Missing character: There is no ã in font bchr7t!
+[44] [45]
 Underfull \hbox (badness 10000) in paragraph at lines 982--983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 984--989
+Underfull \hbox (badness 10000) in paragraph at lines 984--985
 
  []
 
 
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 However, extension and optimization could be done if more tim
-e is given
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 and basic solution is completed. Until here the 3D reconstruc
-tion process
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 will be running on Tango tablet's NVIDIA Tegra K1 processor w
-ithout utilizing
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 the CUDA feature on it to improve performance by parallel pro
-cessing. A
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 optimization could be to use CUDA in the camera tracking proc
-ess. Also
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 on the application side, extra features can be added such as 
-saving the
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 reconstructed surfel map on the Tango tablet, add an interact
-ive view of
- []
-
-
-Overfull \hbox (65.82309pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 reconstructed 3D surface map on the screen to allow for drag 
-and zoom operation,
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 showing the camera's current pose on the map. Further more, d
-emo application
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 and be built to utilising the augmented reality ability on Ta
-ngo platform,
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 984--989
-\OT1/cmtt/m/it/12 such as placing a virtual static object on the 3D reconstruct
-ing surface. 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 984--989
+Underfull \hbox (badness 10000) in paragraph at lines 986--991
 
  []
 
-[40]
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 This consists of a list of all the books, articles, manuals e
-tc. used
- []
 
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 in the project and referred to in the report. You should prov
-ide enough
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 information to allow the reader to find the source. In partic
-ular references
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 must contain all the information regarding the publication of
- the paper
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 * For journals: Authors, Title, Journal, volume number, issue
- number,
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 page number, publisher, month, year. * For conferences: Autho
-rs, Title,
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 Conference name, Place where held, publisher, page number, mo
-nth, year.
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 * For technical reports: Authors, Title, institution, Technic
-al report
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 number, month, year. * For web references: Authors, Title, We
-b-reference,
- []
-
-
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 A weakness of many reports is inadequate citation of a source
- of information.
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 It's easy to get this right so there are no excuses. Each ent
-ry in the
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 bibliography should list the author(s) and title of the piece
- of work and
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 1 Bennett, A.J., Field, A.J. and Harrison, P.G., "Modelling a
-nd Validation
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 of Shared Memory Coherency Protocols", Performance Evaluation
-, 1996, Vol.
- []
-
-
-Overfull \hbox (59.52315pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 27 28, 1996, pp. 541-562. rather than just listing the source
- as "Performance
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1001--1010
-\OT1/cmtt/m/it/12 Evaluation 1996". Using a reference management programme can 
-make your
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1001--1010
+Underfull \hbox (badness 10000) in paragraph at lines 986--991
 
  []
 
-[41]
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1021--1022
-\OT1/cmtt/m/it/12 The appendices contain information which is peripheral to the
- main body
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1021--1022
-\OT1/cmtt/m/it/12 of the report. Information typically included are things like
- parts of
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1021--1022
-\OT1/cmtt/m/it/12 the code, tables, proofs, test cases or any other material wh
-ich would
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1021--1022
-\OT1/cmtt/m/it/12 break up the theme of the text if it appeared in situ. You sh
-ould try
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1021--1022
+[46]
+Underfull \hbox (badness 10000) in paragraph at lines 1003--1012
 
  []
 
-[42]
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 For projects which result in a new piece of software you shou
-ld provide
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 a proper user guide providing easily understood instructions 
-on how to
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 use it. A particularly useful approach is to treat the user g
-uide as a
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 walk-through of a typical session, or set of sessions, which 
-collectively
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 display all the features of your system. Technical details of
- how the
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 package works should be in the body of the report. Keep it co
-ncise and
- []
-
-
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 simple. The extensive use of diagrams illustrating the packag
-e in action
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 prove particularly helpful. The user guide is sometimes inclu
-ded as a
- []
-
-
-Overfull \hbox (34.32338pt too wide) in paragraph at lines 1033--1034
-\OT1/cmtt/m/it/12 chapter in the main body of the report, but is often better i
-n an appendix. 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1033--1034
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 1023--1024
 
  []
 
-[43]
-Overfull \hbox (46.92326pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 Complete program listings should NOT be part of the report ex
-cept in specific
- []
-
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 cases at the request of your supervisor. The project report(s
-) must be
- []
-
-
-Overfull \hbox (53.2232pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 bound in a departmental folder and must include a standard ti
-tle page produced
- []
-
-
-Overfull \hbox (53.2232pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 You are strongly advised to spend some time looking at the re
-ports of previous
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 project students to get a feel for what's good and bad. In Ju
-ne 1999 we
- []
-
-
-Overfull \hbox (2.82367pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 introduced a "Distinguished Project" classification, which is
- a formal
- []
-
-
-Overfull \hbox (40.62332pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 recognition of outstanding projects for which no official pri
-ze was awarded.
- []
-
-
-Overfull \hbox (15.42355pt too wide) in paragraph at lines 1045--1047
-\OT1/cmtt/m/it/12 The complete list of prize winners and the other distinguishe
-d projects,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1045--1047
+[48]
+Underfull \hbox (badness 10000) in paragraph at lines 1035--1036
 
  []
 
-[44]
-Overfull \hbox (21.7235pt too wide) in paragraph at lines 1054--1055
-\OT1/cmtt/m/it/12 There is no word count for the report as such, but ideally yo
-u should not
+[49]
+Underfull \hbox (badness 10000) in paragraph at lines 1047--1049
+
  []
 
-
-Overfull \hbox (9.12361pt too wide) in paragraph at lines 1054--1055
-\OT1/cmtt/m/it/12 exceed the limit of 40,000 words. Generally, our best project
-s tend to
- []
-
-
-Overfull \hbox (28.02344pt too wide) in paragraph at lines 1054--1055
-\OT1/cmtt/m/it/12 have the word count in the range of 20,000 - 35,000 words wit
-h a few going
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1054--1055
+[50]
+Underfull \hbox (badness 10000) in paragraph at lines 1056--1057
 
  []
 
@@ -3070,405 +2398,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 1054--1055
 \tf@brf=\write8
 \openout8 = `report.brf'.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--12
-[]\OT1/cmtt/m/it/12 Thomas Whelan, Renato F Salas-Moreno, Ben Glocker, Andrew J
-
+ [51]
+Underfull \hbox (badness 2495) in paragraph at lines 135--135
+[]\OT1/bch/m/n/12 Sameer Agar-wal, Keir Mierle, and Oth-ers.  Ceres solver.  []
+[]$\OT1/cmtt/m/n/12 http : / /
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--12
-\OT1/cmtt/m/it/12 slam and light source estimation.  \OT1/cmtt/m/n/12 The Inter
-national Journal of
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-[]\OT1/cmtt/m/it/12 Cesar Cadena, Luca Carlone, Henry Carrillo, Yasir Latif, Da
-vide
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-\OT1/cmtt/m/it/12 Scaramuzza, Jos^^Se Neira, Ian Reid, and John J Leonard.  Pas
-t,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-\OT1/cmtt/m/it/12 present, and future of simultaneous localization and mapping:
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--26
-\OT1/cmtt/m/it/12 constraint kalman filter for vision-aided inertial navigation
-.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--26
-\OT1/cmtt/m/it/12 In \OT1/cmtt/m/n/12 Robotics and automation, 2007 IEEE intern
-ational conference
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
-[]\OT1/cmtt/m/it/12 Richard A Newcombe, Shahram Izadi, Otmar Hilliges, David
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
-\OT1/cmtt/m/it/12 Molyneaux, David Kim, Andrew J Davison, Pushmeet Kohi, Jamie
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
-\OT1/cmtt/m/it/12 Shotton, Steve Hodges, and Andrew Fitzgibbon.  Kinectfusion:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
-\OT1/cmtt/m/it/12 Real-time dense surface mapping and tracking.  In \OT1/cmtt/m
-/n/12 Mixed and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
-\OT1/cmtt/m/n/12 augmented reality (ISMAR), 2011 10th IEEE international sympos
-ium
- []
-
-
-Underfull \hbox (badness 4792) in paragraph at lines 39--39
-[]\OT1/cmtt/m/it/12 Yang Chen and G^^Serard Medioni.  Object modelling by regis
-tration
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 39--39
-\OT1/cmtt/m/it/12 of multiple range images.  \OT1/cmtt/m/n/12 Image and vision 
-computing\OT1/cmtt/m/it/12 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 45--45
-[]\OT1/cmtt/m/it/12 Paul J Besl and Neil D McKay.  Method for registration of 3
--d
- []
-
-
-Underfull \hbox (badness 2080) in paragraph at lines 45--45
-\OT1/cmtt/m/it/12 shapes.  In \OT1/cmtt/m/n/12 Robotics-DL tentative\OT1/cmtt/m
-/it/12 , pages 586--606. International
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
-[]\OT1/cmtt/m/it/12 Stefan Leutenegger, Simon Lynen, Michael Bosse, Roland Sieg
-wart,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
-\OT1/cmtt/m/it/12 nonlinear optimization.  \OT1/cmtt/m/n/12 The International J
-ournal of Robotics
- []
-
-[45]
-Underfull \hbox (badness 10000) in paragraph at lines 66--66
-[]\OT1/cmtt/m/it/12 Maik Keller, Damien Lefloch, Martin Lambers, Shahram Izadi,
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--66
-\OT1/cmtt/m/it/12 Tim Weyrich, and Andreas Kolb.  Real-time 3d reconstruction i
-n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--66
-\OT1/cmtt/m/it/12 dynamic scenes using point-based fusion.  In \OT1/cmtt/m/n/12
- 3DTV-Conference,
- []
-
-
-Underfull \hbox (badness 2922) in paragraph at lines 66--66
-\OT1/cmtt/m/n/12 2013 International Conference on\OT1/cmtt/m/it/12 , pages 1--8
-. IEEE, 2013.  pages
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 73--73
-[]\OT1/cmtt/m/it/12 Ben Glocker, Jamie Shotton, Antonio Criminisi, and Shahram
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 73--73
-\OT1/cmtt/m/it/12 Izadi.  Real-time rgb-d camera relocalization via randomized
- []
-
-
-Underfull \hbox (badness 3098) in paragraph at lines 73--73
-\OT1/cmtt/m/it/12 ferns for keyframe encoding.  \OT1/cmtt/m/n/12 IEEE transacti
-ons on visualization
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--80
-[]\OT1/cmtt/m/it/12 Richard A Newcombe, Dieter Fox, and Steven M Seitz.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--80
-\OT1/cmtt/m/it/12 Dynamicfusion: Reconstruction and tracking of non-rigid scene
-s
- []
-
-
-Underfull \hbox (badness 4291) in paragraph at lines 80--80
-\OT1/cmtt/m/it/12 in real-time.  In \OT1/cmtt/m/n/12 Proceedings of the IEEE co
-nference on computer
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 86--86
-[]\OT1/cmtt/m/it/12 Matthew Klingensmith, Ivan Dryanovski, Siddhartha Srinivasa
-, and
- []
-
-
-Underfull \hbox (badness 4792) in paragraph at lines 86--86
-\OT1/cmtt/m/it/12 Jizhong Xiao.  Chisel: Real time large scale 3d reconstructio
-n
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 86--86
-\OT1/cmtt/m/it/12 onboard a mobile device using spatially hashed signed distanc
-e
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 92--92
-[]\OT1/cmtt/m/it/12 Matthias Nie^^Yner, Michael Zollh^^?ofer, Shahram Izadi, an
-d Marc
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 92--92
-\OT1/cmtt/m/it/12 Stamminger.  Real-time 3d reconstruction at scale using voxel
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 92--92
-\OT1/cmtt/m/it/12 hashing.  \OT1/cmtt/m/n/12 ACM Transactions on Graphics (TOG)
-\OT1/cmtt/m/it/12 , 32(6):169, 2013.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--100
-[]\OT1/cmtt/m/it/12 O. Kahler, V. A. Prisacariu, C. Y. Ren, X. Sun, P. H. S Tor
-r,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 100--100
-\OT1/cmtt/m/n/12 and Computer Graphics (Proceedings International Symposium on
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--106
-[]\OT1/cmtt/m/it/12 Raul Mur-Artal and Juan D Tardos.  Orb-slam2: an open-sourc
-e
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--106
-\OT1/cmtt/m/it/12 slam system for monocular, stereo and rgb-d cameras.  \OT1/cm
-tt/m/n/12 arXiv
- []
-
-
-Underfull \hbox (badness 2012) in paragraph at lines 111--111
-\OT1/cmtt/m/it/12 fast place recognition in image sequences.  \OT1/cmtt/m/n/12 
-IEEE Transactions on
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--117
-[]\OT1/cmtt/m/it/12 Jakob Engel, Thomas Sch^^?ops, and Daniel Cremers.  Lsd-sla
-m:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--117
-\OT1/cmtt/m/it/12 Large-scale direct monocular slam.  In \OT1/cmtt/m/n/12 Europ
-ean Conference on
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 123--123
-[]\OT1/cmtt/m/it/12 Thomas Sch^^?ops, Jakob Engel, and Daniel Cremers.  Semi-de
-nse
- []
-
-
-Underfull \hbox (badness 7433) in paragraph at lines 123--123
-\OT1/cmtt/m/it/12 visual odometry for ar on a smartphone.  In \OT1/cmtt/m/n/12 
-Mixed and Augmented
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 123--123
-\OT1/cmtt/m/n/12 Reality (ISMAR), 2014 IEEE International Symposium on\OT1/cmtt
-/m/it/12 , pages
- []
-
-[46]
-Underfull \hbox (badness 10000) in paragraph at lines 130--130
-[]\OT1/cmtt/m/it/12 Zhenfei Yang and Shaojie Shen.  Monocular visual--inertial
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 130--130
-\OT1/cmtt/m/it/12 state estimation with online initialization and camera--imu
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 130--130
-\OT1/cmtt/m/it/12 extrinsic calibration.  \OT1/cmtt/m/n/12 IEEE Transactions on
- Automation Science
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 140--140
-[]\OT1/cmtt/m/it/12 Dimitrios G Kottas, Joel A Hesch, Sean L Bowman, and Stergi
-os I
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 140--140
-\OT1/cmtt/m/it/12 Roumeliotis.  On the consistency of vision-aided inertial
- []
-
-
-Underfull \hbox (badness 2080) in paragraph at lines 140--140
-\OT1/cmtt/m/it/12 navigation.  In \OT1/cmtt/m/n/12 Experimental Robotics\OT1/cm
-tt/m/it/12 , pages 303--317. Springer,
- []
-
-)
+[52])
 \tf@thm=\write9
 \openout9 = `report.thm'.
 
- [47]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1061.
- [48 <./figures/vin1.png>] [49 <./figures/vin2.png> <./figures/vin3.png>] [50 <
-./figures/projectStructure.png> <./figures/rgbd1.png>] [51 <./figures/rgbd2.png
-> <./figures/rgbd3.png>] [52 <./figures/rgbd4.png> <./figures/rgbd5.png>] [53 <
+ [53]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1063.
+ [54 <./figures/vin1.png>] [55 <./figures/vin2.png> <./figures/vin3.png>] [56 <
+./figures/projectStructure.png> <./figures/rgbd1.png>] [57 <./figures/rgbd2.png
+> <./figures/rgbd3.png>] [58 <./figures/rgbd4.png> <./figures/rgbd5.png>] [59 <
 ./figures/rgbd6.png> <./figures/Screenshot1.png> <./figures/Screenshot2.png>] [
-54 <./figures/Screenshot3.png> <./figures/Screenshot9.png> <./figures/Screensho
-t10.png>] [55 <./figures/Screenshot11.png> <./figures/Screenshot14.png> <./figu
-res/ScreenshotTango1.png>] [56 <./figures/timeline2.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1061.
- (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1061.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1061.
+60 <./figures/Screenshot3.png> <./figures/Screenshot9.png> <./figures/Screensho
+t10.png>] [61 <./figures/Screenshot11.png> <./figures/Screenshot14.png> <./figu
+res/ScreenshotTango1.png>] [62 <./figures/timeline2.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1063.
 
+(./report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1063.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1063.
 
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: E2E5BFA1AEA4D0F94BCEC04CF06F60CC;3211.
+Package rerunfilecheck Info: File `report.brf' has not changed.
+(rerunfilecheck)             Checksum: C0A127B6F37AAECEF9CEE27B68DE7029;2882.
 
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: AA9C41A36A55FAEB62F4EE9B46D7532F;3197
-(rerunfilecheck)             After:  6F6CD61F0811C6187071ACE1EEF07C81;3198.
-
-Package rerunfilecheck Warning: File `report.brf' has changed.
-(rerunfilecheck)                Rerun to get bibliographical references right.
-
-Package rerunfilecheck Info: Checksums for `report.brf':
-(rerunfilecheck)             Before: 6B5FAAF90ACFB6DAE27F5FDE403ADC13;2696
-(rerunfilecheck)             After:  5421D12537919C16F43C7EEF8D456E1C;2696.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 516 ({)
-### bottom level 
+ ) 
 Here is how much of TeX's memory you used:
- 24931 strings out of 493014
- 452765 string characters out of 6133350
- 528757 words of memory out of 5000000
+ 24996 strings out of 493014
+ 453587 string characters out of 6133350
+ 557757 words of memory out of 5000000
  27657 multiletter control sequences out of 15000+600000
- 78657 words of font info for 160 fonts, out of 8000000 for 9000
+ 78489 words of font info for 159 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,13n,77p,2110b,993s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section.124} has been referenced bu
-t does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.123} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.119} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.118} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.108} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.105} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.104} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.102} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.99} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.94} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.93} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.82} has been referenced but does not exi
-st, replaced by a fixed one
-
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
-live/2016/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2016/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2016/tex
-mf-dist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/kpfonts/jkpbmi.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
-pe1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/kpfonts/jkpmn8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/kpfonts/jkpsy.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/kpfo
-nts/jkpsyb.pfb>
-Output written on report.pdf (56 pages, 19271533 bytes).
+ 64i,13n,77p,2110b,1671s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2016/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/kpfonts/jkpbmi.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/kpfonts/jkpsy.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/kp
+fonts/jkpsyb.pfb>
+Output written on report.pdf (62 pages, 19277182 bytes).
 PDF statistics:
- 927 PDF objects out of 1000 (max. 8388607)
- 769 compressed objects within 8 object streams
- 222 named destinations out of 1000 (max. 500000)
+ 1026 PDF objects out of 1200 (max. 8388607)
+ 862 compressed objects within 9 object streams
+ 288 named destinations out of 1000 (max. 500000)
  575 words of extra memory for PDF output out of 10000 (max. 10000000)
 

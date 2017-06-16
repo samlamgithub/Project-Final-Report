@@ -513,20 +513,20 @@ The orientation array defines a quaternion that represents the rotation of the t
 0 & 0 & 0 & 1
 \end{bmatrix} \quad  \in \mathbb{S}\E(3)
 \end{align}
-\\In the application, to get the pose of Tango device, the API function \textit{TangoService_connectOnPoseAvailable} is used, this function take a pair of frame reference, which represents the coordinate of frame that pose is in, in this case is \verb|TANGO_COORDINATE_FRAME_START_OF_SERVICE| and \verb|TANGO_COORDINATE_FRAME_DEVICE|, means the pose would be the current device pose with respect to the pose device is in when application start. Another parameter is a callback function, the callback function will be called when a new Tango pose is available, and the pose data will be given in the parameter. The signature of this functions is given below.
+In the application, to get the pose of Tango device, the API function  is used, this function take a pair of frame reference, which represents the coordinate of frame that pose is in, in this case is \verb|TANGO_COORDINATE_FRAME_START_OF_SERVICE| and , means the pose would be the current device pose with respect to the pose device is in when application start. Another parameter is a callback function, the callback function will be called when a new Tango pose is available, and the pose data will be given in the parameter. The signature of this functions is given below.
 \begin{lstlisting}
 TangoErrorType TangoService_connectOnPoseAvailable(
     uint32_t count, const TangoCoordinateFramePair* frames,
     void (*TangoService_onPoseAvailable)(void* context,
                                          const TangoPoseData* pose)
 \end{lstlisting}
-Another way for getting pose data from Tango is the function \textit{TangoService_getPoseAtTime}, this function pulls Tango pose data from the give as parameter, if this parameter is set to 0.0, the latest estimated pose is returned with respect to the coordinate of frames given. The signature of this function is shown below.\\
+Another way for getting pose data from Tango is the function \verb|TangoService_getPoseAtTime|, this function pulls Tango pose data from the give as parameter, if this parameter is set to 0.0, the latest estimated pose is returned with respect to the coordinate of frames given. The signature of this function is shown below.\\
 \begin{lstlisting}
 TangoErrorType TangoService_getPoseAtTime(double timestamp,
                                           TangoCoordinateFramePair frame,
                                           TangoPoseData* pose);
 \end{lstlisting}
-The complete structure of Tango Pose Data struct is shown below, however only timestamp, orientation and translation are used to be processed for running ElasticFusion. \\  
+The complete structure of Tango Pose Data struct is shown below, however only timestamp, orientation and translation are used to be processed for running ElasticFusion. \\
 \begin{lstlisting}
 typedef struct TangoPoseData {
   uint32_t version;
@@ -539,7 +539,7 @@ typedef struct TangoPoseData {
   float accuracy;
 } TangoPoseData;
 \end{lstlisting}
-In the Tango application developed, the RGB image data from color camera is not only being rendered to the screen, but also to be input to the ElasticFusion part for 3D reconstruction, and this is achieved by using Tango API and OpenGL ES textures. A class called \textit{GlCameraFrame} is responsible for manage OpenGL ES programs and shaders and texture, and then render the image stored in gl texture to the screen using function \textit{glDrawElements}. To acquire the RGB image from color camera and store it into textures, three Tango API functions are used. The first one is \textit{TangoService_connectTextureId} which the function signature is given below, it takes in a camera id, which in this case is \verb|TANGO_CAMERA_COLOR| for the color camera, and an OpenGL ES texture id. It connects the texture id of the texture to the camera which id is given in the parameter. This allows the second function \textit{TangoService_updateTexture} to be used, it updates the OpenGL ES texture that has been connected to the camera with id given in the parameter, fills in the latest image from that camera, and also returns the timestamps of the image acquired by the camera. The signature of this function is shown below. Lastly another function \textit{TangoService_updateTextureExternalOes} is used so that a specific OpenGL ES EXTERNAL OES texture can be filled with the image acquired by given camera id, it takes in valid OpenGL ES EXTERNAL OES texture id as parameter to update the texture associated with that id, the function signature is also given below.\\
+In the Tango application developed, the RGB image data from color camera is not only being rendered to the screen, but also to be input to the ElasticFusion part for 3D reconstruction, and this is achieved by using Tango API and OpenGL ES textures. A class called \textit{GlCameraFrame} is responsible for manage OpenGL ES programs and shaders and texture, and then render the image stored in gl texture to the screen using function \textit{glDrawElements}. To acquire the RGB image from color camera and store it into textures, three Tango API functions are used. The first one is \verb|TangoService_connectTextureId| which the function signature is given below, it takes in a camera id, which in this case is \verb|TANGO_CAMERA_COLOR| for the color camera, and an OpenGL ES texture id. It connects the texture id of the texture to the camera which id is given in the parameter. This allows the second function \verb|TangoService_updateTexture| to be used, it updates the OpenGL ES texture that has been connected to the camera with id given in the parameter, fills in the latest image from that camera, and also returns the timestamps of the image acquired by the camera. The signature of this function is shown below. Lastly another function \verb|TangoService_updateTextureExternalOes| is used so that a specific OpenGL ES EXTERNAL OES texture can be filled with the image acquired by given camera id, it takes in valid OpenGL ES EXTERNAL OES texture id as parameter to update the texture associated with that id, the function signature is also given below.\\
 \begin{lstlisting}
 TangoErrorType TangoService_connectTextureId(
     TangoCameraId id, unsigned int tex, void* context,
@@ -553,7 +553,6 @@ TangoErrorType TangoService_updateTextureExternalOes(TangoCameraId id,
                                                      unsigned int tex,
                                                      double* timestamp);
 \end{lstlisting}
-\\
 After the RGB image data is stored in the OpenGL ES texture, these data can be read out from the OpenGL ES framebuffer that's associated with the texture using function \textit{glReadPixels}, the RGB data read out is store in a byte buffer which every value is corresponding to the RGB value of each pixel. This step is done in the \textit{GlCameraFrame} class, and the RGB data stored in byte buffer can be later used to write to files or feed into ElasticFusion program.\\
 \\
 Another function of Tango platform have been used in the application is Depth Perception, the depth data acquired from the depth sensor is stored in a C++ struct by tango call \textit{TangoPointCloud}, TangoPointCloud includes the time when the sensor captures this depth data, the number points contained in this data, and the array of 3D data points with their confidence level in the range of [0, 1]. In the 3D point coordinates, X and Y represents the position of data point corresponding to the pixel, and the Z component is the depth that was captured. The definition of this struct is shown below.\\
@@ -565,22 +564,24 @@ typedef struct TangoPointCloud {
   float (*points)[4];
 } TangoPointCloud;
 \end{lstlisting}
-On Tango platform, a struct called \textit{TangoSupportPointCloudManager} is used to manage point cloud data, it can move the pointcloud data from the callback thread to other threads for render or processing usage. The PointCloud manager is created using the function below where max_points the maximum amount of 3D points allowed to be stored in it.\\
+On Tango platform, a struct called \verb|TangoSupportPointCloudManager| is used to manage point cloud data, it can move the pointcloud data from the callback thread to other threads for render or processing usage. The PointCloud manager is created using the function below where max\_points the maximum amount of 3D points allowed to be stored in it.\\
 \begin{lstlisting}
 TangoErrorType TangoSupport_createPointCloudManager(
   size_t max_points,
   TangoSupportPointCloudManager **manager
 )
 \end{lstlisting}
-To register the call back for point cloud data, a similar function to pose data function is called, \textit{TangoService_connectOnPointCloudAvailable} takes in a call back function, so that it will be called when new pointcloud data is available. The function signature is given below.
+To register the call back for point cloud data, a similar function to pose data function is called, \verb|TangoService_connectOnPointCloudAvailable| takes in a call back function, so that it will be called when new pointcloud data is available. The function signature is given below.
 \begin{lstlisting}
 TangoErrorType TangoService_connectOnPointCloudAvailable(void(*)(void *context, const TangoPointCloud *cloud)
 \end{lstlisting}
-In the call back thread, point cloud manager is used to put the new point cloud data into the buffer within it, so that the data can be used later, the function \textit{TangoSupport_updatePointCloud} is called to swaps the buffer inside point cloud manager for new point cloud data.\\
+In the call back thread, point cloud manager is used to put the new point cloud data into the buffer within it, so that the data can be used later, the function\\
+ \verb|TangoSupport_updatePointCloud| is called to swaps the buffer inside point cloud manager for new point cloud data.\\
 \begin{lstlisting}
 TangoErrorType TangoSupport_updatePointCloud(TangoSupportPointCloudManager *manager, const TangoPointCloud *point_cloud)
 \end{lstlisting}
-In other thread that does computation or rendering, point cloud data can be acquired from the point cloud manager use the function \textit{TangoSupport_getLatestPointCloudAndNewDataFlag}, it returns the latest point cloud data stored inside the manager, and also returns a flag for the user to know whether the point cloud data acquired is new compared to the last time. The function signature is shown below.\\
+In other thread that does computation or rendering, point cloud data can be acquired from the point cloud manager use the function \\
+\verb|TangoSupport_getLatestPointCloudAndNewDataFlag|, it returns the latest point cloud data stored inside the manager, and also returns a flag for the user to know whether the point cloud data acquired is new compared to the last time. The function signature is shown below.\\
 \begin{lstlisting}
 TangoErrorType TangoSupport_getLatestPointCloudAndNewDataFlag(
   TangoSupportPointCloudManager *manager,
@@ -588,11 +589,12 @@ TangoErrorType TangoSupport_getLatestPointCloudAndNewDataFlag(
   bool *new_data
 )
 \end{lstlisting}
-After RGB and depth data is acquired, processing is needed to later usage, since both RGB and depth data are acquired with respect to their own sensors, therefore correction is needed to place the data under the same frame, in this application, the depth data is transformed to be align with the RGB data. However, the translation between depth sensor and color camera can not be simply calculated since the time of each data being captured is slight different. On tango platform, the function \textit{TangoSupport_calculateRelativePose} is used to calculate relative transformation between different coordinate of frame and timestamp, which in this case is \verb|TANGO_COORDINATE_FRAME_CAMERA_COLOR| and \verb|TANGO_COORDINATE_FRAME_CAMERA_DEPTH|, this function outputs a Tango pose data instance to represent the related transformation calculated. This pose data is then coverted into a transformation matrix to bring depth data into alignment with RGB data. The function signature is shown below.\\
+After RGB and depth data is acquired, processing is needed to later usage, since both RGB and depth data are acquired with respect to their own sensors, therefore correction is needed to place the data under the same frame, in this application, the depth data is transformed to be align with the RGB data. However, the translation between depth sensor and color camera can not be simply calculated since the time of each data being captured is slight different. On tango platform, the function \verb|TangoSupport_calculateRelativePose| is used to calculate relative transformation between different coordinate of frame and timestamp, which in this case is \verb|TANGO_COORDINATE_FRAME_CAMERA_COLOR| and \\
+\verb|TANGO_COORDINATE_FRAME_CAMERA_DEPTH|, this function outputs a Tango pose data instance to represent the related transformation calculated. This pose data is then converted into a transformation matrix to bring depth data into alignment with RGB data. The function signature is shown below.\\
 \begin{lstlisting}
 TangoErrorType TangoSupport_calculateRelativePose(double base_timestamp, TangoCoordinateFrameType base_frame, double target_timestamp, TangoCoordinateFrameType target_frame, TangoPoseData *base_frame_T_target_frame)
 \end{lstlisting}
-In the ElasticFusion program, the camera intrinsics data have to be provided for image processing, these information can be acquired directly on Tango using the Tango API, function \textit{TangoService_getCameraIntrinsics} returns a \textit{TangoCameraIntrinsics} struct instance corresponds to the input camera id. The Intrinsics struct contains the image width and height, focal length, and distortion coefficients. These information is later being input to the ElasticFusion. The function signature and struct definition is given below.\\
+In the ElasticFusion program, the camera intrinsics data have to be provided for image processing, these information can be acquired directly on Tango using the Tango API, function \verb|TangoService_getCameraIntrinsics| returns a \verb|TangoCameraIntrinsics| struct instance corresponds to the input camera id. The Intrinsics struct contains the image width and height, focal length, and distortion coefficients. These information is later being input to the ElasticFusion. The function signature and struct definition is given below.\\
 \begin{lstlisting}
 TangoErrorType TangoService_getCameraIntrinsics(TangoCameraId cameraid,
     TangoCameraIntrinsics* intrinsics);
@@ -610,6 +612,24 @@ typedef struct TangoCameraIntrinsics {
   double distortion[5];
 } TangoCameraIntrinsics;
 \end{lstlisting}
+
+\newpage
+
+\subsection{Logging data from Tango}
+
+
+\begin{lstlisting}
+struct RGBDdata {
+  double pointCloudTimestamp;
+  uint32_t pointCloudNumpoints;
+  float *pointCloudPoints;
+  uint8_t *image;
+  double colorTimeStamp;
+  int64_t m_lastTimestamp;
+  TangoPoseData pose;
+};
+\end{lstlisting}
+
 In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2016elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}} at Imperial College London is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, so that drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet. Also, the current code exist for ElasticFusion running on desktop computer made heavily use of CUDA(Compute Unified Device Architecture) for GPU general data processing, which is supported by the NVIDIA Tegra K1 processer on Google Tango tablet.\\
 \\This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
 \\
@@ -633,24 +653,6 @@ laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
 \\
 \begin{lstlisting}
 Code
-\end{lstlisting}
-
-
-\newpage
-
-\subsection{Logging data from Tango}
-
-
-\begin{lstlisting}
-struct RGBDdata {
-  double pointCloudTimestamp;
-  uint32_t pointCloudNumpoints;
-  float *pointCloudPoints;
-  uint8_t *image;
-  double colorTimeStamp;
-  int64_t m_lastTimestamp;
-  TangoPoseData pose;
-};
 \end{lstlisting}
 
 
