@@ -40,7 +40,7 @@ In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan
 \\
 This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
 \\
-Also, since the Tango platform on the tablet provides pose estimation feature, this pose is simply feed into the ElasticFusion program run on the tablet, so that the ElasticFusion part doesn't need to waste time and processing power to execute the camera tracking part. However, the pose provided by Tango is not accurate enough and during the reconstruction process ElasticFusion will alter the pose if global or local loop closure happens, in this project a simply way to correct pose input to ElasticFusion by Tango is developed to  over come this problem.
+Also, since the Tango platform on the tablet provides pose estimation feature, this pose is simply feed into the ElasticFusion program run on the tablet, so that the ElasticFusion part doesn't need to waste time and processing power to execute the camera tracking part. However, the pose provided by Tango may not be accurate enough and during the reconstruction process ElasticFusion will alter the pose if global or local loop closure happens, in this project a simply way to correct pose input to ElasticFusion by Tango is developed to  over come this problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -490,6 +490,39 @@ The overall structure of the Android application developed in this project is sh
 The central part of the report usually consists of three of four chapters detailing the technical work undertaken during the project. The structure of these chapters is highly project dependent. They can reflect the chronological development of the project, e.g. design, implementation, experimentation, optimisation, evaluation etc. although this is not always the best approach. However you choose to structure this part of the report, you should make it clear how you arrived at your chosen approach in preference to the other alternatives documented in the background. If you have built a new piece of software you should describe and justify the design of your program at some high level, possibly using an approved graphical formalism such as UML. It should also document any interesting problems with, or features of, your implementation. Integration and testing are also important to discuss in some cases. You need to discuss the content of these sections thoroughly with your supervisor.\\
 
 ============\\
+\subsection{Environment Configuration}
+Eclipse 
+Project Tango1 is a platform that uses computer vision to give devices the ability to understand their
+position relative to the world around them. The Project Tango Tablet Development Kit is an Android
+device with a wide-angle camera, a depth sensing camera, accurate sensor timestamping, and a software
+stack that enables application developers to use motion tracking, area learning and depth sensing.
+Thousands of developers have purchased these developer kits to create experiences to explore physical
+space around the user, including precise navigation without GPS, windows into virtual 3D worlds,
+measurement and scanning of spaces, and games that know where they are in the room and whats
+around them.
+filesystem /vol/bitbucket/bjm113/android-sdklinux
+\verb|  10. Click “next” (don’t send statistics, unless you want to...)|
+\verb| 11. Click finish|
+\verb| 12. In Window! Preferences! android/NDK click browse, go to /vol/bitbucket/bjm113/|
+\verb| android-ndk-r10e and click “OK”|
+
+
+Eclipse (tested under Neon release 4.6.0) with ADT insta
+
+
+\verb| Tango Interface: we (John) wrote a whole interface that abstracts interfacing IMU and camera|
+\verb| for you. It comes in <path/to/projects>/aer/jni/tango_interface/.|
+\verb| • Tango Client API: comes in <path/to/projects>/tango_client_api/ folder. You|
+\verb| should not have to use it, we provide all the functionality in our Tango Interface.|
+\verb| • Java App: includes GUI overlays and main Android activities in the projects/aer/src/ac/uk/imperial/|
+\verb| aer. You won’t have to deal with it, unless you are adding fancy GUI things (<path/to/|
+\verb| projects>/aer/jni/jni_interface.cpp defines the C++ to Java App interface).|
+\verb| • Eigen: for linear algebra, vectors, matrices,. . . . We provided you with the sources in projects/|
+\verb| aer/jni/Eigen. See http://eigen.tuxfamily.org/dox/. In particular, read http://|
+\verb| eigen.tuxfamily.org/dox-devel/group__TopicStructHavingEigenMembers|
+\verb| .html and http://eigen.tuxfamily.org/dox/TopicFunctionTakingEigenTy|
+\verb| pes.html.   |fefe
+
 
 \subsection{Tango Platform}
 Google's Tango\citep{tango} platform provides mobile devices with the abilities to sense the 3D space around the device and allow developers to build augmented reality applications on the device. Tango devices have three main functionalities: Motion Tracking, Area Learning, and Depth Perception, these are achieved using the RGB color camera, IMU (accelerometer and gyroscope), depth sensor and wide angle fisheye lens motion tracking camera on Tango devices. The motion tracking feature mainly estimate current position and pose of device using data from IMU and wide angle camera and techniques that use Kalman filter such as \citep{mourikis2007multi}. \\
@@ -520,7 +553,8 @@ TangoErrorType TangoService_connectOnPoseAvailable(
     void (*TangoService_onPoseAvailable)(void* context,
                                          const TangoPoseData* pose)
 \end{lstlisting}
-Another way for getting pose data from Tango is the function \verb|TangoService_getPoseAtTime|, this function pulls Tango pose data from the give as parameter, if this parameter is set to 0.0, the latest estimated pose is returned with respect to the coordinate of frames given. The signature of this function is shown below.\\
+Another way for getting pose data from Tango is the function \\
+\verb|TangoService_getPoseAtTime|, this function pulls Tango pose data from the give as parameter, if this parameter is set to 0.0, the latest estimated pose is returned with respect to the coordinate of frames given. The signature of this function is shown below.\\
 \begin{lstlisting}
 TangoErrorType TangoService_getPoseAtTime(double timestamp,
                                           TangoCoordinateFramePair frame,
@@ -643,85 +677,61 @@ ElasticFusion using data captured from the Tango tablet for 3D reconstruction, t
 \newpage
 
 \subsection{Compiling ElasticFusion on Tango}
-
-
-
-In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2016elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}} at Imperial College London is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, so that drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet. Also, the current code exist for ElasticFusion running on desktop computer made heavily use of CUDA(Compute Unified Device Architecture) for GPU general data processing, which is supported by the NVIDIA Tegra K1 processer on Google Tango tablet.\\
-\\This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
-\\
-Also, since the Tango platform on the tablet provides pose estimation feature, this pose is simply feed into the ElasticFusion program run on the tablet, so that the ElasticFusion part doesn't need to waste time and processing power to execute the camera tracking part. However, the pose provided by Tango is not accurate enough and during the reconstruction process ElasticFusion will alter the pose if global or local loop closure happens, in this project a simply way to correct pose input to ElasticFusion by Tango is developed to  over come this problem. \\
-\\
-the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7)."\\
-\\
-=======\\
-requirement:\\
-A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7).  3500 GFLOPS\\
-Nvidia Tegra K1  approx = GT620-GT540\\
-\\
-make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
-\\
-In this project the goal is run ElasticFusion\citep{whelan2016elasticfusion} on Google Tango Tablet for real time 3D reconstruction, but the algorithm will be adapted to fit into the Tango platform, also to make use of the Tango motion tracking and depth perception API. Given that Tango's camera pose estimation already make use of RGB-D and IMU sensor data, the pose tracking could possibly be replaced with 3D pose gain directly from Tango. Also, camera frame and 3D point cloud data for a time point can be acquired with the API. However, although the Tango 3D Reconstruction Library C provides functions and structs reconstruct 3D suface using mesh or voxel grid, it is different than the surfel map that we will be using for ElasticFusion\citep{whelan2016elasticfusion}. However, it will be worth to study the sample project of building mesh and rendering on screen.\\
-An actual pose struct contains other fields, such as a timestamp and a copy of the frame pair, \\
-Frames of Reference\\
-Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
-laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
-\textit{tangoAPI}\\
-\\
-\begin{lstlisting}
-Code
-\end{lstlisting}
-
-
-
-
+As mentioned above, the desktop ElasticFusion program includes three parts: the \textit{Core} part contains the code for ElasticFusion algorithm, and can be used as an API for other application, the \textit{GIU} part is responsible the displaying the user interface of program and handles input setting from the command line, reading from files provided for the program, the there is a \textit{GPUTest} program that user can test the performance of their GPU for running ElasticFusion. In this project the \textit{core} part is compiled and adapted on the Tango tablet to allow it to run on Android platform, and please be mindful that although open source code of ElasticFusion is available on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}, in this project an internal version of source code is used for its better structure.\\
 
 \subsubsection{Dependencies}
+Originally in the ElasticFusion program, the dependencies include OpenGL 3.0\footnote{\url{https://www.opengl.org/}} that is used to manage the global map and predict the views, CUDA(Compute Unified Device Architecture) 7.0 that is used to implement the reduction process in camera tracking, OpenNI2\footnote{\url{https://structure.io/openni}} that is used to connect the program to a RGBD camera such as Microsoft Kinect or ASUS Xtion Pro Live. And SuiteSparse\footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}} is used to do solve the Cholesky decomposition for optimization problem during camera tracking process. The header only library eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} is used for matrix calculation. The zlib library\footnote{\url{http://zlib.net/}} is used uncompress depth data from dataset file and the libjpeg library\footnote{\url{http://libjpeg.sourceforge.net/}} is used to uncompress the RGB image data in dataset file from JPEG format into RGB pixel data. Lastly the Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} library that is used for building the GUI of program and also manage some OpenGL objects. \\
+\\
+Among the dependencies mentioned above, the OpenGL part in the source code of ElasticFusion is adapted to OpenGL ES for running on Android, and OpenNI is not used as since it's not needed in the Core part of ElasticFusion, the libjpeg library is removed and its function is implemented using OpenCV instead. Lastly the Pangolin library is removed and the part where it manages OpenGL objects is replaced with plain OpenGL ES implementation that is adapted from the Pangolin source code. The rest of dependencies are all compiled to be able to used in the Application for running on Android.\\
 
-
-
-
-
+\subsubsection{Hardware requirements}
+Since ElasticFusion is a RGBD SLAM system for 3D dense reconstruction, it needs to process full RGB image data as well as the depth map, also the pose estimation made heavily use of CUDA for GPU general data processing in the camera tracking stage if no dataset is provided, not to mention the local and global loop closure detection in each frame. Therefore by the hardware requirement for running ElasticFusion is already very high, quote from the \textit{README} of ElasticFusion on Github: "A very fast nVidia GPU (3.5TFLOPS+), and a fast CPU (something like an i7).", 3.5T FLOPS(Floating-point operations per second) is equal to 3500 G FLOPS, this kind of processing power is only available on graphics card like Nvidia GeForce GTX 970 which has 1664 CUDA cores. However the Nvidia Tegra K1 equipped on Tango tablet has only 192 CUDA core, and with 192 CUDA cores * 2 FLOPS per core * 950MHz, the processing power is only about 365 G FLOPS, which is approximately the power on a GT620 graphic card, only about one tenth what is required. This kind of processing power is considered quite high on a mobile device, however is still too low compare to the requirement.\\
 
 
 \subsubsection{OpenCV}
-
-
-
-
+The OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}}\ is used to encode the RGB image data to jpeg when saving Tango data to files and used to decode the color image data from jpeg format to RGB pixel data when ElasticFusion is running using datasets on the Tango tablet.\\
+\\
+The Android version of OpenCV 2.4 source code in C++ is simply downloaded and imported in Eclipse as a project and attached to the Android application as a library. After that the android makefile of OpenCV \textit{OpenCV.mk} is included in the \textit{Android.mk} file of the Android application, so that OpenCV is compiled and linked as a static library for the application and the code in application can use it as normally done in C++ programs.\\
 
 \subsubsection{CUDA}
-
-
-
-
-
-
+CUDA (Compute Unified Device Architecture) is a compute platform for general purpose computing on Nvidia graphic card. CUDA 7.0 is needed in ElasticFusion program and since CUDA 6.0 supported by the NVIDIA Tegra K1 processer on Google Tango tablet, no change is needed to make to adapt this part of code. \\
+In the \textit{core} part of the ElasticFusion code, a folder nameed \textit{CUDA} contains all the files that includes source code run on GPU using CUDA, include it there are normal C++ files and CUDA head files with extension ".cuh" and CUDA source files with extension ".cu".\\
+\\
+To compile the code inside this folder for the Android application on Tango tablet, under Ubuntu environment the NVIDIA Tegra Android Development Pack version 3.0r4\footnote{\url{https://developer.nvidia.com/AndroidWorks-TADP-Archive}} need to be download and installed. It contains the Android CUDA toolkit for CUDA 6.0 and can be used to compile CUDA code for Android platform.\\
+\\
+Firstly, the code in \textit{CUDA} folder is compiled into a static library by creating an \textit{"Android.mk"} makefile, in the makefile CUDA \textit{nvcc} compiler and \textit{g++} compiler from the Android standalone tool chain is used to compile the CUDA files and C++ files in the folder. After that a library file \textit{libCudaLib.a} is created and in the \textit{"Android.mk"} makefile for application the \textit{libCudaLib.a} is linked as a static library to the Android application. This allows the source code of ElasticFusion in C++ to call the CUDA code inside \textit{CUDA} folder and no change is needed to made.\\ 
 
 \subsubsection{Pangolin}
-
-
-
-
-
-Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
-
-
-
-
-
-
+The Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} library in the ElasticFusion source code was used to render the GUI of program and manage some OpenGL objects, however the \textit{Core} part of ElasticFusion does not contain GUI part and only use Pangolin in a few place, therefore compiling the Pangolin library on Android is an overkill. And so when porting the code for ElasticFusion onto Tango tablet, Pangolin is removed, and the part that Pangolin is used to manage encapsulated OpenGL objects is replaced by plain OpenGL ES code extracted from Pangolin's source code.\\
+\\
+The \textit{GlTexture} class in Pangolin stores an OpenGL texture object and its behaviour methods such as binding and uploading texture image. When adapting the ElasticFusion program on Tango tablet, the source code for \textit{GlTexture} class in Pangolin is extracted and put into a file in the ElasticFusion program, and then is place in ElasticFusion where Pangolin's \textit{GlTexture} is used is then replaced by the new \textit{GlTexture} class. The \textit{Shader} class originally in the ElasticFusion program is inherited from the \textit{GlSlProgram} class in Pangolin, it's mainly used for managing OpenGL programs and attached shaders. This class is adapted in a similar way, the part of source code that is useful in Pangolin is taken out and put inside the \textit{Shader} class. The \textit{GlRenderBuffer} and \textit{GlFramebuffer} class from Pangolin used are also adapted in similar way. The table given below includes all the Pangolin values and class adapted or removed in the ElasticFusion program on Tango tablet.\\
+\\
+\begin{table}
+\centering
+\caption{Pangolin values and class adapted or removed}
+\begin{tabular}{|r|l|}
+  \hline
+  pangolin::GlTexture  \\
+  pangolin::GlSlProgram  \\
+  pangolin::GlSlVertexShader  \\
+  pangolin::GlSlGeometryShader \\
+  pangolin::GlSlFragmentShader  \\
+  pangolin::GlRenderBuffer  \\
+  pangolin::GlFramebuffer \\
+   pangolin::OpenGlMatrix \\
+    \hline
+\end{tabular}
+\end{table}
 
 
 \subsubsection{SuiteSparse}
 
 \footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}}
 
-\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 
+OpenNI
 
-
-
-
+ clapack\footnote{\url{http://www.netlib.org/clapack/}} and eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} 
 
 
 
@@ -741,6 +751,14 @@ Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}}
 \subsubsection{Eigen}
 
 
+
+Nvidia Tegra K1  approx = GT620-GT540\\
+\\
+make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
+\\
+Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
+laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\ 
+In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
 
 
 \newpage
