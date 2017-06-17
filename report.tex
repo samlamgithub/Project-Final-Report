@@ -616,8 +616,7 @@ typedef struct TangoCameraIntrinsics {
 \newpage
 
 \subsection{Logging data from Tango}
-
-
+After the RGBD and pose data from Tango are acquired, data of each frame is encapsulated into a C++ struct \textit{RGBDdata} and stored in a circular buffer. The definition of \textit{RGBDdata} is given below, other than RGBD and pose data, it also contains both the timestamp for depth and RGB data for calculating the transformation between color camera and depth sensor at the time their data is captured.\\
 \begin{lstlisting}
 struct RGBDdata {
   double pointCloudTimestamp;
@@ -629,6 +628,23 @@ struct RGBDdata {
   TangoPoseData pose;
 };
 \end{lstlisting}
+The first function implemented in the application developed is to write and RGBD and pose data recorded into their files, so that they can be used as dataset to run ElaticFusion on desktop computer. The processing of data into correct format is done in a data logging thread to reduce the workload on the main thread, and so that the writing of data is asynchronous with the capture for data. The circular buffer for storing data is an array of \textit{RGBDdata} structs with fixed size 50, after data is captured in the main thread and encapsulated into a \textit{RGBDdata} struct instance, it's stored in the position in circular buffer pointed by a variable called 
+\textit{latestBufferIndex}. This variable records the last position in the array where data is stored and so that data can be put into the front of array when the end of buffer is full, thus the circular effect is achieved where old data is gradually replaced by new data come in. This variable also allows the data logging thread to always read the latest frame of data that was stored in the buffer, in this way the speed difference between data producing and consuming is handled.\\
+\\
+The code processing and writing RGBD and pose data is combined and adapted from the Google Tango application RGB depth sync{\url{https://github.com/googlesamples/tango-examples-c/tree/master}} which produce a depth map in sync with the RGB image, and data logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}}, which originally is used to save data from RGBD camera that supports OpenNI\footnote{\url{https://structure.io/openni}} interface. Firstly the relative transformation between RGB and depth coordinate of frame and timestamp is calculated using the function \verb|TangoSupport_calculateRelativePose| which outputs a \textit{TangoPoseData} instance as result, this pose data is then converted into a transformation matrix for producing the depth map. To produce the depth map, firstly the 3D point coordinates in Tango point cloud is brought into alignment with RGB data using the transformation matrix calculated above, after that an upsample method is used filter the Tango Point Cloud data for smoothness, in the process the depth value of each 3D point coordinate in Tango Point Cloud is upsampled at a fixed size window around the 3D point's X and Y value, which corresponds to the pixel coordinates in the RGB image from color image. In this way, the depth map produced is in sync with the RGB image in both time and coordinate of frame, after that the data compressed for writing into files.\\
+\\
+In order to save space and reduce amount of data written to files, the RGB image data is compressed into JPEG format from byte buffer using the OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}}, also the depth buffer is compressed using the \textit{compress2} function from zlib library\footnote{\url{http://zlib.net/}}. After that the timestamp, compressed RGB data and depth data with their sizes of each frame is written to the RGBD data file. and the pose data of each frame is written to the pose data file in the order of: \textit{x, y, z, qx, qy, qz, qw} where \textit{x, y, z} is the 3D position of the device and \textit{qx, qy, qz, qw} is the elements of quaternion that represents the orientation of the device.\\
+\\
+After the data being saved to two files on the Tango tablet, a slight modification is needed for the original ElasticFusion program to be able tu use them as datasets. The ElasticFusion program is designed to be able to use data from  datasets, however in the \textit{GIU} part of ElasticFusion program the \textit{Resolution} struct instance that holds width and height of RGB image is hard-coded with fix width and height, while the \textit{Intrinsics} struct instance can use the focal length and distortion parameter from a given calibration file, therefore a small change is made to the \textit{GIU} part of ElasticFusion program to allow for both image size and intrinsics data to be read from the calibration file.\\
+\\
+Using the logging function implemented in the application, experiments were carried out on desktop computer to run 
+ElasticFusion using data captured from the Tango tablet for 3D reconstruction, the screen shots of that is shown in Fig \ref{fig:Screenshot1}, Fig \ref{fig:Screenshot2}, Fig \ref{fig:Screenshot3} and Fig \ref{fig:Screenshot9}. From the screenshots it can be seen that the surface is able to be reconstructed however the points in the global map is vert sparse and the speed is very slow, this is mainly due to the noise and sparseness of depth data from depth sensor, also the pose estimated from Tango may not be very accurate, as the RGB image has even higher resolution (1980 x 720) then the image size in original ElasticFusion program. Also to allow for the surface to be reconstructed evenly instead of sparse points, when recording data using the Tango tablet, the device has to be held and move in a very slow and stable fashion. \\
+
+\newpage
+
+\subsection{Compiling ElasticFusion on Tango}
+
+
 
 In the recently published dense RGB-D SLAM algorithms, ElasticFusion\cite{whelan2016elasticfusion} published by Dyson Robotics Lab\footnote{\url{http://www.imperial.ac.uk/dyson-robotics-lab/}} at Imperial College London is one that achieve state-of-the-art performance by applying local and global loop closures using a deformation graph, so that drifts raised by accumulated errors can be recovered and global consistency of the map is maintained. The fact Elastic Fusion scored high marks on benchmarks for trajectory estimation and surface estimation makes it perfect to be applied on Google Tango Tablet. Also, the current code exist for ElasticFusion running on desktop computer made heavily use of CUDA(Compute Unified Device Architecture) for GPU general data processing, which is supported by the NVIDIA Tegra K1 processer on Google Tango tablet.\\
 \\This project have attempted to port the code for ElasticFusion onto Google Tango Tablet and integrated with 3D points data from Tango platform, although the result of running ElasticFusion on the tablet has shown to be not effective enough for self-contained real time application due to processing power and sensor problem on the tablet and time and effort limitation in this project, this attempt has still proved that it is possible and more convenient to record the 3D space data on a hand held portable device first, and then let the data to be processed on a more power desktop computer for high quality 3D surface reconstruction.\\
@@ -654,14 +670,6 @@ laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
 \begin{lstlisting}
 Code
 \end{lstlisting}
-
-
-
-
-\subsection{Compiling ElasticFusion on Tango}
-
-
-
 
 
 
