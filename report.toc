@@ -26,22 +26,22 @@
 \contentsline {subsubsection}{\numberline {6.4.4}CUDA}{42}{subsubsection.181}
 \contentsline {subsubsection}{\numberline {6.4.5}Pangolin}{43}{subsubsection.183}
 \contentsline {subsubsection}{\numberline {6.4.6}SuiteSparse}{43}{subsubsection.186}
-\contentsline {subsubsection}{\numberline {6.4.7}OpenGL}{44}{subsubsection.190}
-\contentsline {subsubsection}{\numberline {6.4.8}Eigen}{44}{subsubsection.191}
-\contentsline {subsection}{\numberline {6.5}Running ElasticFusion on Tango}{45}{subsection.192}
-\contentsline {subsubsection}{\numberline {6.5.1}Running ElasticFusion with pose on Tango}{45}{subsubsection.193}
-\contentsline {subsubsection}{\numberline {6.5.2}Running ElasticFusion dataset on Tango}{45}{subsubsection.194}
-\contentsline {subsubsection}{\numberline {6.5.3}Running Tango dataset on Tango}{45}{subsubsection.195}
-\contentsline {subsection}{\numberline {6.6}Combine ElasticFusion with pose from Tango in Loop closure mode}{46}{subsection.196}
-\contentsline {section}{\numberline {7}Evaluation}{48}{section.206}
-\contentsline {subsection}{\numberline {7.1}Reconstruction Accuracy}{48}{subsection.207}
-\contentsline {subsection}{\numberline {7.2}depth sensor noise}{48}{subsection.208}
-\contentsline {subsection}{\numberline {7.3}Computation power problem}{48}{subsection.209}
-\contentsline {subsection}{\numberline {7.4}Optimization problem}{48}{subsection.210}
-\contentsline {subsubsection}{\numberline {7.4.1}Software limitation}{49}{subsubsection.211}
-\contentsline {section}{\numberline {8}Conclusions and Future Work}{50}{section.212}
-\contentsline {section}{\numberline {9}Bibliography}{51}{section.213}
-\contentsline {section}{\numberline {10}Appendix}{52}{section.214}
-\contentsline {section}{\numberline {11}User Guide}{53}{section.215}
-\contentsline {section}{\numberline {12}Program Listings}{54}{section.216}
-\contentsline {section}{\numberline {13}Word Count}{55}{section.217}
+\contentsline {subsubsection}{\numberline {6.4.7}OpenGL}{44}{subsubsection.191}
+\contentsline {subsubsection}{\numberline {6.4.8}Eigen}{46}{subsubsection.265}
+\contentsline {subsection}{\numberline {6.5}Running ElasticFusion on Tango}{47}{subsection.267}
+\contentsline {subsubsection}{\numberline {6.5.1}Running ElasticFusion with pose on Tango}{47}{subsubsection.268}
+\contentsline {subsubsection}{\numberline {6.5.2}Running ElasticFusion dataset on Tango}{47}{subsubsection.269}
+\contentsline {subsubsection}{\numberline {6.5.3}Running Tango dataset on Tango}{47}{subsubsection.270}
+\contentsline {subsection}{\numberline {6.6}Combine ElasticFusion with pose from Tango in Loop closure mode}{48}{subsection.271}
+\contentsline {section}{\numberline {7}Evaluation}{50}{section.281}
+\contentsline {subsection}{\numberline {7.1}Reconstruction Accuracy}{50}{subsection.282}
+\contentsline {subsection}{\numberline {7.2}depth sensor noise}{50}{subsection.283}
+\contentsline {subsection}{\numberline {7.3}Computation power problem}{50}{subsection.284}
+\contentsline {subsection}{\numberline {7.4}Optimization problem}{50}{subsection.285}
+\contentsline {subsubsection}{\numberline {7.4.1}Software limitation}{51}{subsubsection.286}
+\contentsline {section}{\numberline {8}Conclusions and Future Work}{52}{section.287}
+\contentsline {section}{\numberline {9}Bibliography}{53}{section.288}
+\contentsline {section}{\numberline {10}Appendix}{54}{section.289}
+\contentsline {section}{\numberline {11}User Guide}{55}{section.290}
+\contentsline {section}{\numberline {12}Program Listings}{56}{section.291}
+\contentsline {section}{\numberline {13}Word Count}{57}{section.292}

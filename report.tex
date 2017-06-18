@@ -725,32 +725,94 @@ The \textit{GlTexture} class in Pangolin stores an OpenGL texture object and its
 
 
 \subsubsection{SuiteSparse}
-
-\footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}}
-
-
-OpenNI
-
- clapack\footnote{\url{http://www.netlib.org/clapack/}} and eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} 
-
-
+SuiteSparse\footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}} is a suite of sparse matrix software, and it's used in the ElasticFusion program to do solve the Cholesky decomposition for optimization problem during camera tracking process. For doing Cholesky decomposition, the actual library used in ElasticFusion is the \textit{cholmod} library, however the \textit{cholmod} library depends on other libraries in SuiteSparse.\\
+\\
+The dependency of \textit{cholmod} library includes the \verb|SuiteSparse_config|, AMD, CAMD, CCOLAMD, COLAMD, CXSparse, clapack\footnote{\url{http://www.netlib.org/clapack/}} and metis\footnote{\url{http://glaros.dtc.umn.edu/gkhome/metis/metis/download}}. To compile \textit{cholmod} library for Android platform, first clapack and metis are compiled into static libraries since both their source code is not in the SuiteSparse source code. The srouce code for clapack is downloaded from the official website and the source code for metis-5.1.0\footnote{\url{https://github.com/scibuilder/metis}} is used. After they are compiled, two files \textit{libmetis.a} and \textit{libclapak.a} are generated, they are then used to compile the choldmod library using other compiled dependencies of cholmod library into a static library file. Finally the choldmod static library is linked in the \textit{Android.mk} makefile for Android application so that the cholmod library can be used.
 
 
 \subsubsection{OpenGL}
 
+\begin{lstlisting}
+
+https://www.opengl.org/
+
+https://www.khronos.org/egl
+
+eglGetDisplay
+eglInitialize
+eglChooseConfig
+eglCreateContext
+eglCreatePbufferSurface
+eglMakeCurrent
+
+
+OpenGL ES 3.1 https://www.khronos.org/registry/OpenGL-Refpages/es3.1/
+
+glDrawTransformFeedback
+eglGetProcAddress
+
+GLint error = glGetError()
+GLenum glGetError(	void);
+
+GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
+
+GLenum glCheckFramebufferStatus(	GLenum target);
+
+GL_GEOMETRY_SHADER
+typedef void(GL_API_CALL_P PFNGLDRAWTRANSFORMFEEDBACKNVPROC)(GLenum mode,
+                                                             GLuint id);
 
 
 
 
+glGetBufferSubData(GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, vertices);
+  Eigen::Vector4f *ver = (Eigen::Vector4f *)glMapBufferRange(
+      GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, GL_MAP_READ_BIT);
+      glUnmapBuffer(GL_ARRAY_BUFFER);
+      
+      
+      GL_RGB GL_RGBA
+      GL_LUMINANCE16UI_EXT  GL_R16UI
+      GL_LUMINANCE_INTEGER_EXT GL_RED_INTEGER
+      GL_LUMINANCE32F_ARB GL_R32F
+      GL_LUMINANCE GL_RED
+      glGetVaryingLocationNV
+      glTransformFeedbackVaryingsNV glTransformFeedbackVaryings before binding
+      glPushAttrib glPopAttrib
+\end{lstlisting}
 
-
-
-
+\begin{lstlisting}
+static const char copy_unstablegeom_source[] =
+    "#version 310 es\n"
+    "#extension GL_EXT_geometry_shader : require\n"
+    "precision highp float;\n"
+    "precision highp int;\n"
+    "layout(points) in;\n"
+    "layout(points, max_vertices = 1) out;\n"
+    "in vec4 vPosition[];\n"
+    "in vec4 vColor[];\n"
+    "in vec4 vNormRad[];\n"
+    "flat in int test[];\n"
+    "out vec4 vPosition0;\n"
+    "out vec4 vColor0;\n"
+    "out vec4 vNormRad0;\n"
+    "void main() {\n"
+    "    if(test[0] > 0) {\n"
+    "        vPosition0 = vPosition[0];\n"
+    "        vColor0 = vColor[0];\n"
+    "        vNormRad0 = vNormRad[0];\n"
+    "        EmitVertex();\n"
+    "        EndPrimitive(); \n"
+    "    }\n"
+    "}\n";
+static const std::tuple<std::string, std::string> copy_unstablegeom_tuple =
+    std::make_tuple("copy_unstablegeom", copy_unstablegeom_source);
+\end{lstlisting}
 
 
 \subsubsection{Eigen}
 
-
+eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} 
 
 Nvidia Tegra K1  approx = GT620-GT540\\
 \\
