@@ -6,8 +6,10 @@
 \newcommand{\email}{jiahao.lin13@imperial.ac.uk}
 \newcommand{\supervisor}{Dr Stefan Leutenegger}
 \newcommand{\secondmarker}{Professor Andrew Davison}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  
 
 \usepackage{listings}
+
 \lstset{
   basicstyle=\ttfamily,
   columns=fullflexible,
@@ -15,6 +17,7 @@
   breaklines=true,
   postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
 }
+
 
 
 % include files that load packages and define macros
@@ -491,7 +494,7 @@ The central part of the report usually consists of three of four chapters detail
 
 ============\\
 \subsection{Environment Configuration}
-Eclipse 
+Eclipse
 Project Tango1 is a platform that uses computer vision to give devices the ability to understand their
 position relative to the world around them. The Project Tango Tablet Development Kit is an Android
 device with a wide-angle camera, a depth sensing camera, accurate sensor timestamping, and a software
@@ -662,7 +665,7 @@ struct RGBDdata {
   TangoPoseData pose;
 };
 \end{lstlisting}
-The first function implemented in the application developed is to write and RGBD and pose data recorded into their files, so that they can be used as dataset to run ElaticFusion on desktop computer. The processing of data into correct format is done in a data logging thread to reduce the workload on the main thread, and so that the writing of data is asynchronous with the capture for data. The circular buffer for storing data is an array of \textit{RGBDdata} structs with fixed size 50, after data is captured in the main thread and encapsulated into a \textit{RGBDdata} struct instance, it's stored in the position in circular buffer pointed by a variable called 
+The first function implemented in the application developed is to write and RGBD and pose data recorded into their files, so that they can be used as dataset to run ElaticFusion on desktop computer. The processing of data into correct format is done in a data logging thread to reduce the workload on the main thread, and so that the writing of data is asynchronous with the capture for data. The circular buffer for storing data is an array of \textit{RGBDdata} structs with fixed size 50, after data is captured in the main thread and encapsulated into a \textit{RGBDdata} struct instance, it's stored in the position in circular buffer pointed by a variable called
 \textit{latestBufferIndex}. This variable records the last position in the array where data is stored and so that data can be put into the front of array when the end of buffer is full, thus the circular effect is achieved where old data is gradually replaced by new data come in. This variable also allows the data logging thread to always read the latest frame of data that was stored in the buffer, in this way the speed difference between data producing and consuming is handled.\\
 \\
 The code processing and writing RGBD and pose data is combined and adapted from the Google Tango application RGB depth sync{\url{https://github.com/googlesamples/tango-examples-c/tree/master}} which produce a depth map in sync with the RGB image, and data logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}}, which originally is used to save data from RGBD camera that supports OpenNI\footnote{\url{https://structure.io/openni}} interface. Firstly the relative transformation between RGB and depth coordinate of frame and timestamp is calculated using the function \verb|TangoSupport_calculateRelativePose| which outputs a \textit{TangoPoseData} instance as result, this pose data is then converted into a transformation matrix for producing the depth map. To produce the depth map, firstly the 3D point coordinates in Tango point cloud is brought into alignment with RGB data using the transformation matrix calculated above, after that an upsample method is used filter the Tango Point Cloud data for smoothness, in the process the depth value of each 3D point coordinate in Tango Point Cloud is upsampled at a fixed size window around the 3D point's X and Y value, which corresponds to the pixel coordinates in the RGB image from color image. In this way, the depth map produced is in sync with the RGB image in both time and coordinate of frame, after that the data compressed for writing into files.\\
@@ -671,7 +674,7 @@ In order to save space and reduce amount of data written to files, the RGB image
 \\
 After the data being saved to two files on the Tango tablet, a slight modification is needed for the original ElasticFusion program to be able tu use them as datasets. The ElasticFusion program is designed to be able to use data from  datasets, however in the \textit{GIU} part of ElasticFusion program the \textit{Resolution} struct instance that holds width and height of RGB image is hard-coded with fix width and height, while the \textit{Intrinsics} struct instance can use the focal length and distortion parameter from a given calibration file, therefore a small change is made to the \textit{GIU} part of ElasticFusion program to allow for both image size and intrinsics data to be read from the calibration file.\\
 \\
-Using the logging function implemented in the application, experiments were carried out on desktop computer to run 
+Using the logging function implemented in the application, experiments were carried out on desktop computer to run
 ElasticFusion using data captured from the Tango tablet for 3D reconstruction, the screen shots of that is shown in Fig \ref{fig:Screenshot1}, Fig \ref{fig:Screenshot2}, Fig \ref{fig:Screenshot3} and Fig \ref{fig:Screenshot9}. From the screenshots it can be seen that the surface is able to be reconstructed however the points in the global map is vert sparse and the speed is very slow, this is mainly due to the noise and sparseness of depth data from depth sensor, also the pose estimated from Tango may not be very accurate, as the RGB image has even higher resolution (1980 x 720) then the image size in original ElasticFusion program. Also to allow for the surface to be reconstructed evenly instead of sparse points, when recording data using the Tango tablet, the device has to be held and move in a very slow and stable fashion. \\
 
 \newpage
@@ -699,7 +702,7 @@ In the \textit{core} part of the ElasticFusion code, a folder nameed \textit{CUD
 \\
 To compile the code inside this folder for the Android application on Tango tablet, under Ubuntu environment the NVIDIA Tegra Android Development Pack version 3.0r4\footnote{\url{https://developer.nvidia.com/AndroidWorks-TADP-Archive}} need to be download and installed. It contains the Android CUDA toolkit for CUDA 6.0 and can be used to compile CUDA code for Android platform.\\
 \\
-Firstly, the code in \textit{CUDA} folder is compiled into a static library by creating an \textit{"Android.mk"} makefile, in the makefile CUDA \textit{nvcc} compiler and \textit{g++} compiler from the Android standalone tool chain is used to compile the CUDA files and C++ files in the folder. After that a library file \textit{libCudaLib.a} is created and in the \textit{"Android.mk"} makefile for application the \textit{libCudaLib.a} is linked as a static library to the Android application. This allows the source code of ElasticFusion in C++ to call the CUDA code inside \textit{CUDA} folder and no change is needed to made.\\ 
+Firstly, the code in \textit{CUDA} folder is compiled into a static library by creating an \textit{"Android.mk"} makefile, in the makefile CUDA \textit{nvcc} compiler and \textit{g++} compiler from the Android standalone tool chain is used to compile the CUDA files and C++ files in the folder. After that a library file \textit{libCudaLib.a} is created and in the \textit{"Android.mk"} makefile for application the \textit{libCudaLib.a} is linked as a static library to the Android application. This allows the source code of ElasticFusion in C++ to call the CUDA code inside \textit{CUDA} folder and no change is needed to made.\\
 
 \subsubsection{Pangolin}
 The Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} library in the ElasticFusion source code was used to render the GUI of program and manage some OpenGL objects, however the \textit{Core} part of ElasticFusion does not contain GUI part and only use Pangolin in a few place, therefore compiling the Pangolin library on Android is an overkill. And so when porting the code for ElasticFusion onto Tango tablet, Pangolin is removed, and the part that Pangolin is used to manage encapsulated OpenGL objects is replaced by plain OpenGL ES code extracted from Pangolin's source code.\\
@@ -786,12 +789,12 @@ Other than putting the source code of shaders into char array, the actual code f
 \centering
 \caption{OpenGL ES Shader adaptation}
 \label{table:OpenGL ES Shader}
-\begin{tabular}{\textwidth}{|r|l|}
+\begin{tabular}{|r|l|}
   \hline
   \verb| "#version 310 es\n" |\\
   \verb| "precision highp float;\n"| \\
   \verb|   "precision highp int;\n" |\\
-   \verb|    "precision lowp sampler2D;\n"| \\ 
+   \verb|    "precision lowp sampler2D;\n"| \\
    \verb|  "precision lowp usampler2D;\n" |\\
  \verb|  "#extension GL_EXT_geometry_shader : require\n"| \\
     \hline
@@ -807,7 +810,7 @@ The similar method is used to define the \verb|\textit{GL_GEOMETRY_SHADER}| valu
 Also in order to check for error in the OpenGL ES code, the function \textit{glGetError} and \textit{glCheckFramebufferStatus} are used to detect error and incorrect OpenGL ES framebuffer status that may not cause the application to crash, since normal OpenGL ES error will not be logged automatically. The function signatures are given below.\\
 \begin{lstlisting}
 GLenum glGetError(void);
-GLenum glCheckFramebufferStatus(	GLenum target);
+GLenum glCheckFramebufferStatus(GLenum target);
 \end{lstlisting}
 A table \ref{table:OpenGL ES adaptation} is given below to list the adapted functions of OpenGL in the original ElasticFusio program.
 
@@ -833,9 +836,9 @@ A table \ref{table:OpenGL ES adaptation} is given below to list the adapted func
 \hline
   \verb|GL_LUMINANCE| & \verb|GL_RED| \\
   \hline
-  glGetVaryingLocationNV & removed \\ 
+  glGetVaryingLocationNV & removed \\
   \hline
-  glTransformFeedbackVaryingsNV & glTransformFeedbackVaryings, changed to be used before linking the shader to OpenGL ES program\\
+  glTransformFeedbackVaryingsNV & \tabincell{c}{glTransformFeedbackVaryings, changed to be \\ used before linking the shader to OpenGL ES program} \\
   \hline
  glPushAttrib & removed \\
  \hline
@@ -849,15 +852,26 @@ A table \ref{table:OpenGL ES adaptation} is given below to list the adapted func
 
 
 \subsubsection{Eigen}
+Eigen\footnote{\url{http://eigen.tuxfamily.org/}}n is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
+In the ElasticFusion program, Eigen is used to store the position or pose data uisng Eigen structures like \textit{Eigen::Matrix4f} or \textit{Eigen::Isometry3f}
 
-eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} 
+Eigen::Vector4f
+
+Eigen::Isometry3f
+
+header only library
+eigen.tuxfamily.org/
+
+Eigen::Matrix4f
+
+eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}}
 
 Nvidia Tegra K1  approx = GT620-GT540\\
 \\
 make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
 \\
 Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
-laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\ 
+laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
 In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
 
 
