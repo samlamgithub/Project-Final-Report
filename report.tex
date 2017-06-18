@@ -628,9 +628,9 @@ typedef struct TangoCameraIntrinsics {
 \newpage
 
 \subsection{Logging data from Tango}
-After the RGBD and pose data from Tango are acquired, data of each frame is encapsulated into a C++ struct \textit{RGBDdata} and stored in a circular buffer. The definition of \textit{RGBDdata} is given below, other than RGBD and pose data, it also contains both the timestamp for depth and RGB data for calculating the transformation between color camera and depth sensor at the time their data is captured.\\
+After the RGBD and pose data from Tango are acquired, data of each frame is encapsulated into a C++ struct \textit{RGBDPosedata} and stored in a circular buffer. The definition of \textit{RGBDPosedata} is given below, other than RGBD and pose data, it also contains both the timestamp for depth and RGB data for calculating the transformation between color camera and depth sensor at the time their data is captured.\\
 \begin{lstlisting}
-struct RGBDdata {
+struct RGBDPosedata {
   double pointCloudTimestamp;
   uint32_t pointCloudNumpoints;
   float *pointCloudPoints;
@@ -640,7 +640,7 @@ struct RGBDdata {
   TangoPoseData pose;
 };
 \end{lstlisting}
-The first function implemented in the application developed is to write and RGBD and pose data recorded into their files, so that they can be used as dataset to run ElaticFusion on desktop computer. The processing of data into correct format is done in a data logging thread to reduce the workload on the main thread, and so that the writing of data is asynchronous with the capture for data. The circular buffer for storing data is an array of \textit{RGBDdata} structs with fixed size 50, after data is captured in the main thread and encapsulated into a \textit{RGBDdata} struct instance, it's stored in the position in circular buffer pointed by a variable called
+The first function implemented in the application developed is to write and RGBD and pose data recorded into their files, so that they can be used as dataset to run ElaticFusion on desktop computer. The processing of data into correct format is done in a data logging thread to reduce the workload on the main thread, and so that the writing of data is asynchronous with the capture for data. The circular buffer for storing data is an array of \textit{RGBDPosedata} structs with fixed size 50, after data is captured in the main thread and encapsulated into a \textit{RGBDPosedata} struct instance, it's stored in the position in circular buffer pointed by a variable called
 \textit{latestBufferIndex}. This variable records the last position in the array where data is stored and so that data can be put into the front of array when the end of buffer is full, thus the circular effect is achieved where old data is gradually replaced by new data come in. This variable also allows the data logging thread to always read the latest frame of data that was stored in the buffer, in this way the speed difference between data producing and consuming is handled.\\
 \\
 The code processing and writing RGBD and pose data is combined and adapted from the Google Tango application RGB depth sync{\url{https://github.com/googlesamples/tango-examples-c/tree/master}} which produce a depth map in sync with the RGB image, and data logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}}, which originally is used to save data from RGBD camera that supports OpenNI\footnote{\url{https://structure.io/openni}} interface. Firstly the relative transformation between RGB and depth coordinate of frame and timestamp is calculated using the function \verb|TangoSupport_calculateRelativePose| which outputs a \textit{TangoPoseData} instance as result, this pose data is then converted into a transformation matrix for producing the depth map. To produce the depth map, firstly the 3D point coordinates in Tango point cloud is brought into alignment with RGB data using the transformation matrix calculated above, after that an upsample method is used filter the Tango Point Cloud data for smoothness, in the process the depth value of each 3D point coordinate in Tango Point Cloud is upsampled at a fixed size window around the 3D point's X and Y value, which corresponds to the pixel coordinates in the RGB image from color image. In this way, the depth map produced is in sync with the RGB image in both time and coordinate of frame, after that the data compressed for writing into files.\\
@@ -843,29 +843,27 @@ In the Android application developed on Tango tablet, Boost\footnote{\url{http:/
 
 \subsection{Running ElasticFusion on Tango}
 
-After 
-
-
-
-
-Nvidia Tegra K1  approx = GT620-GT540\\
-\\
-make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
-\\
-Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
-laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
-In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
-
-
-
+After the ElasticFusion program is compiled on the Tango tablet, actual functions need to be implemented to run the ElasticFusion program using different data sources. In the Android application developed in this project, the ElasticFusion can be either run using the live RGBD and pose data from the cameras and IMU sensor on board, or run using the \textit{dyson_lab.klg} dataset that was used as the example in ElasticFusion paper\footcite{whelan2016elasticfusion}, or running using the Tango RGBD and pose data saved earlier in files. However, they are all implemented in similar way by starting a new thread to run ElasticFusion. \\
 
 \subsubsection{Running ElasticFusion using data from Tango}
+To run the ElasticFusion program using the RGBD and pose data from Tango tablet, a similar method like the data logging function is used. When the button for this function is pressed on screen, the function called is passed from the event listener in Java part of the application to the C++ part using the Java Native Interface (JNI) on Android platform. Firstly it is checked that no other function is running before the ElasticFusion thread can start, after that when the function started, the RGBD and pose data from Tango will be put into the circular buffer of \textit{RGBDPosedata} structures in the class for this function.\\
+On the other hand
 
 
 
+glReadPixels
+
+glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+  glPixelStorei(GL_PACK_ALIGNMENT, 1);
+
+  glEnable(GL_DEPTH_TEST);
+  glDepthMask(GL_TRUE);
+  glDepthFunc(GL_LESS);
+
+  Eigen::Matrix4f
 
 
-
+confidenceThreshold
 
 \subsubsection{Running ElasticFusion dataset on Tango}
 
@@ -900,7 +898,7 @@ In this project, only the core part of ElasticFusion is used, the original depen
 
 
 
-
+\subsection{Debugging and testing}
 
 
 
@@ -995,6 +993,14 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 \subsection{Reconstruction Accuracy}
 
 
+
+Nvidia Tegra K1  approx = GT620-GT540\\
+\\
+make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
+\\
+Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
+laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
+In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
 
 
 
