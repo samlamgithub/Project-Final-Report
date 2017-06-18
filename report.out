@@ -20,27 +20,28 @@
 \BOOKMARK [2][]{subsection.153}{6.3 Logging data from Tango}{section.73}% 20
 \BOOKMARK [2][]{subsection.168}{6.4 Compiling ElasticFusion on Tango}{section.73}% 21
 \BOOKMARK [3][]{subsubsection.170}{6.4.1 Dependencies}{subsection.168}% 22
-\BOOKMARK [3][]{subsubsection.178}{6.4.2 Hardware requirements}{subsection.168}% 23
-\BOOKMARK [3][]{subsubsection.179}{6.4.3 OpenCV}{subsection.168}% 24
-\BOOKMARK [3][]{subsubsection.181}{6.4.4 CUDA}{subsection.168}% 25
-\BOOKMARK [3][]{subsubsection.183}{6.4.5 Pangolin}{subsection.168}% 26
-\BOOKMARK [3][]{subsubsection.186}{6.4.6 SuiteSparse}{subsection.168}% 27
-\BOOKMARK [3][]{subsubsection.191}{6.4.7 OpenGL}{subsection.168}% 28
-\BOOKMARK [3][]{subsubsection.230}{6.4.8 Eigen}{subsection.168}% 29
-\BOOKMARK [2][]{subsection.233}{6.5 Running ElasticFusion on Tango}{section.73}% 30
-\BOOKMARK [3][]{subsubsection.234}{6.5.1 Running ElasticFusion with pose on Tango}{subsection.233}% 31
-\BOOKMARK [3][]{subsubsection.235}{6.5.2 Running ElasticFusion dataset on Tango}{subsection.233}% 32
-\BOOKMARK [3][]{subsubsection.236}{6.5.3 Running Tango dataset on Tango}{subsection.233}% 33
-\BOOKMARK [2][]{subsection.237}{6.6 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.73}% 34
-\BOOKMARK [1][]{section.247}{7 Evaluation}{}% 35
-\BOOKMARK [2][]{subsection.248}{7.1 Reconstruction Accuracy}{section.247}% 36
-\BOOKMARK [2][]{subsection.249}{7.2 depth sensor noise}{section.247}% 37
-\BOOKMARK [2][]{subsection.250}{7.3 Computation power problem}{section.247}% 38
-\BOOKMARK [2][]{subsection.251}{7.4 Optimization problem}{section.247}% 39
-\BOOKMARK [3][]{subsubsection.252}{7.4.1 Software limitation}{subsection.251}% 40
-\BOOKMARK [1][]{section.253}{8 Conclusions and Future Work}{}% 41
-\BOOKMARK [1][]{section.254}{9 Bibliography}{}% 42
-\BOOKMARK [1][]{section.255}{10 Appendix}{}% 43
-\BOOKMARK [1][]{section.256}{11 User Guide}{}% 44
-\BOOKMARK [1][]{section.257}{12 Program Listings}{}% 45
-\BOOKMARK [1][]{section.258}{13 Word Count}{}% 46
+\BOOKMARK [3][]{subsubsection.179}{6.4.2 Hardware requirements}{subsection.168}% 23
+\BOOKMARK [3][]{subsubsection.180}{6.4.3 OpenCV}{subsection.168}% 24
+\BOOKMARK [3][]{subsubsection.182}{6.4.4 CUDA}{subsection.168}% 25
+\BOOKMARK [3][]{subsubsection.184}{6.4.5 Pangolin}{subsection.168}% 26
+\BOOKMARK [3][]{subsubsection.187}{6.4.6 SuiteSparse}{subsection.168}% 27
+\BOOKMARK [3][]{subsubsection.192}{6.4.7 OpenGL}{subsection.168}% 28
+\BOOKMARK [3][]{subsubsection.231}{6.4.8 Eigen}{subsection.168}% 29
+\BOOKMARK [3][]{subsubsection.234}{6.4.9 Eigen}{subsection.168}% 30
+\BOOKMARK [2][]{subsection.238}{6.5 Running ElasticFusion on Tango}{section.73}% 31
+\BOOKMARK [3][]{subsubsection.239}{6.5.1 Running ElasticFusion using data from Tango}{subsection.238}% 32
+\BOOKMARK [3][]{subsubsection.240}{6.5.2 Running ElasticFusion dataset on Tango}{subsection.238}% 33
+\BOOKMARK [3][]{subsubsection.241}{6.5.3 Running Tango dataset on Tango}{subsection.238}% 34
+\BOOKMARK [2][]{subsection.242}{6.6 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.73}% 35
+\BOOKMARK [1][]{section.252}{7 Evaluation}{}% 36
+\BOOKMARK [2][]{subsection.253}{7.1 Reconstruction Accuracy}{section.252}% 37
+\BOOKMARK [2][]{subsection.254}{7.2 depth sensor noise}{section.252}% 38
+\BOOKMARK [2][]{subsection.255}{7.3 Computation power problem}{section.252}% 39
+\BOOKMARK [2][]{subsection.256}{7.4 Optimization problem}{section.252}% 40
+\BOOKMARK [3][]{subsubsection.257}{7.4.1 Software limitation}{subsection.256}% 41
+\BOOKMARK [1][]{section.258}{8 Conclusions and Future Work}{}% 42
+\BOOKMARK [1][]{section.259}{9 Bibliography}{}% 43
+\BOOKMARK [1][]{section.260}{10 Appendix}{}% 44
+\BOOKMARK [1][]{section.261}{11 User Guide}{}% 45
+\BOOKMARK [1][]{section.262}{12 Program Listings}{}% 46
+\BOOKMARK [1][]{section.263}{13 Word Count}{}% 47

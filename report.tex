@@ -508,7 +508,9 @@ filesystem /vol/bitbucket/bjm113/android-sdklinux
 \verb| 11. Click finish|
 \verb| 12. In Window! Preferences! android/NDK click browse, go to /vol/bitbucket/bjm113/|
 \verb| android-ndk-r10e and click “OK”|
-
+Android 4.4.2  : 19
+Android ndk r10e
+\verb|/Users/jiahaolin/Downloads/android-ndk-r13b |
 
 Eclipse (tested under Neon release 4.6.0) with ADT insta
 
@@ -683,7 +685,7 @@ ElasticFusion using data captured from the Tango tablet for 3D reconstruction, t
 As mentioned above, the desktop ElasticFusion program includes three parts: the \textit{Core} part contains the code for ElasticFusion algorithm, and can be used as an API for other application, the \textit{GIU} part is responsible the displaying the user interface of program and handles input setting from the command line, reading from files provided for the program, the there is a \textit{GPUTest} program that user can test the performance of their GPU for running ElasticFusion. In this project the \textit{core} part is compiled and adapted on the Tango tablet to allow it to run on Android platform, and please be mindful that although open source code of ElasticFusion is available on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}, in this project an internal version of source code is used for its better structure.\\
 
 \subsubsection{Dependencies}
-Originally in the ElasticFusion program, the dependencies include OpenGL 3.0\footnote{\url{https://www.opengl.org/}} that is used to manage the global map and predict the views, CUDA(Compute Unified Device Architecture) 7.0 that is used to implement the reduction process in camera tracking, OpenNI2\footnote{\url{https://structure.io/openni}} that is used to connect the program to a RGBD camera such as Microsoft Kinect or ASUS Xtion Pro Live. And SuiteSparse\footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}} is used to do solve the Cholesky decomposition for optimization problem during camera tracking process. The header only library eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} is used for matrix calculation. The zlib library\footnote{\url{http://zlib.net/}} is used uncompress depth data from dataset file and the libjpeg library\footnote{\url{http://libjpeg.sourceforge.net/}} is used to uncompress the RGB image data in dataset file from JPEG format into RGB pixel data. Lastly the Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} library that is used for building the GUI of program and also manage some OpenGL objects. \\
+Originally in the ElasticFusion program, the dependencies include OpenGL 3.0\footnote{\url{https://www.opengl.org/}} that is used to manage the global map and predict the views, CUDA(Compute Unified Device Architecture) 7.0 that is used to implement the reduction process in camera tracking, OpenNI2\footnote{\url{https://structure.io/openni}} that is used to connect the program to a RGBD camera such as Microsoft Kinect or ASUS Xtion Pro Live. And SuiteSparse\footnote{\url{http://faculty.cse.tamu.edu/davis/suitesparse.html}} is used to do solve the Cholesky decomposition for optimization problem during camera tracking process. The header only library eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} is used for matrix calculation. The zlib library\footnote{\url{http://zlib.net/}} is used uncompress depth data from dataset file and the libjpeg library\footnote{\url{http://libjpeg.sourceforge.net/}} is used to uncompress the RGB image data in dataset file from JPEG format into RGB pixel data. Lastly the Pangolin\footnote{\url{https://github.com/stevenlovegrove/Pangolin}} library that is used for building the GUI of program and also manage some OpenGL objects. Lastly the Boost C++ library\footnote{\url{http://www.boost.org/}} is mainly used for thread management in the application. \\
 \\
 Among the dependencies mentioned above, the OpenGL part in the source code of ElasticFusion is adapted to OpenGL ES for running on Android, and OpenNI is not used as since it's not needed in the Core part of ElasticFusion, the libjpeg library is removed and its function is implemented using OpenCV instead. Lastly the Pangolin library is removed and the part where it manages OpenGL objects is replaced with plain OpenGL ES implementation that is adapted from the Pangolin source code. The rest of dependencies are all compiled to be able to used in the Application for running on Android.\\
 
@@ -852,15 +854,26 @@ A table \ref{table:OpenGL ES adaptation} is given below to list the adapted func
 
 
 \subsubsection{Eigen}
-Eigen\footnote{\url{http://eigen.tuxfamily.org/}}n is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
-In the ElasticFusion program, Eigen is used to store the position and pose data uisng Eigen structures like \textit{Eigen::Vector4f} for homogeneous coordinates and   \textit{Eigen::Matrix4f} or \textit{Eigen::Isometry3f} for pose data representing in affine transformation matrix
+Eigen\footnote{\url{http://eigen.tuxfamily.org/}} is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms. In the ElasticFusion program, Eigen is used to store the position and pose data uisng Eigen structures like \textit{Eigen::Vector4f} for homogeneous coordinates and \textit{Eigen::Matrix4f} or \textit{Eigen::Isometry3f} for pose data representing in affine transformation matrix.\\
+\\
+Eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} source code is used in the Application on Tango tablet, since it's just a header only library that uses templates, the source code folder is pasted in the project source code and the header needed is simply included in the code that use Eigen.\\
 
-header only library
-eigen.tuxfamily.org/
 
-Eigen::Matrix4f
 
-eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}}
+\subsubsection{Eigen}
+In the Android application developed on Tango tablet, Boost\footnote{\url{http://www.boost.org/}} is mainly use for manage thread, such as creating new thread to compress RGB image and depth data in the data logging function, or creating new thread to run ElasticFusion program. The version of Boost used in the application is 1.53.0\footnote{\url{http://www.boost.org/doc/libs/1_53_0/}}, the source code is downloaded from Github\footnote{\url{https://github.com/emileb/Boost-for-Android-Prebuilt}}, which is a built version of Boost for Android using the code from \url{https://github.com/sorccu/Boost-for-Android}. The Boost library is compiled into a static library and it's linked to the main application in the \textit{Android.mk} makefile. 
+
+
+\newpage
+
+
+
+\subsection{Running ElasticFusion on Tango}
+
+After 
+
+
+
 
 Nvidia Tegra K1  approx = GT620-GT540\\
 \\
@@ -871,22 +884,9 @@ laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
 In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
 
 
-\newpage
 
 
-
-\subsection{Running ElasticFusion on Tango}
-
-
-
-
-
-
-
-
-
-
-\subsubsection{Running ElasticFusion with pose on Tango}
+\subsubsection{Running ElasticFusion using data from Tango}
 
 
 
