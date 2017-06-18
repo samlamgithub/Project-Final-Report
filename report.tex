@@ -828,9 +828,9 @@ A table \ref{table:OpenGL ES adaptation} is given below to list the adapted func
  \hline
    \verb|GL_RGB|  & \verb|GL_RGBA| \\
    \hline
-\verb|GL_LUMINANCE16UI_EXT| &  \verb|GL_R16UI| \\
+\verb|GL_LUMINANCE16UI_EXT| & \verb|GL_R16UI| \\
 \hline
-  \verb|GL_LUMINANCE_INTEGER_EXT|  &  \verb|GL_RED_INTEGER| \\
+  \verb|GL_LUMINANCE_INTEGER_EXT| & \verb|GL_RED_INTEGER| \\
   \hline
 \verb|GL_LUMINANCE32F_ARB| &  \verb|GL_R32F| \\
 \hline
@@ -853,11 +853,7 @@ A table \ref{table:OpenGL ES adaptation} is given below to list the adapted func
 
 \subsubsection{Eigen}
 Eigen\footnote{\url{http://eigen.tuxfamily.org/}}n is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
-In the ElasticFusion program, Eigen is used to store the position or pose data uisng Eigen structures like \textit{Eigen::Matrix4f} or \textit{Eigen::Isometry3f}
-
-Eigen::Vector4f
-
-Eigen::Isometry3f
+In the ElasticFusion program, Eigen is used to store the position and pose data uisng Eigen structures like \textit{Eigen::Vector4f} for homogeneous coordinates and   \textit{Eigen::Matrix4f} or \textit{Eigen::Isometry3f} for pose data representing in affine transformation matrix
 
 header only library
 eigen.tuxfamily.org/
