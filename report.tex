@@ -734,8 +734,8 @@ The dependency of \textit{cholmod} library includes the \verb|SuiteSparse_config
 \subsubsection{OpenGL}
 OpenGL\footnote{\url{https://www.opengl.org/}} is used to manage map and predict views in the ElasticFusion program, it mainly made use of the transform feedback feature for off-screen rendering in OpenGL using the Vertex shader, Geometry shader and Fragment shader. To adapt this part of code on the Android platform for Tango tablet, the original OpenGL language need to be change to OpenGL ES language for mobile platform. The Tango tablet supports OpenGL ES version 3.1\footnote{\url{OpenGL ES 3.1 https://www.khronos.org/registry/OpenGL-Refpages/es3.1/}}, this is the latest version of OpenGL carried on Android API version 19, corresponds to Android 4.2.2 (KitKat), which is the last official update of Tango tablet gets. Since Google has officially stopped to support the Tango tablet, no newer version of Android can be installed and therefore newer version of OpenGL ES cannot be acquired on the tablet. The OpenGL ES version 3.1 on Tango tablet does not some features that's used in ElasticFusion program using OpenGL, so in some places workaround is used to adapt the code.\\
 \\
-Firstly, in the Android application on Tango tablet, OpenGL ES is already used to render the RGB image acquired from color camera to the screen, and the ElasticFusion program ported to the application is designed to be running on a separate thread. To let the ElasticFusion thread use OpenGL ES, a new OpenGL ES context need to be created and attached to the ElasticFusion thread, this is done by using the EGL\footnote{\url{https://www.khronos.org/egl}} platform available under Android NDK environment, a new EGL pixel buffer surface is created using the \textit{eglCreatePbufferSurface} function in EGL to allow for offscreen rendering into buffer using OpenGL ES in this thread. The EGL functions used to do that is given in the table below.\\
-\ref{table:EGL functions}
+Firstly, in the Android application on Tango tablet, OpenGL ES is already used to render the RGB image acquired from color camera to the screen, and the ElasticFusion program ported to the application is designed to be running on a separate thread. To let the ElasticFusion thread use OpenGL ES, a new OpenGL ES context need to be created and attached to the ElasticFusion thread, this is done by using the EGL\footnote{\url{https://www.khronos.org/egl}} platform available under Android NDK environment, a new EGL pixel buffer surface is created using the \textit{eglCreatePbufferSurface} function in EGL to allow for offscreen rendering into buffer using OpenGL ES in this thread. The EGL functions used to do that is given in the table \ref{table:EGL functions} below.\\
+\\
 \begin{table}
 \centering
 \caption{EGL functions used}
@@ -751,43 +751,7 @@ Firstly, in the Android application on Tango tablet, OpenGL ES is already used t
     \hline
 \end{tabular}
 \end{table}
-
-
-\begin{lstlisting}
-\footnote{\url{}}
-\footnote{\url{}}
-
-https://www.khronos.org/egl
-
-glDrawTransformFeedback
-eglGetProcAddress
-
-GLint error = glGetError()
-GLenum glGetError(	void);
-
-GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
-
-GLenum glCheckFramebufferStatus(	GLenum target);
-
-GL_GEOMETRY_SHADER
-typedef void(GL_API_CALL_P PFNGLDRAWTRANSFORMFEEDBACKNVPROC)(GLenum mode,
-                                                             GLuint id);
-
-glGetBufferSubData(GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, vertices);
-  Eigen::Vector4f *ver = (Eigen::Vector4f *)glMapBufferRange(
-      GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, GL_MAP_READ_BIT);
-      glUnmapBuffer(GL_ARRAY_BUFFER);
-      
-      GL_RGB GL_RGBA
-      GL_LUMINANCE16UI_EXT  GL_R16UI
-      GL_LUMINANCE_INTEGER_EXT GL_RED_INTEGER
-      GL_LUMINANCE32F_ARB GL_R32F
-      GL_LUMINANCE GL_RED
-      glGetVaryingLocationNV
-      glTransformFeedbackVaryingsNV glTransformFeedbackVaryings before binding
-      glPushAttrib glPopAttrib
-\end{lstlisting}
-
+After the OpenGL ES context is created, original code in OpenGL needs to be adapted. In the original ElasticFusion code, the code for shaders are written in separate files and are read by Pangolin in the program to produce a C++ string of type \textit{const char *} that is then used as the source code for shaders by function \textit{glShaderSource}. However it will be troublesome to do the same thing on Android application, also because the Pangolin dependency is removed, the source code for shaders are all put into hardcoded C++ char array of type \textit{static const char []} for fast reading in a file, the source code string is then placed into a tupe together with the name of the shader for east identification of shader source code. The Geometry shader originally stored in the file \verb| \textit{copy_unstable.geom}| is adapted and the created code is shown below as an example.\\
 \begin{lstlisting}
 static const char copy_unstablegeom_source[] =
     "#version 310 es\n"
@@ -814,7 +778,60 @@ static const char copy_unstablegeom_source[] =
     "}\n";
 static const std::tuple<std::string, std::string> copy_unstablegeom_tuple =
     std::make_tuple("copy_unstablegeom", copy_unstablegeom_source);
+\end{lstlisting}Other than putting the source code of shaders into char array, the actual code for shaders also need to be changed for OpenGL ES format, firstly the version indicator at the top of shader code is changed from \verb|\textit{#version 330 core}| to \verb|\textit{#version 310 es}| since the Tango tablet run at OpenGL ES version 3.1. Also the precision need to set for numerical types \textit{int} and \textit{float} and also the texture samplers. In OpenGL the data types  \textit{int} and \textit{float} can be converted to each other implicitly, however this has to be done explicitly in OpenGL ES so type conversion is manually added to the shader source code. Lastly in the code for Geometry shaders the OpenGL extension for it need to be declared using \\
+\verb|\textit{#extension GL_EXT_geometry_shader : require}|. The table \ref{table:OpenGL ES Shader} below .\\
+\begin{table}
+\centering
+\caption{OpenGL ES Shader adaptation}
+\label{table:OpenGL ES Shader}
+\begin{tabular}{|r|l|}
+  \hline
+  \verb| "#version 310 es\n" |\\
+  \verb| "precision highp float;\n"| \\
+  \verb|   "precision highp int;\n" |\\
+   \verb|    "precision lowp sampler2D;\n"| \\ 
+   \verb|  "precision lowp usampler2D;\n" |\\
+ \verb|  "#extension GL_EXT_geometry_shader : require\n"| \\
+    \hline
+\end{tabular}
+\end{table}
+
+
+\begin{lstlisting}
+\footnote{\url{}}
+\footnote{\url{}}
+
+https://www.khronos.org/egl
+
+glDrawTransformFeedback
+eglGetProcAddress
+
+GLint error = glGetError()
+GLenum glGetError(	void);
+
+GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
+
+GLenum glCheckFramebufferStatus(	GLenum target);
+
+GL_GEOMETRY_SHADER
+typedef void(GL_API_CALL_P PFNGLDRAWTRANSFORMFEEDBACKNVPROC)(GLenum mode, GLuint id);
+
+glGetBufferSubData(GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, vertices);
+
+Eigen::Vector4f *ver = (Eigen::Vector4f *)glMapBufferRange(
+      GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, GL_MAP_READ_BIT);
+glUnmapBuffer(GL_ARRAY_BUFFER);
+      
+GL_RGB GL_RGBA
+ GL_LUMINANCE16UI_EXT  GL_R16UI
+  GL_LUMINANCE_INTEGER_EXT GL_RED_INTEGER
+ GL_LUMINANCE32F_ARB GL_R32F
+  GL_LUMINANCE GL_RED
+  glGetVaryingLocationNV
+ glTransformFeedbackVaryingsNV glTransformFeedbackVaryings before binding
+ glPushAttrib glPopAttrib
 \end{lstlisting}
+
 
 
 
