@@ -84,7 +84,7 @@ Previously, ElasticFusion can only be run on a desktop computer with powerful gr
 \\
 In the original design for this project, if the development of this solution is successful, an augmented reality application could be created as demo to illustrate the interaction of virtual object with scanned 3D surface map. But after various experiments in this project, a conclusion that ElasticFusion could not be run on Tango tablet as a real time application drawn, due to processing power and depth sensor accuracy problem, although due to time and effort limitations, the ElasticFusion on Tango application produces in this project still produce incorrect reconstruction model and the program has not been optimized. Despite all the above, the contribution of this project still includes the attempt made to implement this solution, and the possibility of using Tango tablet as a pure scanning device for recording data, and let the data to be processed on other computers for doing 3D surface reconstruction.\\
 \\
-In the solution, an Android application is developed using Android Native Development Kit (NDK), which allows the use of Tango C API to acquire depth camera data and 3D pose data, also makes it possible to reuse the existing code for ElasticFusion that is written in C++. Therefore most of the application is written in C++, with a few Java code for the Android application. The application uses the code for Advanced Estimation in Robotics (433H) course practical exercise by Dr Stefan Leutenegger in Department of Computing at Imperial College London as the basic frame work, firstly the code is combined with the logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}} to write the RGB, depth and pose data in format required by ElasticFusion acquired from Tango into two files on the Tango tablet, which allows ElasticFusion to be run on desktop using these two files as raw dataset. Then the core function part of code for ElasticFusion is ported and adapted to Android with its dependencies changed or removed, so that ElasticFusion can be run on Android while its source remains in C++. One thing worth notice in here is that this project uses an internal version of ElasticFusion source code at Dyson Robotics Lab in Imperial College London, instead of the open source version on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}. The final produced application is able to log the data from sensors on Tango into files, or run ElasticFusion from sensor data in real time, or run ElasticFusion from raw dataset files on the device with or without pose data. This provides various way to do experiments or measure  efficiency during the project. However, due to time and effort limitations, no interface for showing the progress of ElasticFusion running is built, this is different from original planning but the reasons will be explain in detail later. Right now on the screen of the application, interface only shows the image that color camera is taking and a few buttons, screen shot and description will be provided in later section.\\
+In the solution, an Android application is developed using Android Native Development Kit (NDK)\footnote{\url{https://developer.android.com/ndk/index.html}}, which allows the use of Tango C API\footnote{\url{https://developers.google.com/tango/apis/c/}} to acquire depth camera data and 3D pose data, also makes it possible to reuse the existing code for ElasticFusion that is written in C++. Therefore most of the application is written in C++, with a few Java code for the Android application. The application uses the code for Advanced Estimation in Robotics (433H) course practical exercise by Dr Stefan Leutenegger in Department of Computing at Imperial College London as the basic frame work, firstly the code is combined with the logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}} to write the RGB, depth and pose data in format required by ElasticFusion acquired from Tango into two files on the Tango tablet, which allows ElasticFusion to be run on desktop using these two files as raw dataset. Then the core function part of code for ElasticFusion is ported and adapted to Android with its dependencies changed or removed, so that ElasticFusion can be run on Android while its source remains in C++. One thing worth notice in here is that this project uses an internal version of ElasticFusion source code at Dyson Robotics Lab in Imperial College London, instead of the open source version on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}. The final produced application is able to log the data from sensors on Tango into files, or run ElasticFusion from sensor data in real time, or run ElasticFusion from raw dataset files on the device with or without pose data. This provides various way to do experiments or measure  efficiency during the project. However, due to time and effort limitations, no interface for showing the progress of ElasticFusion running is built, this is different from original planning but the reasons will be explain in detail later. Right now on the screen of the application, interface only shows the image that color camera is taking and a few buttons, screen shot and description will be provided in later section.\\
 \\
 Finally, simple change is made on both desktop version and Android version of ElasticFusion to allow for pose feed into the program to be corrected overtime when global or local loop closure happens. This help maintain consistency between the pose feed into ElasticFusion and the internal pose stored in the program. Since the original ElasticFusion can only estimate pose from RGB-D data, or use an input pose as ground truth pose, or use the input pose as a bootstrap pose for optimization, the adaptation made in this project enables the pose feed into ElasticFusion to be consistent with the true pose while also not waste time to do the camera tracking process when the processing power is not so strong like on the Tango tablet.
 
@@ -494,39 +494,12 @@ The central part of the report usually consists of three of four chapters detail
 
 ============\\
 \subsection{Environment Configuration}
-Eclipse
-Project Tango1 is a platform that uses computer vision to give devices the ability to understand their
-position relative to the world around them. The Project Tango Tablet Development Kit is an Android
-device with a wide-angle camera, a depth sensing camera, accurate sensor timestamping, and a software
-stack that enables application developers to use motion tracking, area learning and depth sensing.
-Thousands of developers have purchased these developer kits to create experiences to explore physical
-space around the user, including precise navigation without GPS, windows into virtual 3D worlds,
-measurement and scanning of spaces, and games that know where they are in the room and whats
-around them.
-filesystem /vol/bitbucket/bjm113/android-sdklinux
-\verb|  10. Click “next” (don’t send statistics, unless you want to...)|
-\verb| 11. Click finish|
-\verb| 12. In Window! Preferences! android/NDK click browse, go to /vol/bitbucket/bjm113/|
-\verb| android-ndk-r10e and click “OK”|
-Android 4.4.2  : 19
-Android ndk r10e
-\verb|/Users/jiahaolin/Downloads/android-ndk-r13b |
+In this project an Android application is developed to run on the Tango tablet. The Tango tablet runs Android 4.2.2 (KitKat), which corresponds to Android API 19. To be able to develop Android application, Eclipse Mars\footnote{\url{https://eclipse.org/mars/}} under Linux Ubuntu\footnote{\url{https://www.ubuntu.com/}} operating system is used with installed ADT(Android Development Tools)\footnote{\url{https://developer.android.com/studio/tools/sdk/eclipse-adt.html}} plugin. The reason for choosing Ubuntu environment is due to the NVIDIA Tegra Android Development Pack version \footnote{\url{https://developer.nvidia.com/AndroidWorks-TADP-Archive}} used for compiling CUDA part of ElasticFusion is only available on Ubuntu.\\
+\\
+After Eclipse and ADT plugin are installed, Android SDK for API version 19 and the corresponding Android NDK version r13b\footnote{\url{https://developer.android.com/ndk/downloads/revision_history.html}} is downloaded and their path is configured in Eclipse to allow Android NDK application to be developed for the Tango tablet.\\
+\\
+Lastly for using the Tango C API to develop Tango application on the tablet, the Tango Client API, Tango 3D Reconstruction API and the Tango Support API is needed, they can be downloaded from the Tango C API example repository on Github \footnote{\url{https://github.com/googlesamples/tango-examples-c}}. Also contained in the Tango C example repository the \textit{glm(OpenGL Mathematics)} library\footnote{\url{https://github.com/googlesamples/tango-examples-c/tree/master/third_party/glm}} that is used for matrix calculation is also imported along with the Tango C API files.
 
-Eclipse (tested under Neon release 4.6.0) with ADT insta
-
-
-\verb| Tango Interface: we (John) wrote a whole interface that abstracts interfacing IMU and camera|
-\verb| for you. It comes in <path/to/projects>/aer/jni/tango_interface/.|
-\verb| • Tango Client API: comes in <path/to/projects>/tango_client_api/ folder. You|
-\verb| should not have to use it, we provide all the functionality in our Tango Interface.|
-\verb| • Java App: includes GUI overlays and main Android activities in the projects/aer/src/ac/uk/imperial/|
-\verb| aer. You won’t have to deal with it, unless you are adding fancy GUI things (<path/to/|
-\verb| projects>/aer/jni/jni_interface.cpp defines the C++ to Java App interface).|
-\verb| • Eigen: for linear algebra, vectors, matrices,. . . . We provided you with the sources in projects/|
-\verb| aer/jni/Eigen. See http://eigen.tuxfamily.org/dox/. In particular, read http://|
-\verb| eigen.tuxfamily.org/dox-devel/group__TopicStructHavingEigenMembers|
-\verb| .html and http://eigen.tuxfamily.org/dox/TopicFunctionTakingEigenTy|
-\verb| pes.html.   |fefe
 
 
 \subsection{Tango Platform}
