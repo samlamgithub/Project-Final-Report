@@ -778,13 +778,15 @@ static const char copy_unstablegeom_source[] =
     "}\n";
 static const std::tuple<std::string, std::string> copy_unstablegeom_tuple =
     std::make_tuple("copy_unstablegeom", copy_unstablegeom_source);
-\end{lstlisting}Other than putting the source code of shaders into char array, the actual code for shaders also need to be changed for OpenGL ES format, firstly the version indicator at the top of shader code is changed from \verb|\textit{#version 330 core}| to \verb|\textit{#version 310 es}| since the Tango tablet run at OpenGL ES version 3.1. Also the precision need to set for numerical types \textit{int} and \textit{float} and also the texture samplers. In OpenGL the data types  \textit{int} and \textit{float} can be converted to each other implicitly, however this has to be done explicitly in OpenGL ES so type conversion is manually added to the shader source code. Lastly in the code for Geometry shaders the OpenGL extension for it need to be declared using \\
-\verb|\textit{#extension GL_EXT_geometry_shader : require}|. The table \ref{table:OpenGL ES Shader} below .\\
+\end{lstlisting}
+Other than putting the source code of shaders into char array, the actual code for shaders also need to be changed for OpenGL ES format, firstly the version indicator at the top of shader code is changed from \verb|\textit{#version 330 core}| to \verb|\textit{#version 310 es}| since the Tango tablet run at OpenGL ES version 3.1. Also the precision need to set for numerical types \textit{int} and \textit{float} and also the texture samplers. In OpenGL the data types  \textit{int} and \textit{float} can be converted to each other implicitly, however this has to be done explicitly in OpenGL ES so type conversion is manually added to the shader source code. Lastly in the code for Geometry shaders the OpenGL extension for it need to be declared using \\
+\verb|\textit{#extension GL_EXT_geometry_shader : require}|. The table \ref{table:OpenGL ES Shader} below gives all the declarations added to the beginning of shader source code.\\
+\\
 \begin{table}
 \centering
 \caption{OpenGL ES Shader adaptation}
 \label{table:OpenGL ES Shader}
-\begin{tabular}{|r|l|}
+\begin{tabular}{\textwidth}{|r|l|}
   \hline
   \verb| "#version 310 es\n" |\\
   \verb| "precision highp float;\n"| \\
@@ -795,42 +797,52 @@ static const std::tuple<std::string, std::string> copy_unstablegeom_tuple =
     \hline
 \end{tabular}
 \end{table}
-
-
+After the shader source code is adapted, other OpenGL code need to be changed as well. In OpenGL the format and internal format of textures can be totally different, for example in the ElasticFusion code RGB image texture format use \verb|\textit{GL_RGB}| as format and \verb|\textit{GL_RGBA}| as internal format, however this is not allowed in OpenGL ES, also some OpenGL texture formats used in the ElasticFusion program is not available in OpenGL ES, so adaptation is made using similar type of format such as changing from \verb|\textit{GL_RGB}| to \verb|\textit{GL_RGBA}| and use \verb|\textit{GL_RED}| to replace \verb|\textit{GL_LUMINANCE}|. Other than some function of transform back feature uses the Nvidia extension in OpenGL but not available in OpenGL ES, such as the \textit{glGetBufferSubData} function, this is replaced by the \textit{glMapBufferRange} function. With functions that simply doesn't exist in OpenGL ES and also no replacements like \textit{glDrawTransformFeedback}, a work around is used, by defining the function ourselves like below and using the \textit{eglGetProcAddress} function in EGL to retrieve the function pointer, the actual function pointer of OpenGL in driver of graphic card can be retrieved if they exist, then by casting the function pointer back to the function signature, this function can be used normally.\\
 \begin{lstlisting}
-\footnote{\url{}}
-\footnote{\url{}}
-
-https://www.khronos.org/egl
-
-glDrawTransformFeedback
-eglGetProcAddress
-
-GLint error = glGetError()
-GLenum glGetError(	void);
-
-GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
-
-GLenum glCheckFramebufferStatus(	GLenum target);
-
-GL_GEOMETRY_SHADER
+void glDrawTransformFeedback(GLenum mode, GLuint id);
 typedef void(GL_API_CALL_P PFNGLDRAWTRANSFORMFEEDBACKNVPROC)(GLenum mode, GLuint id);
-
-glGetBufferSubData(GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, vertices);
-
-Eigen::Vector4f *ver = (Eigen::Vector4f *)glMapBufferRange(
-      GL_ARRAY_BUFFER, 0, count * Vertex::SIZE, GL_MAP_READ_BIT);
-glUnmapBuffer(GL_ARRAY_BUFFER);
-      
-GL_RGB GL_RGBA
- GL_LUMINANCE16UI_EXT  GL_R16UI
-  GL_LUMINANCE_INTEGER_EXT GL_RED_INTEGER
- GL_LUMINANCE32F_ARB GL_R32F
-  GL_LUMINANCE GL_RED
-  glGetVaryingLocationNV
- glTransformFeedbackVaryingsNV glTransformFeedbackVaryings before binding
- glPushAttrib glPopAttrib
 \end{lstlisting}
+The similar method is used to define the \verb|\textit{GL_GEOMETRY_SHADER}| value for using Geometry shader, since the OpenGL ES version 3.1 on Tango tablet does not support Geometry shader on its own. However the OpenGL implementation inside the Nvidia Tegra K1 graphic card driver supports Geometry shader, so the work around is usable.\\
+\\
+Also in order to check for error in the OpenGL ES code, the function \textit{glGetError} and \textit{glCheckFramebufferStatus} are used to detect error and incorrect OpenGL ES framebuffer status that may not cause the application to crash, since normal OpenGL ES error will not be logged automatically. The function signatures are given below.\\
+\begin{lstlisting}
+GLenum glGetError(void);
+GLenum glCheckFramebufferStatus(	GLenum target);
+\end{lstlisting}
+A table \ref{table:OpenGL ES adaptation} is given below to list the adapted functions of OpenGL in the original ElasticFusio program.
+
+\begin{table}
+\centering
+\caption{OpenGL ES adaptation}
+\label{table:OpenGL ES adaptation}
+\begin{tabular}{|r|l|}
+  \hline
+  original function or values & adaptation \\
+  \hline
+ glDrawTransformFeedback & extract function pointer using eglGetProcAddress\\
+ \hline
+ glGetBufferSubData  &  glMapBufferRange and glUnmapBuffer \\
+ \hline
+   \verb|GL_RGB|  & \verb|GL_RGBA| \\
+   \hline
+\verb|GL_LUMINANCE16UI_EXT| &  \verb|GL_R16UI| \\
+\hline
+  \verb|GL_LUMINANCE_INTEGER_EXT|  &  \verb|GL_RED_INTEGER| \\
+  \hline
+\verb|GL_LUMINANCE32F_ARB| &  \verb|GL_R32F| \\
+\hline
+  \verb|GL_LUMINANCE| & \verb|GL_RED| \\
+  \hline
+  glGetVaryingLocationNV & removed \\ 
+  \hline
+  glTransformFeedbackVaryingsNV & glTransformFeedbackVaryings, changed to be used before linking the shader to OpenGL ES program\\
+  \hline
+ glPushAttrib & removed \\
+ \hline
+ glPopAttrib & removed\\
+    \hline
+\end{tabular}
+\end{table}
 
 
 
