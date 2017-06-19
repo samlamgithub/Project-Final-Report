@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  19 JUN 2017 08:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  19 JUN 2017 08:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2368,25 +2368,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 848--879
  []
 
 [49]
-Underfull \hbox (badness 10000) in paragraph at lines 885--890
+Underfull \hbox (badness 10000) in paragraph at lines 885--891
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 885--890
+Underfull \hbox (badness 10000) in paragraph at lines 885--891
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 885--890
+Underfull \hbox (badness 10000) in paragraph at lines 885--891
 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [50]
-[51] [52] <figures/Screenshot1.png, id=1013, 1927.2pt x 1084.05pt>
+[50] [51] [52] <figures/Screenshot1.png, id=1013, 1927.2pt x 1084.05pt>
 File: figures/Screenshot1.png Graphic file (type png)
 
 <use figures/Screenshot1.png>
@@ -2633,7 +2629,7 @@ type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
 lic/kpfonts/jkpsy.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/kp
 fonts/jkpsyb.pfb>
-Output written on report.pdf (73 pages, 19317107 bytes).
+Output written on report.pdf (73 pages, 19317579 bytes).
 PDF statistics:
  1261 PDF objects out of 1440 (max. 8388607)
  1084 compressed objects within 11 object streams

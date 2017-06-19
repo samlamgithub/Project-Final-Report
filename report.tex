@@ -887,7 +887,7 @@ connecting to it.\\
 \\
 The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.\\
 \\
-
+In order to show the speed of ElasticFusion running, a frame counter is displayed on the screen in application, every time the ELasticFusion processed a frame, the frame counter is incremented. This is done by when the screen is rendered by using the \verb|request_render}| function, the increment function is called from the C++ part to the Java part of program using Java Native Interface (JNI), this function call in Java then starts a new \textit{Runnable} using the\textit{runOnUiThread} function to increment the counter and set the text of the counter label.\\
 
 \subsubsection{Running ElasticFusion dataset on Tango}
 
