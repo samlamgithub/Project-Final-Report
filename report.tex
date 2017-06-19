@@ -968,106 +968,22 @@ GLenum glCheckFramebufferStatus(GLenum target);
 
 
 \section{Evaluation}
-
-
-\subsection{Reconstruction Accuracy}
-
-
-
-Nvidia Tegra K1  approx = GT620-GT540\\
+In the original planning of this project, the evaluation process is intended to use the same mechanism as in original ElasticFusion\citep{whelan2016elasticfusion} paper if the implementation process went successful in this project, as the goal of this project is to deploying the ElasticFusion algorithm on Google Tango tablet for a portable dense 3D reconstruction solution.\\
 \\
-make it faster: Kintinuous will run at 30Hz on a modern laptop on battery power these days). You can try disabling SO(3) pre-alignment, enabling fast odometry, only using either ICP or RGB tracking and not both, running in open loop mode or disabling the tracking pyramid. All of these will cost you accuracy.\\
+In the original planning, to measure the performance of the solution by quantity and quality. Both algorithm and computational performance need to be benchmarked as what is done in the ElasticFusion\citep{whelan2016elasticfusion} paper.\\
 \\
-Nvidia Tegra K1  192  GPU core, Direct3D 12, OpenGL ES 3.1, CUDA 6.5, OpenGL 4.4/OpenGL 4.5, and Vulkan, 365 G FLOPS, 192 CUDA cores * 2 FLOPS per core * 950MHz, sm30, floating point operations per second (FLOPS)\\
-laptop: GTX765M PICe SSE2 , 1224 GFLOPS\\
-In this project, only the core part of ElasticFusion is used, the original dependency of Pangolin is removed and replaced with plain OpenGL ES code that full fills the same function, other necessary change is made to enable the ElasticFusion program be run on Android platform. When the user starts ElasticFusion on the Tango tablet, a new ElasticFusion thread is started and it takes RGBD and pose data from the circular buffer previously mentioned, and use these frame data as the input to the program.\\
-
-
-
-
-
-
-\subsection{depth sensor noise}
-
-，depth点非常sparse。
-
-
-
-
-
-
-
-
-\subsection{Computation power problem}
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Optimization problem}
-
-Be warned that many projects fall down through poor evaluation. Simply building a system and documenting its design and functionality is not enough to gain top marks. It is extremely important that you evaluate what you have done both in absolute terms and in comparison with existing techniques, software, hardware etc. This might involve quantitative evaluation, for example based on numerical results, performance etc. or something more qualitative such as expressibility, functionality, ease-of-use etc. At some point you should also evaluate the strengths and weaknesses of what you have done. Avoid statements like "The project has been a complete success and we have solved all the problems asssociated with blah...; - you will be shot down immediately! It is important to understand that there is no such thing as a perfect project. Even the very best pieces of work have their limitations and you are expected to provide a proper critical appraisal of what you have done.\\
-
-=============\\
-
-
-
-
-The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2016elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
-In order to measure the performance of this solution by quantity and quality. Both algorithm and computational performance need to be benchmarked.\\
-Both
-A. Trajectory Estimation
-To evaluate the trajectory estimation performance of our approach
-we test our system on the RGB-D benchmark of Sturm
-et al. [22]. This benchmark provides synchronised ground truth
-poses for an RGB-D sensor moved through a scene, captured
-with a highly precise motion capture system.  We use the absolute
-trajectory (ATE) root-mean-square error metric (RMSE) in
-our comparison, which measures the root-mean-square of the
-Euclidean distances between all estimated camera poses and
-the ground truth poses associated by timestamp [22].
-
-
-B. Surface Estimation
-We evaluate the surface reconstruction results of our approach
-on the
- This
-benchmark provides ground truth poses for a camera moved
-through a synthetic environment as well as a ground truth 3D
-model which can be used to evaluate surface reconstruction
-accuracy.
-
-Computational Performance
-
-
-​The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2016elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
-In order to measure the performance of this solution by quantity and quality. Both algorithm and computational performance need to be benchmarked.\\
-For the algorithm, trajectory accuracy can be tested using sample data sets to provide RGB-D input, then the trajectory output can be compared with the ground truth data that is obtained by using industrial standard system. The root mean square distance between every estimated pose and ground truth pose can be calculated to provide error at each timepoint. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. However, since the post data and image input are provided by Tango platform, a way is needed to fed the benchmark data into Tango.\\
-For computational Performance, we can simply plot the frame rate during the process of 3D scanning to check if it is within the acceptable range for real time SLAM algorithm.\\
-​The evaluation of this project is intended to use the same mechanism as in original ElasticFusion\citep{whelan2016elasticfusion} paper, as the goal of this project is to deploying this algorithm on Google Tango tablet.\\
-In order to measure the performance of this solution by quantity and quality. Both algorithm and computational performance need to be benchmarked.\\
-For the algorithm, trajectory accuracy can be tested using sample data sets to provide RGB-D input, then the trajectory output can be compared with the ground truth data that is obtained by using industrial standard system. The root mean square distance between every estimated pose and ground truth pose can be calculated to provide error at each timepoint. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. However, since the post data and image input are provided by Tango platform, a way is needed to fed the benchmark data into Tango.\\
-For computational Performance, we can simply plot the frame rate during the process of 3D scanning to check if it is within the acceptable range for real time SLAM algorithm.
-
-
-
-\subsubsection{Software limitation}
-
-
-
+For the algorithm, trajectory accuracy can be tested using sample datasets to provide RGBD data input on the tablet, then the output pose graph can be used to compared with the ground truth data that is obtained by using industrial standard system. The RMSE(root mean square error distance) between every estimated pose and ground truth pose can be calculated to provide the error at each timestamp. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. Similarly, since the function of running ElasticFusion using saved dataset from Tango is implemented, benchmark using data from Tango tablet can also been done by comparing the result of Tango running Tango data and use the Tango data to run ElasticFusion on desktop computer.\\
+\\
+For computational Performance, the frame rate during ElasticFusion running can be plotted to check if it is within the acceptable range for real time SLAM application.\\
+\\
+However, before the project ends the experiment of using Dyson Lab dataset to run ElasticFusion on Tango tablet have not achieve good results. Firstly for reason that still not to be known, somehow the confidence value of surfels are extremely low compared to the default confidence threshold 10.0, which results in no surfel is saved when the global map reconstructed should be saved to a ply file. After this is discovered the very low confidence threshold 0.45 is set to try to allow some surfels from the global model to be saved to the ply file, but by viewing the saved the ply file in MeshLab\footnote{\url{http://www.meshlab.net/}} application on computer, it can be seen that the 3D reconstructed surface is slightly wrong compare to the reconstructed model by running ElasticFusion on desktop computer. However due to time limitation on this project, the reason for that or the place caused this error is still unknown. Sceondly, from all the experiments to run ElasticFusion on Tango tablet, it can be seen that even when all the settings are set to allow ElasticFusion run at fastest speed, such as disabling $\mathfrak{so}(3)$ pre-alignment, use single level tracking pyramid by enabling fast odometry, and disable loop closure detection. Despite that, even when running the Dyson Lab dataset with its manually generated pose data on Tango tablet, the frame rate is very slow that the processing of each frame takes up more then a second, which corresponds to the time seven frames are newly stored in the circular buffer. This is actually already faster then using data from the Tango tablet since the resolution of Dyson Lab dataset image is 640 and 480, but the Tango tablet camera resolution is 1280 and 720, which means using Tango data will require more procssing time and memeory usage. As the Tango tablet only has 4Gb memory to used by both CPU and GPU, the memory is not sufficient for 3D reconstruct large scenes, and in the implementation stage the \verb|TEXTURE_DIMENSION| value that represents dimension of reconstructed scene in \textit{GlobalModel} class has to be reduced from the original 3072 to less 1000. Therefore the performance of running ElasticFusion on Tango is no where near the frame rate required for real time interactive SLAM application (30 Hz).\\
+The slow performace of running ElaticFusion on Tango tablet is mainly due to the lack of processing power on the tablet, as described below, the Nvidia Tegra K1 processor is still quite far behind from the processing power required, since ElasticFusion is a dense 3D reconstruction SLAM system, both memory and processor usage is intensive.\\
+\\
+On the other hand, although first recording the RGBD and pose data using Tango tablet and then use the data for running ElasticFusion on desktop is possible, only a small part surface is able to be re constructed and the performace is not very good compared to other RGBD sensor cameras like Microsoft Kinect or ASUS Xtion Pro Live or Intel RealSense 3D Camera. This is due to the projective I-R depth sensor is not very good on the Tango tablet, the depth points captured is very sparse and results in performace of ElasticFusion not as good as using other densor sensors.\\
 
 
 
 \newpage
-
-
-
 
 
 
@@ -1077,6 +993,10 @@ For computational Performance, we can simply plot the frame rate during the proc
 The project's conclusions should list the things which have been learnt as a result of the work you have done. For example, "The use of overloading in C++ provides a very elegant mechanism for transparent parallelisation of sequential programs", or "The overheads of linear-time n-body algorithms makes them computationally less efficient than O(n log n) algorithms for systems with less than 100000 particles". Avoid tedious personal reflections like "I learned a lot about C++ programming...", or "Simulating colliding galaxies can be real fun...". It is common to finish the report by listing ways in which the project can be taken further. This might, for example, be a plan for doing the project better if you had a chance to do it again, turning the project deliverables into a more polished end product, or extending the project into a programme for an MPhil or PhD.\\
 
 ASUS ZenFone AR\\
+https://www.asus.com/us/Phone/ZenFone-AR-ZS571KL/
+
+Apple arkit
+https://developer.apple.com/arkit/
 
 optimization \\
 slow, GPU, memmory\\
@@ -1172,24 +1092,6 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 
 
 
-
-\newpage
-
-\section{Bibliography}
-
-
-
-This consists of a list of all the books, articles, manuals etc. used in the project and referred to in the report. You should provide enough information to allow the reader to find the source. In particular references must contain all the information regarding the publication of the paper and must be consistently formatted. Usually this means:\\
-* For journals: Authors, Title, Journal, volume number, issue number, page number, publisher, month, year.
-* For conferences: Authors, Title, Conference name, Place where held, publisher, page number, month, year.
-* For technical reports: Authors, Title, institution, Technical report number, month, year.
-* For web references: Authors, Title, Web-reference, date accessed.
-* URLs are optional for published work but preferred.\\
-A weakness of many reports is inadequate citation of a source of information. It's easy to get this right so there are no excuses. Each entry in the bibliography should list the author(s) and title of the piece of work and should give full details of where it can be found. For example:\\
-1 Bennett, A.J., Field, A.J. and Harrison, P.G., "Modelling and Validation of Shared Memory Coherency Protocols", Performance Evaluation, 1996, Vol. 27  28, 1996, pp. 541-562. rather than just listing the source as "Performance Evaluation 1996".
-Using a reference management programme can make your life simpler.See for example Bibdesk,JabRef,RefWorks, etc.\\
-
-
 \newpage
 
 
@@ -1219,20 +1121,7 @@ For projects which result in a new piece of software you should provide a proper
 
 
 
-
-\section{Program Listings}
-
-
-Complete program listings should NOT be part of the report except in specific cases at the request of your supervisor. The project report(s) must be bound in a departmental folder and must include a standard title page produced by the project co-ordinator. More of this nearer the date.\\
-You are strongly advised to spend some time looking at the reports of previous project students to get a feel for what's good and bad. In June 1999 we introduced a "Distinguished Project" classification, which is a formal recognition of outstanding projects for which no official prize was awarded. The complete list of prize winners and the other distinguished projects, along with links to the final reports, can be found here.\\
-
-\newpage
-
-\section{Word Count}
-
-
-
-There is no word count for the report as such, but ideally you should not exceed the limit of 40,000 words. Generally, our best projects tend to have the word count in the range of 20,000 - 35,000 words with a few going beyond that. This does not include the Appendices.\\
+\section{Bibliography}
 
 
 

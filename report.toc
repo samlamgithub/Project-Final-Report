@@ -37,14 +37,7 @@
 \contentsline {subsection}{\numberline {6.7}Combine ElasticFusion with pose from Tango in Loop closure mode}{55}{subsection.261}
 \contentsline {subsection}{\numberline {6.8}Debugging and testing}{56}{subsection.262}
 \contentsline {section}{\numberline {7}Evaluation}{58}{section.275}
-\contentsline {subsection}{\numberline {7.1}Reconstruction Accuracy}{58}{subsection.276}
-\contentsline {subsection}{\numberline {7.2}depth sensor noise}{58}{subsection.277}
-\contentsline {subsection}{\numberline {7.3}Computation power problem}{58}{subsection.278}
-\contentsline {subsection}{\numberline {7.4}Optimization problem}{58}{subsection.279}
-\contentsline {subsubsection}{\numberline {7.4.1}Software limitation}{60}{subsubsection.280}
-\contentsline {section}{\numberline {8}Conclusions and Future Work}{61}{section.281}
-\contentsline {section}{\numberline {9}Bibliography}{63}{section.291}
-\contentsline {section}{\numberline {10}Appendix}{64}{section.292}
-\contentsline {section}{\numberline {11}User Guide}{65}{section.293}
-\contentsline {section}{\numberline {12}Program Listings}{66}{section.294}
-\contentsline {section}{\numberline {13}Word Count}{67}{section.295}
+\contentsline {section}{\numberline {8}Conclusions and Future Work}{60}{section.277}
+\contentsline {section}{\numberline {9}Appendix}{62}{section.287}
+\contentsline {section}{\numberline {10}User Guide}{63}{section.288}
+\contentsline {section}{\numberline {11}Bibliography}{64}{section.289}
