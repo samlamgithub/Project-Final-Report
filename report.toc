@@ -31,19 +31,19 @@
 \contentsline {subsubsection}{\numberline {6.4.9}Eigen}{48}{subsubsection.242}
 \contentsline {subsection}{\numberline {6.5}Running ElasticFusion on Tango}{49}{subsection.246}
 \contentsline {subsubsection}{\numberline {6.5.1}Running ElasticFusion using data from Tango}{49}{subsubsection.247}
-\contentsline {subsubsection}{\numberline {6.5.2}Running ElasticFusion dataset on Tango}{50}{subsubsection.254}
-\contentsline {subsubsection}{\numberline {6.5.3}Running Tango dataset on Tango}{50}{subsubsection.255}
-\contentsline {subsection}{\numberline {6.6}Combine ElasticFusion with pose from Tango in Loop closure mode}{51}{subsection.256}
-\contentsline {subsection}{\numberline {6.7}Debugging and testing}{51}{subsection.257}
-\contentsline {section}{\numberline {7}Evaluation}{53}{section.267}
-\contentsline {subsection}{\numberline {7.1}Reconstruction Accuracy}{53}{subsection.268}
-\contentsline {subsection}{\numberline {7.2}depth sensor noise}{53}{subsection.269}
-\contentsline {subsection}{\numberline {7.3}Computation power problem}{53}{subsection.270}
-\contentsline {subsection}{\numberline {7.4}Optimization problem}{53}{subsection.271}
-\contentsline {subsubsection}{\numberline {7.4.1}Software limitation}{55}{subsubsection.272}
-\contentsline {section}{\numberline {8}Conclusions and Future Work}{56}{section.273}
-\contentsline {section}{\numberline {9}Bibliography}{57}{section.274}
-\contentsline {section}{\numberline {10}Appendix}{58}{section.275}
-\contentsline {section}{\numberline {11}User Guide}{59}{section.276}
-\contentsline {section}{\numberline {12}Program Listings}{60}{section.277}
-\contentsline {section}{\numberline {13}Word Count}{61}{section.278}
+\contentsline {subsubsection}{\numberline {6.5.2}Running ElasticFusion dataset on Tango}{51}{subsubsection.254}
+\contentsline {subsubsection}{\numberline {6.5.3}Running Tango dataset on Tango}{51}{subsubsection.255}
+\contentsline {subsection}{\numberline {6.6}Combine ElasticFusion with pose from Tango in Loop closure mode}{52}{subsection.256}
+\contentsline {subsection}{\numberline {6.7}Debugging and testing}{52}{subsection.257}
+\contentsline {section}{\numberline {7}Evaluation}{54}{section.267}
+\contentsline {subsection}{\numberline {7.1}Reconstruction Accuracy}{54}{subsection.268}
+\contentsline {subsection}{\numberline {7.2}depth sensor noise}{54}{subsection.269}
+\contentsline {subsection}{\numberline {7.3}Computation power problem}{54}{subsection.270}
+\contentsline {subsection}{\numberline {7.4}Optimization problem}{54}{subsection.271}
+\contentsline {subsubsection}{\numberline {7.4.1}Software limitation}{56}{subsubsection.272}
+\contentsline {section}{\numberline {8}Conclusions and Future Work}{57}{section.273}
+\contentsline {section}{\numberline {9}Bibliography}{58}{section.274}
+\contentsline {section}{\numberline {10}Appendix}{59}{section.275}
+\contentsline {section}{\numberline {11}User Guide}{60}{section.276}
+\contentsline {section}{\numberline {12}Program Listings}{61}{section.277}
+\contentsline {section}{\numberline {13}Word Count}{62}{section.278}

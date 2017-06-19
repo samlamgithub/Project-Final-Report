@@ -728,7 +728,7 @@ Firstly, in the Android application on Tango tablet, OpenGL ES is already used t
     \hline
 \end{tabular}
 \end{table}
-After the OpenGL ES context is created, original code in OpenGL needs to be adapted. In the original ElasticFusion code, the code for shaders are written in separate files and are read by Pangolin in the program to produce a C++ string of type \textit{const char *} that is then used as the source code for shaders by function \textit{glShaderSource}. However it will be troublesome to do the same thing on Android application, also because the Pangolin dependency is removed, the source code for shaders are all put into hardcoded C++ char array of type \textit{static const char []} for fast reading in a file, the source code string is then placed into a tupe together with the name of the shader for east identification of shader source code. The Geometry shader originally stored in the file \verb| \textit{copy_unstable.geom}| is adapted and the created code is shown below as an example.\\
+After the OpenGL ES context is created, original code in OpenGL needs to be adapted. In the original ElasticFusion code, the code for shaders are written in separate files and are read by Pangolin in the program to produce a C++ string of type \textit{const char *} that is then used as the source code for shaders by function \textit{glShaderSource}. However it will be troublesome to do the same thing on Android application, also because the Pangolin dependency is removed, the source code for shaders are all put into hardcoded C++ char array of type \textit{static const char []} for fast reading in a file, the source code string is then placed into a tupe together with the name of the shader for east identification of shader source code. The Geometry shader originally stored in the file \verb|copy_unstable.geom| is adapted and the created code is shown below as an example.\\
 \begin{lstlisting}
 static const char copy_unstablegeom_source[] =
     "#version 310 es\n"
@@ -756,8 +756,8 @@ static const char copy_unstablegeom_source[] =
 static const std::tuple<std::string, std::string> copy_unstablegeom_tuple =
     std::make_tuple("copy_unstablegeom", copy_unstablegeom_source);
 \end{lstlisting}
-Other than putting the source code of shaders into char array, the actual code for shaders also need to be changed for OpenGL ES format, firstly the version indicator at the top of shader code is changed from \verb|\textit{#version 330 core}| to \verb|\textit{#version 310 es}| since the Tango tablet run at OpenGL ES version 3.1. Also the precision need to set for numerical types \textit{int} and \textit{float} and also the texture samplers. In OpenGL the data types  \textit{int} and \textit{float} can be converted to each other implicitly, however this has to be done explicitly in OpenGL ES so type conversion is manually added to the shader source code. Lastly in the code for Geometry shaders the OpenGL extension for it need to be declared using \\
-\verb|\textit{#extension GL_EXT_geometry_shader : require}|. The table \ref{table:OpenGL ES Shader} below gives all the declarations added to the beginning of shader source code.\\
+Other than putting the source code of shaders into char array, the actual code for shaders also need to be changed for OpenGL ES format, firstly the version indicator at the top of shader code is changed from \verb|#version 330 core| to \verb|#version 310 es| since the Tango tablet run at OpenGL ES version 3.1. Also the precision need to set for numerical types \textit{int} and \textit{float} and also the texture samplers. In OpenGL the data types  \textit{int} and \textit{float} can be converted to each other implicitly, however this has to be done explicitly in OpenGL ES so type conversion is manually added to the shader source code. Lastly in the code for Geometry shaders the OpenGL extension for it need to be declared using \\
+\verb|#extension GL_EXT_geometry_shader : require|. The table \ref{table:OpenGL ES Shader} below gives all the declarations added to the beginning of shader source code.\\
 \\
 \begin{table}
 \centering
@@ -774,12 +774,12 @@ Other than putting the source code of shaders into char array, the actual code f
     \hline
 \end{tabular}
 \end{table}
-After the shader source code is adapted, other OpenGL code need to be changed as well. In OpenGL the format and internal format of textures can be totally different, for example in the ElasticFusion code RGB image texture format use \verb|\textit{GL_RGB}| as format and \verb|\textit{GL_RGBA}| as internal format, however this is not allowed in OpenGL ES, also some OpenGL texture formats used in the ElasticFusion program is not available in OpenGL ES, so adaptation is made using similar type of format such as changing from \verb|\textit{GL_RGB}| to \verb|\textit{GL_RGBA}| and use \verb|\textit{GL_RED}| to replace \verb|\textit{GL_LUMINANCE}|. Other than some function of transform back feature uses the Nvidia extension in OpenGL but not available in OpenGL ES, such as the \textit{glGetBufferSubData} function, this is replaced by the \textit{glMapBufferRange} function. With functions that simply doesn't exist in OpenGL ES and also no replacements like \textit{glDrawTransformFeedback}, a work around is used, by defining the function ourselves like below and using the \textit{eglGetProcAddress} function in EGL to retrieve the function pointer, the actual function pointer of OpenGL in driver of graphic card can be retrieved if they exist, then by casting the function pointer back to the function signature, this function can be used normally.\\
+After the shader source code is adapted, other OpenGL code need to be changed as well. In OpenGL the format and internal format of textures can be totally different, for example in the ElasticFusion code RGB image texture format use \verb|GL_RGB| as format and \verb|GL_RGBA| as internal format, however this is not allowed in OpenGL ES, also some OpenGL texture formats used in the ElasticFusion program is not available in OpenGL ES, so adaptation is made using similar type of format such as changing from \verb|GL_RGB| to \verb|GL_RGBA| and use \verb|GL_RED| to replace \verb|GL_LUMINANCE|. Other than some function of transform back feature uses the Nvidia extension in OpenGL but not available in OpenGL ES, such as the \textit{glGetBufferSubData} function, this is replaced by the \textit{glMapBufferRange} function. With functions that simply doesn't exist in OpenGL ES and also no replacements like \textit{glDrawTransformFeedback}, a work around is used, by defining the function ourselves like below and using the \textit{eglGetProcAddress} function in EGL to retrieve the function pointer, the actual function pointer of OpenGL in driver of graphic card can be retrieved if they exist, then by casting the function pointer back to the function signature, this function can be used normally.\\
 \begin{lstlisting}
 void glDrawTransformFeedback(GLenum mode, GLuint id);
 typedef void(GL_API_CALL_P PFNGLDRAWTRANSFORMFEEDBACKNVPROC)(GLenum mode, GLuint id);
 \end{lstlisting}
-The similar method is used to define the \verb|\textit{GL_GEOMETRY_SHADER}| value for using Geometry shader, since the OpenGL ES version 3.1 on Tango tablet does not support Geometry shader on its own. However the OpenGL implementation inside the Nvidia Tegra K1 graphic card driver supports Geometry shader, so the work around is usable.\\
+The similar method is used to define the \verb|GL_GEOMETRY_SHADER| value for using Geometry shader, since the OpenGL ES version 3.1 on Tango tablet does not support Geometry shader on its own. However the OpenGL implementation inside the Nvidia Tegra K1 graphic card driver supports Geometry shader, so the work around is usable.\\
 \\
 Also in order to check for error in the OpenGL ES code, the function \textit{glGetError} and \textit{glCheckFramebufferStatus} are used to detect error and incorrect OpenGL ES framebuffer status that may not cause the application to crash, since normal OpenGL ES error will not be logged automatically. The function signatures are given below.\\
 \begin{lstlisting}
@@ -812,7 +812,7 @@ A table \ref{table:OpenGL ES adaptation} is given below to list the adapted func
   \hline
   glGetVaryingLocationNV & removed \\
   \hline
-  glTransformFeedbackVaryingsNV & \tabincell{c}{glTransformFeedbackVaryings, changed to be \\ used before linking the shader to OpenGL ES program} \\
+  glTransformFeedbackVaryingsNV &\tabincell{c}{glTransformFeedbackVaryings, changed to be \\ used before linking the shader to OpenGL ES program} \\
   \hline
  glPushAttrib & removed \\
  \hline
@@ -856,15 +856,15 @@ On the other hand, a new ElasticFusion running thread starts when the button is 
   \hline
  glReadPixels \\
    \hline
- \verb| glPixelStorei(GL_UNPACK_ALIGNMENT, 1);  | \\
+ \verb|glPixelStorei(GL_UNPACK_ALIGNMENT, 1);|\\
    \hline
- \verb|   glPixelStorei(GL_PACK_ALIGNMENT, 1);  | \\
+ \verb|glPixelStorei(GL_PACK_ALIGNMENT, 1);|\\
    \hline
-  \verb|  glEnable(GL_DEPTH_TEST);| \\
+  \verb|glEnable(GL_DEPTH_TEST);|\\
     \hline
-  \verb|  glDepthMask(GL_TRUE);| \\
+  \verb|glDepthMask(GL_TRUE);|\\
     \hline
-  \verb|  glDepthFunc(GL_LESS);  | \\
+  \verb|glDepthFunc(GL_LESS);|\\
     \hline
 \end{tabular}
 \end{table}
@@ -878,13 +878,16 @@ Then the data is processed by calling the \textit{processFrame} function of Elas
 \\
 \begin{lstlisting}
 void processFrame(const unsigned char *rgb, const unsigned short *depth,
-                    const int64_t &timestamp, const Eigen::Matrix4f *inPose = 0,
-                    const float weightMultiplier = 1.f,
-                    const bool bootstrap = false);
+const int64_t &timestamp, const Eigen::Matrix4f *inPose = 0,
+const float weightMultiplier = 1.f,
+const bool bootstrap = false);
 \end{lstlisting}
 After a frame is processed, the state of ElasticFusion program can be checked by getting some critical values store in it such as the current number of surfels in the global map or the number of frames storing in the fern database. These data is logged out and can be viewed using the \textit{adb logcat} command on computer if the Tango tablet is
 connecting to it.\\
-The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.
+\\
+The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.\\
+\\
+
 
 \subsubsection{Running ElasticFusion dataset on Tango}
 
