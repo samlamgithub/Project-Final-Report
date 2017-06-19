@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  19 JUN 2017 14:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.10.26)  19 JUN 2017 14:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2234,6 +2234,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 640--641
  []
 
 
+LaTeX Warning: Reference `fig:Screenshot1' on page 40 undefined on input line 6
+62.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 652--663
 
  []
@@ -2538,45 +2542,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 967--979
  []
 
 [58] [59]
-Underfull \hbox (badness 10000) in paragraph at lines 988--995
+Underfull \hbox (badness 10000) in paragraph at lines 988--997
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 988--995
+Underfull \hbox (badness 10000) in paragraph at lines 988--997
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 988--995
+Underfull \hbox (badness 10000) in paragraph at lines 988--997
 
  []
 
-[60] <figures/timeline2.png, id=1065, 1828.8325pt x 526.96875pt>
+[60] <figures/timeline2.png, id=1066, 1828.8325pt x 526.96875pt>
 File: figures/timeline2.png Graphic file (type png)
 
 <use figures/timeline2.png>
-Package pdftex.def Info: figures/timeline2.png used on input line 1011.
+Package pdftex.def Info: figures/timeline2.png used on input line 1007.
 (pdftex.def)             Requested size: 1828.82806pt x 526.96745pt.
 
 
-LaTeX Warning: Float too large for page by 23.60356pt on input line 1014.
-
-<figures/Screenshot1.png, id=1066, 1927.2pt x 1084.05pt>
-File: figures/Screenshot1.png Graphic file (type png)
-
-<use figures/Screenshot1.png>
-Package pdftex.def Info: figures/Screenshot1.png used on input line 1020.
-(pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Float too large for page by 23.60356pt on input line 1010.
 
 <figures/Screenshot2.png, id=1067, 1927.2pt x 1084.05pt>
 File: figures/Screenshot2.png Graphic file (type png)
 
 <use figures/Screenshot2.png>
-Package pdftex.def Info: figures/Screenshot2.png used on input line 1027.
+Package pdftex.def Info: figures/Screenshot2.png used on input line 1016.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
@@ -2586,7 +2580,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: figures/Screenshot3.png Graphic file (type png)
 
 <use figures/Screenshot3.png>
-Package pdftex.def Info: figures/Screenshot3.png used on input line 1034.
+Package pdftex.def Info: figures/Screenshot3.png used on input line 1023.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
@@ -2596,7 +2590,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: figures/Screenshot9.png Graphic file (type png)
 
 <use figures/Screenshot9.png>
-Package pdftex.def Info: figures/Screenshot9.png used on input line 1041.
+Package pdftex.def Info: figures/Screenshot9.png used on input line 1030.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
@@ -2606,7 +2600,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: figures/Screenshot10.png Graphic file (type png)
 
 <use figures/Screenshot10.png>
-Package pdftex.def Info: figures/Screenshot10.png used on input line 1049.
+Package pdftex.def Info: figures/Screenshot10.png used on input line 1038.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
@@ -2616,7 +2610,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: figures/Screenshot11.png Graphic file (type png)
 
 <use figures/Screenshot11.png>
-Package pdftex.def Info: figures/Screenshot11.png used on input line 1056.
+Package pdftex.def Info: figures/Screenshot11.png used on input line 1045.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
@@ -2626,23 +2620,28 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: figures/Screenshot14.png Graphic file (type png)
 
 <use figures/Screenshot14.png>
-Package pdftex.def Info: figures/Screenshot14.png used on input line 1064.
+Package pdftex.def Info: figures/Screenshot14.png used on input line 1053.
 (pdftex.def)             Requested size: 306.71924pt x 172.52522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/ScreenshotTango1.png, id=1073, 1927.2pt x 1204.5pt>
+[61]
+
+LaTeX Warning: Reference `fig: ScreenshotTango1' on page 62 undefined on input 
+line 1065.
+
+<figures/ScreenshotTango1.png, id=1079, 1927.2pt x 1204.5pt>
 File: figures/ScreenshotTango1.png Graphic file (type png)
 
 <use figures/ScreenshotTango1.png>
-Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 1072.
+Package pdftex.def Info: figures/ScreenshotTango1.png used on input line 1069.
 (pdftex.def)             Requested size: 306.71924pt x 191.6947pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[61] [62] (./report.bbl (./report.brf)
+[62] (./report.bbl (./report.brf)
 \tf@brf=\write8
 \openout8 = `report.brf'.
 
@@ -2657,22 +2656,21 @@ Underfull \hbox (badness 2495) in paragraph at lines 135--135
 \openout9 = `report.thm'.
 
  [65]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1104.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1088.
  [66 <./figures/vin1.png>] [67 <./figures/vin2.png> <./figures/vin3.png>] [68 <
 ./figures/projectStructure.png> <./figures/rgbd1.png>] [69 <./figures/rgbd2.png
 > <./figures/rgbd3.png>] [70 <./figures/rgbd4.png> <./figures/rgbd5.png>] [71 <
-./figures/rgbd6.png>] [72 <./figures/timeline2.png>] [73 <./figures/Screenshot1
-.png> <./figures/Screenshot2.png> <./figures/Screenshot3.png>]
-[74 <./figures/Screenshot9.png> <./figures/Screenshot10.png> <./figures/Screens
-hot11.png>] [75 <./figures/Screenshot14.png> <./figures/ScreenshotTango1.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1104.
-
-(./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1104.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1104.
+./figures/rgbd6.png>] [72 <./figures/timeline2.png>] [73 <./figures/Screenshot2
+.png> <./figures/Screenshot3.png> <./figures/Screenshot9.png>]
+[74 <./figures/Screenshot10.png> <./figures/Screenshot11.png> <./figures/Screen
+shot14.png>] [75 <./figures/ScreenshotTango1.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1088.
+ (./report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1088.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1088.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: D9A96969DF697FB8D0F83E4CAA210B19;3184.
+(rerunfilecheck)             Checksum: 338E6D4ABC54BBCCF676BD8FF5045D62;3184.
 Package rerunfilecheck Info: File `report.brf' has not changed.
 (rerunfilecheck)             Checksum: E5ED0926F546402AC3260BF3C47DEEBE;2817.
 
@@ -2681,10 +2679,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 25104 strings out of 493014
- 455013 string characters out of 6133350
- 568089 words of memory out of 5000000
- 27663 multiletter control sequences out of 15000+600000
+ 25100 strings out of 493014
+ 454905 string characters out of 6133350
+ 568938 words of memory out of 5000000
+ 27660 multiletter control sequences out of 15000+600000
  78489 words of font info for 159 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,14n,77p,2325b,1679s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2703,10 +2701,10 @@ type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
 lic/kpfonts/jkpsy.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/kp
 fonts/jkpsyb.pfb>
-Output written on report.pdf (75 pages, 19329302 bytes).
+Output written on report.pdf (75 pages, 18872609 bytes).
 PDF statistics:
  1286 PDF objects out of 1440 (max. 8388607)
- 1106 compressed objects within 12 object streams
+ 1107 compressed objects within 12 object streams
  390 named destinations out of 1000 (max. 500000)
- 567 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 562 words of extra memory for PDF output out of 10000 (max. 10000000)
 
