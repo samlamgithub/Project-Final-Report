@@ -257,19 +257,20 @@ Since the map is stored using spatially-hashed data structure, insert and look u
 For fusing depth scan data into the model, projection mapping is used to compare the depth value on image with the projected visual hull of a voxel, the result is then used to update the TSDF value and weight of that voxel.\\
 \\
 In the rendering stage, incremental Marching Cubes is used to generate triangle meshes for the chunk when it is been updated by a depth scan, triangles are generated at the zero isosurface of the TSDF volxel grid.\\
+\\
 CHISEL has shown a nice memory-efficient approach to scanning large scene for high quality 3D reconstruction, however it fails to maintain global consistency of the global map, therefore drifts will increase over time due to lacking detection of global loop closure. Despite that, CHISEL provides a great example for utilising the Tango platform as a dense SLAM frontend for 3D reconstruction purpose.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/CHISEL1}
-    \caption{CHISEL1}
+    \caption{CHISEL screenshot}
     \label{fig:CHISEL1}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/CHISEL2}
-    \caption{CHISEL2}
+    \caption{3D reconstructed model by CHISEL}
     \label{fig: CHISEL2}
 \end{figure}
 
@@ -285,14 +286,14 @@ The architecture designed for InfiniTAM makes it easy to extend functionalities 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/InfiniTAM}
-    \caption{InfiniTAM}
+    \caption{InfiniTAM screenshot}
     \label{fig: InfiniTAM}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/InfiniTAM2}
-    \caption{InfiniTAM2}
+    \caption{InfiniTAM reconstructed model}
     \label{fig: InfiniTAM2}
 \end{figure}
 
