@@ -77,7 +77,7 @@ The main objective of this project is to develop a fully self-contained mobile d
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango5}
-    \caption{ScreenshotTango5}
+    \caption{Demo App Mesh Builder running on tablet}
     \label{fig:ScreenshotTango5}
 \end{figure}
 Previously, ElasticFusion can only be run on a desktop computer with powerful graphic card, using a raw dataset that is given, or connect the computer to a RGB-D camera such as Microsoft Kinect or ASUS Xtion Pro Live or Intel RealSense 3D Camera. That makes it non convenient for a user to scan the space he or she is currently in for 3D reconstruction, therefore the Google Tango tablet with both RGB and depth camera would be the perfect mobile device to implement a portable version of ElasticFusion on. The Google Tango tablet carries Android 4.2.2 OS, has 4GB of RAM, a quadcore Nvidia Tegra K1 graphics card supporting CUDA, six-axis gyroscope and accelerometer, a wide-angle 120 field of view tracking camera which refreshes at 60Hz, a projective depth sensor which refreshes at 3Hz, and a 4 megapixel color sensor which refreshes at 30Hz. The processing power on this tablet succeeds most mobile devices on the market right now, which makes running ElasticFusion on the device alone become possible. Since ElasticFusion requires both high end processor and graphic card on a desktop computer, from the read me of ElasticFusion on Github: "A very fast nVidia GPU (3.5 TFLOPS+), and a fast CPU (something like an i7)." is recommended for a desktop computer, therefore one of important problem in this project is that Tango tablet's processing power is still not strong enough to run ElasticFusion for real time application. However, the attempt make in this project have still shown the possibility of running a state of the art SLAM  algorithm on mobile device.\\
@@ -228,7 +228,7 @@ In the surfel map, each surfel stores the information about a local surface area
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/surfel2}
-    \caption{surfel2}
+    \caption{Illustration of sample graph nodes from surfels}
     \label{fig:surfel2}
 \end{figure}
 The detail structure of ElasticFusion is shown Fig \ref{fig:elas1} in the original paper. From the graph can be seen that firstly in the camera pose estimation step, dense frame-to-model camera tracking is used, geometric and photometric pose estimations are combined into a joint cost function to for minimization. Geometric error is calculated using frame to model projective data association and ICP algorithm as in kinecFusion\citep{newcombe2011kinectfusion}, and photometric error is gain by calculating the intensity difference between current RGB image and backprojected image from the model. Note that here in the tracking process only active surfels are used.\\
@@ -236,7 +236,7 @@ The detail structure of ElasticFusion is shown Fig \ref{fig:elas1} in the origin
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/elas1}
-    \caption{elas1}
+    \caption{3D reconstructed model using Elasticfusion}
     \label{fig:elas1}
 \end{figure}
 After camera pose tracking for each frame, an active predicted model is produced, this model is then rendered into an image for global loop cloure checking, to try recover from drifts produced by accumulating error, and realign the camera pose. To enable global loop closure checking, key frame information from past is stored in a randomized fern encoding database using same technique as in \cite{glocker2015real}, it allows storing and matching frames without putting redundant information into the database. If a high quality match between the current predicted view of active model and a frame in fern database is found, points are sampled from matched frame and active view to construct surface constraints that are used to register the surface together and optimize the deformation graph. Each surface constraint contains a pair of points and timestamps to represent the position of point and the destination position that it should reach the destination after deformation.\\
@@ -248,7 +248,7 @@ The realignment of map is done by applying non rigid deformation using a deforma
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/surfel1}
-    \caption{surfel1}
+    \caption{Illustration of surfels}
     \label{fig:surfel1}
 \end{figure}
 The optimization of deformation of the model is done by minimising five cost function in total using the surface constraints constructed in the steps described above. The parameters in surface constraints after optimization reflects the surface registration happened in loop closure. These five cost functions include the following functions: maximises the rigidity of deformation, guarantees the smoothness of deformation in the graph between neighbour nodes, minimises the error in position constraints, that is reduce the difference between source and destination position, also "pins" the inactive surface of the model without moving to make sure is the active surface that deforms into the inactive surface. In the global loop closure optimization process an extra cost function is added, it introduce the set of relative constraints to prevent the previous surface registrations from being pulled apart by subsequent global loop closures. The optimization problem is  solved using iterative Gauss-Newton algorithm on CPU and the result gives a relative transformation matrix that bring the surfaces registered into alignment. The graph Fig \ref{fig:loopclosure} from the original paper have shown the process of a scanning with loop closure happens when the scanning camera revisits area that has been scanned before, with active model coloured by surface normal overlaid on the inactive model in greyscale.\\
@@ -259,7 +259,7 @@ Before new frame of data come in, the current active model is rendered to an ima
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/loopclosure}
-    \caption{loopclosure}
+    \caption{Illustration of loop closure process in ElasticFusion}
     \label{fig:loopclosure}
 \end{figure}
 
@@ -338,14 +338,14 @@ Since ORB-SLAM2 is a robust SLAM system with robust tracking and loop closure fu
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/orb1}
-    \caption{orb1}
+    \caption{Illustration of feature points detected in ORB SLAM}
     \label{fig: orb1}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/orb2}
-    \caption{orb2}
+    \caption{Trajectory reconstructed using ORB SLAM}
     \label{fig: orb2}
 \end{figure}
 
@@ -358,21 +358,21 @@ LSD-SLAM not only runs a desktop CPU in real time, it can also run on a modern s
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/lsdslam1}
-    \caption{lsdslam1}
+    \caption{LSD SLAM system structure}
     \label{fig: lsdslam1}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/lsdar1}
-    \caption{lsdar1}
+    \caption{AR illustration of LSD SLAM}
     \label{fig: lsdar1}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/lsdar2}
-    \caption{lsdar2}
+    \caption{LSD SLAM system illustration}
     \label{fig: lsdar2}
 \end{figure}
 
@@ -387,14 +387,14 @@ The program uses ceres solver\citep{ceres-solver} from Google\footnote{\url{http
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/vin1}
-    \caption{vin1}
+    \caption{Trajectory estimated with virtual objects in VINS-Mobile}
     \label{fig: vin1}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/vin2}
-    \caption{vin2}
+    \caption{VINS-Mobile AR application}
     \label{fig: vin2}
 \end{figure}
 
@@ -402,7 +402,7 @@ The program uses ceres solver\citep{ceres-solver} from Google\footnote{\url{http
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/vin3}
-    \caption{vin3}
+    \caption{VINS-Mobile system structure}
     \label{fig: vin3}
 \end{figure}
 
@@ -445,42 +445,42 @@ The overall structure of the Android application developed in this project is sh
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/rgbd1}
-    \caption{rgbd1}
+    \caption{RGB Depth Sync Demo application 1: pure RGB image}
     \label{fig: rgbd1}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/rgbd2}
-    \caption{rgbd2}
+    \caption{RGB Depth Sync Demo application 2: pure RGB image}
     \label{fig: rgbd2}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/rgbd3}
-    \caption{rgbd3}
+    \caption{RGB Depth Sync Demo application 3: pure RGB image}
     \label{fig: rgbd3}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/rgbd4}
-    \caption{rgbd4}
+    \caption{RGB Depth Sync Demo application 4: mixed RGB and depth}
     \label{fig: rgbd4}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/rgbd5}
-    \caption{rgbd5}
+    \caption{RGB Depth Sync Demo application 5: mixed RGB and depth}
     \label{fig: rgbd5}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/rgbd6}
-    \caption{rgbd6}
+    \caption{RGB Depth Sync Demo application 6: pure depth map}
     \label{fig: rgbd6}
 \end{figure}
 
@@ -796,7 +796,7 @@ Also in order to check for error in the OpenGL ES code, the function \textit{glG
 GLenum glGetError(void);
 GLenum glCheckFramebufferStatus(GLenum target);
 \end{lstlisting}
-A table \ref{table:OpenGL ES adaptation} is given below to list the adapted functions of OpenGL in the original ElasticFusio program.
+A table \ref{table:OpenGL ES adaptation} is given below to list the adapted functions of OpenGL in the original ElasticFusion program.
 
 \begin{table}
 \centering
@@ -882,7 +882,7 @@ After the set up is done, inside a whileloop the latest RGBD and pose data struc
 \\
 In the adaptation of OpenGL code to OpenGL ES code, the format of RGB image has to be changed from \verb|GL_RGB| to \verb|GL_RGBA| in order to match the limitation of OpenGL ES, therefore in order to use the color image data in \verb|GL_RGBA| format when the image data is read out in the \textit{GlCameraFrame} class using the \textit{glReadPixels} function, it's read out in \verb|GL_RGBA| format instead of the \verb|GL_RGB| format used in data logging function.\\
 \\
-In the data processing stage, the depth data is brought into alignment with the camera data coordinate of frame,  upsampled use the same method as in data logging function and converted to millimetre scale to produce a depth map, and the pose data is converted into a \textit{Eigen::Matrix4f} structure for ElasticFusion.\\
+In the data processing stage, the depth data is brought into alignment with the camera data coordinate of frame,  up-sampled use the same method as in data logging function and converted to millimetre scale to produce a depth map, and the pose data is converted into a \textit{Eigen::Matrix4f} structure for ElasticFusion.\\
 \\
 Then the data is processed by calling the \textit{processFrame} function of ElasticFusion with RGB image data, depth data, pose and timestamp, which the function signature is shown below.
 \\
@@ -895,35 +895,31 @@ const bool bootstrap = false);
 After a frame is processed, the state of ElasticFusion program can be checked by getting some critical values store in it such as the current number of surfels in the global map or the number of frames storing in the fern database. These data is logged out and can be viewed using the \textit{adb logcat} command on computer if the Tango tablet is
 connecting to it.\\
 \\
-The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.\\
+The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using "mutex lock", so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.\\
 \\
 In order to show the speed of ElasticFusion running, a frame counter is displayed on the screen in application, every time the ELasticFusion processed a frame, the frame counter is incremented. This is done by when the screen is rendered by using the \verb|request_render}| function, the increment function is called from the C++ part to the Java part of program using Java Native Interface (JNI), this function call in Java then starts a new \textit{Runnable} using the \textit{runOnUiThread} function to increment the counter and set the text of the counter label. This function is also implemented on all other functions, including the data logging function and others that runs ElasticFusion.\\
 
 
 
 \subsubsection{Running ElasticFusion dataset on Tango}
-Other than use the live RGBD and pose data from the Tango tablet itself, for experimenting and testing purposes, the application developed is also implemented to run the \verb|dyson_lab.klg| dataset that was used as the example in ElasticFusion paper\citep{whelan2016elasticfusion}, the Dyson Lab dataset however, only contains the RGBD data as it is the data recorded using pure 3D sensor camera. This means the camera tracking function that previous has been turn off by inputing the pose directly to ElasticFusion now has to be running, however the main method to implement this function is similar to the previous function, except for the data does not come from Tango device but the dataset file placed on the device manually.\\
+Other than use the live RGBD and pose data from the Tango tablet itself, for experimenting and testing purposes, the application developed is also implemented to run the \verb|dyson_lab.klg| dataset that was used as the example in ElasticFusion paper\citep{whelan2016elasticfusion}, the Dyson Lab dataset however, only contains the RGBD data as it is the data recorded using pure 3D sensor camera. This means the camera tracking function that previous has been turn off by inputting the pose directly to ElasticFusion now has to be running, however the main method to implement this function is similar to the previous function, except for the data does not come from Tango device but the dataset file placed on the device manually.\\
 \\
-To be able to read the RGBD data from dataset file, the \textit{RawLogReader} inherited from \textit{LiveLogReader} that is used to read data from dataset files in the \textit{GUI} part of original ElasticFusion program is extracted out and put into the \textit{runDatasetEF} class created for this function. When data is read from the dataset file, it's checked if it's compressed, if the RGBD data is compressed then the depth data is uncompressed using \textit{uncompress} function in zlib library\footnote{\url{http://zlib.net/}} into a byte buffer, and the RGB image data is uncompressed from JPEG format using OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}}. As mentioned above, since after the adaptation the format of image texture in ElasticFusion is in \verb|GL_RGBA| format, but the RGB image data stored in JPEG format in dataset file does not have the Alpha channel, an Alpha value of 255 is manually added to the back of each "RGB" values in the bytebuffer acquired after uncompression, also since the OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}} reads data from JPEG image in "BGR" fashion instead of "RGB", the order is corrected when the Alpha channel value is added.\\
+To be able to read the RGBD data from dataset file, the \textit{RawLogReader} inherited from \textit{LiveLogReader} that is used to read data from dataset files in the \textit{GUI} part of original ElasticFusion program is extracted out and put into the \textit{runDatasetEF} class created for this function. When data is read from the dataset file, it's checked if it's compressed, if the RGBD data is compressed then the depth data is uncompressed using \textit{uncompress} function in zlib library\footnote{\url{http://zlib.net/}} into a byte buffer, and the RGB image data is uncompressed from JPEG format using OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}}. As mentioned above, since after the adaptation the format of image texture in ElasticFusion is in \verb|GL_RGBA| format, but the RGB image data stored in JPEG format in dataset file does not have the Alpha channel, an Alpha value of 255 is manually added to the back of each "RGB" values in the byte buffer acquired after uncompress is done, also since the OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}} reads data from JPEG image in "BGR" fashion instead of "RGB", the order is corrected when the Alpha channel value is added.\\
 \\
 The same as to run ElasticFusion from data on Tango, when the button for using dataset to run ElasticFusion is pressed, a new thread for this function is started, for each frame it first read the RGBD data from the dataset, and let the ElasticFusion process the data in a synchronise way, instead of using a circular buffer like the previous function did.\\
 \\
-Since the dataset does not contains pose data, the pose is eatimated in this function using the camera tracking process in ElasticFusion, it make use of the CUDA and SuiteSparse function that are mentioned early. In order to monitor the pose estimation when ElasticFusion is running, the current pose stored in ElasticFusion is acquired using the \textit{getCurrPose} function after frame is process, this pose is stored in Eigen structure \textit{Eigen::Vector4f}, representing by the affine transformation matrix. This pose is then logged out to allow for monitoring, and can be viewed by using the ADB Logcat function when connected to a computer.\\
+Since the dataset does not contains pose data, the pose is estimated in this function using the camera tracking process in ElasticFusion, it make use of the CUDA and SuiteSparse function that are mentioned early. In order to monitor the pose estimation when ElasticFusion is running, the current pose stored in ElasticFusion is acquired using the \textit{getCurrPose} function after frame is process, this pose is stored in Eigen structure \textit{Eigen::Vector4f}, representing by the affine transformation matrix. This pose is then logged out to allow for monitoring, and can be viewed by using the ADB Logcat function when connected to a computer.\\
 \\
 The same as the previous function, when running ElasticFusion using dataset on Tango tablet, the global map reconstructed can be saved to a ply file on the Tango tablet, and the live processed frame count is displayed on the screen. However, due to the time limitation in this project, no GUI is built for the application to allow the user to choose which file to run as dataset, instead a fixed file named \textit{dataset.klg} is used as the dataset to run ElasticFusion, and error will be given if the file is not found.\\
 
 
 
 \subsubsection{Running Tango dataset on Tango}
-One of the problem found when try to run the ElasticFusion using live data from Tango tablet is that, since ElasticFusion runs very slowly on the Tango tablet, and the RGBD and pose data is acquired from the latest position in the circular buffer, the actual frame processed by ElasticFusion is not continous, as discovered that averagely for each frame ElasticFusion is processed, seven frame has been putted into the circular buffer. Since the frame rate of Tango data is already slow on the tablet, only about 3 to 6 Hz, a gap of seven frames is already a large discontinuity in data for ElasticFusion, this results in very poor result of ElasticFusion even when the Tango tablet is held very stable and moving very slowly. One of way that may help is to extend the fixed size of circular buffer, however the uncompressed RGB image and depth data takes up a certain amount of space in memory, and the current 50 frames stored in the buffer is already a considerable space occupied in the memory, since only 4GB memory is available on the Tango tablet to share between CPU and GPU.\\
+One of the problem found when try to run the ElasticFusion using live data from Tango tablet is that, since ElasticFusion runs very slowly on the Tango tablet, and the RGBD and pose data is acquired from the latest position in the circular buffer, the actual frame processed by ElasticFusion is not continuous, as discovered that averagely for each frame ElasticFusion is processed, seven frame has been putted into the circular buffer. Since the frame rate of Tango data is already slow on the tablet, only about 3 to 6 Hz, a gap of seven frames is already a large discontinuity in data for ElasticFusion, this results in very poor result of ElasticFusion even when the Tango tablet is held very stable and moving very slowly. One of way that may help is to extend the fixed size of circular buffer, however the uncompressed RGB image and depth data takes up a certain amount of space in memory, and the current 50 frames stored in the buffer is already a considerable space occupied in the memory, since only 4GB memory is available on the Tango tablet to share between CPU and GPU.\\
 \\
-Therefore, for experimenting purpose the function is implemented to use the previously saved RGBD and pose data files to run the ElasticFusion program on Tango tablet, since the data is read and used in a synchronise way, the problem describled above would not arise. To do this a similar class is created as in the prevoius function, so new thread can be started to read data from the RGBD and pose files on the tablet and use them to run ElasticFusion. The RGB image data is also processed to correct the order of "RGB" value and alpha channel value is added and depth data is also uncompressed into a byte buffer. For the pose data reading, the files for class \textit{GroundTruthOdometry} are copied from the \textit{GUI} part of original ElasticFusion program to the Android application and adapted, it's used to read the pose data in the file stored in position and quaternion format and convert it to transformation matrix format using the \textit{Eigen::Vector4f} structure. The read pose is then feed to the ElasticFusion program for processing. One thing to be mindful here is that the \textit{Core} ElasticFusion should take the current pose estimation as input instead of a incremental transformation matrix with respect to the last frame. There are errors in original Elasticfusion source code that have confused between these two, as the pose inputted to ElasticFusion can not only be used as a ground truth pose but also can be used as a estimation to bootstrap the optimization in camera tracking stage, the errors are corrected here.\\
+Therefore, for experimenting purpose the function is implemented to use the previously saved RGBD and pose data files to run the ElasticFusion program on Tango tablet, since the data is read and used in a synchronise way, the problem described above would not arise. To do this a similar class is created as in the prevoius function, so new thread can be started to read data from the RGBD and pose files on the tablet and use them to run ElasticFusion. The RGB image data is also processed to correct the order of "RGB" value and alpha channel value is added and depth data is also uncompressed into a byte buffer. For the pose data reading, the files for class \textit{GroundTruthOdometry} are copied from the \textit{GUI} part of original ElasticFusion program to the Android application and adapted, it's used to read the pose data in the file stored in position and quaternion format and convert it to transformation matrix format using the \textit{Eigen::Vector4f} structure. The read pose is then feed to the ElasticFusion program for processing. One thing to be mindful here is that the \textit{Core} ElasticFusion should take the current pose estimation as input instead of a incremental transformation matrix with respect to the last frame. There are errors in original Elasticfusion source code that have confused between these two, as the pose inputted to ElasticFusion can not only be used as a ground truth pose but also can be used as a estimation to bootstrap the optimization in camera tracking stage, the errors are corrected here.\\
 \\
 Lastly, with RGBD and pose data feed into the ElasticFusion from dataset on Tango, the reconstructed global model can also be saved into a ply file on device, and the current processed frame count is displated on screen. Again, due to time limitation no GUI is built for choosing dataset file to run and fixed file names "tangoRGBDData.klg" and "tangoPosedata.klg" are used.\\
-
-
-
-
 
 
 \newpage
@@ -936,7 +932,7 @@ Beside to get the ElasticFusion program running on the Tango tablet, one other o
 \\
 In the ElasticFusion\citep{whelan2016elasticfusion} paper, When local or global loop closure happens, the predicted surface renderings of current model prediction and frame registered together is brought into alignment by a relative transformation matrix $\mat H \in \mathbb{S}\E(3)$ outputs by the optimization problem, however the changes the current pose stored in the ElasticFusion program, and theoretically if more loop closure happens, as the pose from Tango platform does not correct drifts, the pose input to ElasticFusion will be inconsistent of the true pose of the Tango tablet.\\
 \\
-To correct the pose input to ElasticFusion, an extra correction matrix is store in the \textit{ElasticFusion} class using the \textit{Eigen::Vector4f} structure. This matrix is initialised to be identity matrix, and every time a local or global loop closure happens, the relative transformation matrix $\mat H$ matrix calculated is multiplied to the correction matrix to accumulate the difference. And at the begining of each frame processed, the correction matrix is multiplied to the input pose from Tango to produce the corrected pose which will be used in the 3D reconstruction process. In this way the pose feed into ElasticFusion is always consistent with the pose stored in ElasticFusion, and drifts will be corrected to prevent error in pose estimated to build up.\\
+To correct the pose input to ElasticFusion, an extra correction matrix is store in the \textit{ElasticFusion} class using the \textit{Eigen::Vector4f} structure. This matrix is initialised to be identity matrix, and every time a local or global loop closure happens, the relative transformation matrix $\mat H$ matrix calculated is multiplied to the correction matrix to accumulate the difference. And at the beginning of each frame processed, the correction matrix is multiplied to the input pose from Tango to produce the corrected pose which will be used in the 3D reconstruction process. In this way the pose feed into ElasticFusion is always consistent with the pose stored in ElasticFusion, and drifts will be corrected to prevent error in pose estimated to build up.\\
 \\
 This change is not only implemented in the ElasticFusion program on Tango tablet but also made in the original ElasticFusion program on desktop computer, and it's tested on desktop computer using the Dyson Lab dataset. Since the Dyson Lab dataset only contains RGBD data, the dataset is used to run ElasticFusion for one time first with loop closure detection, and make use of the saved pose graph file generated when the ElasticFusion program exits. The saved pose graph file format is slightly different from the format required for input pose dataset, so the program is adapted to generated the pose graph file as a pose dataset file directly. This allows the ElasticFusion program to run using the Dyson Lab RGBD dataset and pose dataset we generated, and so the adaptation of the program can be tested, since in the Dyson Lab dataset there are many local and global loop closures so it's a perfect example to demonstrate the effect made by adaptation.\\
 
@@ -953,7 +949,7 @@ To see the logged messages, the Tango tablet can be connected to computer with A
 \\
 If the application crashed, the error and stack trace will be logged out in the logcat tool which allows the function and file where cause the error or crash to be found and analysed.\\
 \\
-To debug the C++ code in the application, GDB\footnote{\url{https://www.gnu.org/software/gdb/}} debugger can be used. In the original code for Advanced Estimation in Robotics (433H) course practical exercise that this application used as basic frame work, the folder \verb|debug_scripts| contains scripts to setup GDB. After the setup script is run, by running the application in Eclipse using the debugging mode, the code can be debugged by pause to inspect status or adding break points.\\
+To debug the C++ code in the application, GDB\footnote{\url{https://www.gnu.org/software/gdb/}} debugger can be used. In the original code for Advanced Estimation in Robotics (433H) course practical exercise that this application used as basic frame work, the folder \verb|debug_scripts| contains scripts to set-up GDB. After the set-up script is run, by running the application in Eclipse using the debugging mode, the code can be debugged by pause to inspect status or adding break points.\\
 \\
 The one kind of error that has to be explicitly checked is the OpenGL ES error, since it may not cause the application to crash but the code will just not work. To check for error in the OpenGL ES code, the function \textit{glGetError} and \textit{glCheckFramebufferStatus} are used to detect general OpenGL ES error and incorrect OpenGL ES framebuffer status, their function signatures are given below. These functions have to be manually written in places where the OpenGL ES to be checked.\\
 \begin{lstlisting}
@@ -972,14 +968,14 @@ In the original planning of this project, the evaluation process is intended to 
 \\
 In the original planning, to measure the performance of the solution by quantity and quality. Both algorithm and computational performance need to be benchmarked as what is done in the ElasticFusion\citep{whelan2016elasticfusion} paper.\\
 \\
-For the algorithm, trajectory accuracy can be tested using sample datasets to provide RGBD data input on the tablet, then the output pose graph can be used to compared with the ground truth data that is obtained by using industrial standard system. The RMSE(root mean square error distance) between every estimated pose and ground truth pose can be calculated to provide the error at each timestamp. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. Similarly, since the function of running ElasticFusion using saved dataset from Tango is implemented, benchmark using data from Tango tablet can also been done by comparing the result of Tango running Tango data and use the Tango data to run ElasticFusion on desktop computer.\\
+For the algorithm, trajectory accuracy can be tested using sample datasets to provide RGBD data input on the tablet, then the output pose graph can be used to compared with the ground truth data that is obtained by using industrial standard system. The RMSE(root mean square error distance) between every estimated pose and ground truth pose can be calculated to provide the error at each time-stamp. In the 3D reconstruction part, similar method can be used to compare the reconstructed surface to benchmark data for accuracy estimation. Similarly, since the function of running ElasticFusion using saved dataset from Tango is implemented, benchmark using data from Tango tablet can also been done by comparing the result of Tango running Tango data and use the Tango data to run ElasticFusion on desktop computer.\\
 \\
 For computational Performance, the frame rate during ElasticFusion running can be plotted to check if it is within the acceptable range for real time SLAM application.\\
 \\
-However, before the project ends the experiment of using Dyson Lab dataset to run ElasticFusion on Tango tablet have not achieve good results. Firstly for reason that still not to be known, somehow the confidence value of surfels are extremely low compared to the default confidence threshold 10.0, which results in no surfel is saved when the global map reconstructed should be saved to a ply file. After this is discovered the very low confidence threshold 0.45 is set to try to allow some surfels from the global model to be saved to the ply file, but by viewing the saved the ply file in MeshLab\footnote{\url{http://www.meshlab.net/}} application on computer, it can be seen that the 3D reconstructed surface is slightly wrong compare to the reconstructed model by running ElasticFusion on desktop computer. However due to time limitation on this project, the reason for that or the place caused this error is still unknown. Sceondly, from all the experiments to run ElasticFusion on Tango tablet, it can be seen that even when all the settings are set to allow ElasticFusion run at fastest speed, such as disabling $\mathfrak{so}(3)$ pre-alignment, use single level tracking pyramid by enabling fast odometry, and disable loop closure detection. Despite that, even when running the Dyson Lab dataset with its manually generated pose data on Tango tablet, the frame rate is very slow that the processing of each frame takes up more then a second, which corresponds to the time seven frames are newly stored in the circular buffer. This is actually already faster then using data from the Tango tablet since the resolution of Dyson Lab dataset image is 640 and 480, but the Tango tablet camera resolution is 1280 and 720, which means using Tango data will require more procssing time and memeory usage. As the Tango tablet only has 4Gb memory to used by both CPU and GPU, the memory is not sufficient for 3D reconstruct large scenes, and in the implementation stage the \verb|TEXTURE_DIMENSION| value that represents dimension of reconstructed scene in \textit{GlobalModel} class has to be reduced from the original 3072 to less 1000. Therefore the performance of running ElasticFusion on Tango is no where near the frame rate required for real time interactive SLAM application (30 Hz).\\
-The slow performace of running ElaticFusion on Tango tablet is mainly due to the lack of processing power on the tablet, as described below, the Nvidia Tegra K1 processor is still quite far behind from the processing power required, since ElasticFusion is a dense 3D reconstruction SLAM system, both memory and processor usage is intensive.\\
+However, before the project ends the experiment of using Dyson Lab dataset to run ElasticFusion on Tango tablet have not achieve good results. Firstly for reason that still not to be known, somehow the confidence value of surfels are extremely low compared to the default confidence threshold 10.0, which results in no surfel is saved when the global map reconstructed should be saved to a ply file. After this is discovered the very low confidence threshold 0.45 is set to try to allow some surfels from the global model to be saved to the ply file, but by viewing the saved the ply file in MeshLab\footnote{\url{http://www.meshlab.net/}} application on computer, it can be seen that the 3D reconstructed surface is slightly wrong compare to the reconstructed model by running ElasticFusion on desktop computer. However due to time limitation on this project, the reason for that or the place caused this error is still unknown. Secondly, from all the experiments to run ElasticFusion on Tango tablet, it can be seen that even when all the settings are set to allow ElasticFusion run at fastest speed, such as disabling $\mathfrak{so}(3)$ pre-alignment, use single level tracking pyramid by enabling fast odometry, and disable loop closure detection. Despite that, even when running the Dyson Lab dataset with its manually generated pose data on Tango tablet, the frame rate is very slow that the processing of each frame takes up more then a second, which corresponds to the time seven frames are newly stored in the circular buffer. This is actually already faster then using data from the Tango tablet since the resolution of Dyson Lab dataset image is 640 and 480, but the Tango tablet camera resolution is 1280 and 720, which means using Tango data will require more processing time and memory usage. As the Tango tablet only has 4Gb memory to used by both CPU and GPU, the memory is not sufficient for 3D reconstruct large scenes, and in the implementation stage the \verb|TEXTURE_DIMENSION| value that represents dimension of reconstructed scene in \textit{GlobalModel} class has to be reduced from the original 3072 to less 1000. Therefore the performance of running ElasticFusion on Tango is no where near the frame rate required for real time interactive SLAM application (30 Hz).\\
+The slow performance of running ElaticFusion on Tango tablet is mainly due to the lack of processing power on the tablet, as described below, the Nvidia Tegra K1 processor is still quite far behind from the processing power required although it's already quite power for mobile devices, since ElasticFusion is a dense 3D reconstruction SLAM system, both memory and processor usage is intensive.\\
 \\
-On the other hand, although first recording the RGBD and pose data using Tango tablet and then use the data for running ElasticFusion on desktop is possible, only a small part surface is able to be re constructed and the performace is not very good compared to other RGBD sensor cameras like Microsoft Kinect or ASUS Xtion Pro Live or Intel RealSense 3D Camera. This is due to the projective I-R depth sensor is not very good on the Tango tablet, the depth points captured is very sparse and results in performace of ElasticFusion not as good as using other densor sensors.\\
+On the other hand, although first recording the RGBD and pose data using Tango tablet and then use the data for running ElasticFusion on desktop is possible, only a small part surface is able to be re-constructed and the performance is not very good compared to other RGBD sensor cameras like Microsoft Kinect or ASUS Xtion Pro Live or Intel RealSense 3D Camera. This is due to the IR projective depth sensor is not very good on the Tango tablet, the depth points captured is very sparse and results in performance of ElasticFusion not as good as using other depth sensors.\\
 
 
 
@@ -989,33 +985,22 @@ On the other hand, although first recording the RGBD and pose data using Tango t
 
 
 \section{Conclusions and Future Work}
-
-The project's conclusions should list the things which have been learnt as a result of the work you have done. For example, "The use of overloading in C++ provides a very elegant mechanism for transparent parallelisation of sequential programs", or "The overheads of linear-time n-body algorithms makes them computationally less efficient than O(n log n) algorithms for systems with less than 100000 particles". Avoid tedious personal reflections like "I learned a lot about C++ programming...", or "Simulating colliding galaxies can be real fun...". It is common to finish the report by listing ways in which the project can be taken further. This might, for example, be a plan for doing the project better if you had a chance to do it again, turning the project deliverables into a more polished end product, or extending the project into a programme for an MPhil or PhD.\\
-
-ASUS ZenFone AR\\
-https://www.asus.com/us/Phone/ZenFone-AR-ZS571KL/
-
-Apple arkit
-https://developer.apple.com/arkit/
-
-optimization \\
-slow, GPU, memmory\\
-resolution, \\
+After this project, it is concluded that currently the ElasticFusion algorithm may not be able to run on the Tango Yellowstone tablet for real time interactive application due to problems like processor, memory and sensors. However due to the time limitation and effort that can be put on this project, no optimization is done and no extension have been developed in this project. \\
 \\
-However, extension and optimization could be done if more time is given and basic solution is completed. Until here the 3D reconstruction process will be running on Tango tablet's NVIDIA Tegra K1 processor without utilizing the CUDA feature on it to improve performance by parallel processing. A optimization could be to use CUDA in the camera tracking process. Also on the application side, extra features can be added such as saving the reconstructed surfel map on the Tango tablet, add an interactive view of reconstructed 3D surface map on the screen to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface.\\
-
-
+If more time and effort is given, optimization could be done such as to use CUDA for pre-processing the RGBD data from data or adapt ElasticFusion algorithm for higher noise depth data. On the application side, extra features can be added such as displaying the 3D reconstructed surfel map on the tablet screen in real time, add interactive function to allow for drag and zoom operation, showing the camera's current pose on the map. Further more, demo application and be built to utilising the augmented reality ability on Tango platform, such as placing a virtual static object on the 3D reconstructing surface. Or building GIU to allow user choose what file to be used as dataset to run ElasticFusion.\\
+\\
+Although great result has not been achieved in this project, it have still shown the possibility of using state-of-the-art SLAM system on mobile device for dense 3D reconstruction. It have also shown the possible way to use Tango tablet as a pure 3D data recording device and then upload the recorded data to a desktop computer for 3D reconstruction.\\
+\\
+On the other hand since this project has only attempted to deploy the ElasticFusion on the Google YellowStone Tango tablet, most of the problem arises actually is only related to the tablet itself. Since this tablet is the first officially release Tango device and has been stopped supporting by Google for quite some time, the hardware and software on the tablet is out of date. With the newly released ASUS ZenFone AR\footnote{\url{https://www.asus.com/us/Phone/ZenFone-AR-ZS571KL/}} Tango smart phone, much better depth sensor and software is carried onboard. This means that ElasticFusion may very well achieve better performance on the new Tango device. However all other Tango device carries Qualcomm processor and the ASUS ZenFone AR phone carries Qualcomm Snapdragon 821 processor, this means that if the camera tracking process will be used then the part that's implemented using CUDA has to be written. But the new Tango platform on new Tango device have already improved the accuracy of the trajectory estimated by performing drift corrections and also the Tango constructor tool\footnote{\url{https://play.google.com/store/apps/details?id=com.projecttango.constructor}} has been released, which means the usage of ElasticFusion algorithm on Tango device will be better in the future.
+\\
+Overall, this project has demonstrate the possibility of using a commodity mobile hand held device for 3D dense surface reconstruction, and have shown the potential of developing augmented reality using on top of it, for example the new feature released by Tango to use environment lighting information to shading virtual objects in real time.
 
 \newpage
 
+\section{appendix}
 
-
-\newpage
-
-
-
-
-The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
+\subsection{planned project timeline}
+The original planned project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
 
 \begin{figure}
 \centering
@@ -1024,33 +1009,26 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
     \label{fig:tiemline2}
 \end{figure}
 
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot1}
-    \caption{Screenshot1}
-    \label{fig:Screenshot1}
-\end{figure}
+%%%%%%%%%%
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Screenshot2}
-    \caption{Screenshot2}
+    \caption{Running ElasticFusion using saved Tango data 1}
     \label{fig:Screenshot2}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Screenshot3}
-    \caption{Screenshot3}
+    \caption{Running ElasticFusion using saved Tango data 2}
     \label{fig:Screenshot3}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Screenshot9}
-    \caption{Screenshot9}
+    \caption{Running ElasticFusion using saved Tango data 3}
     \label{fig:Screenshot9}
 \end{figure}
 
@@ -1058,14 +1036,14 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Screenshot10}
-    \caption{Screenshot10}
+    \caption{Running ElasticFusion using saved Tango data 4}
     \label{fig:Screenshot10}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Screenshot11}
-    \caption{Screenshot11}
+    \caption{Running ElasticFusion using Dyson Lab dataset}
     \label{fig:Screenshot11}
 \end{figure}
 
@@ -1073,47 +1051,26 @@ The project timeline is shown in Fig \ref{fig:tiemline2} with each task correspo
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Screenshot14}
-    \caption{Screenshot14}
+    \caption{Running ElasticFusion using Dyson Lab dataset}
     \label{fig:Screenshot14}
 \end{figure}
 
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango1}
-    \caption{ScreenshotTango1}
-    \label{fig:ScreenshotTango1}
-\end{figure}
-
-
-
-
-
-
-
 \newpage
-
-
-
-
-
-\section{Appendix}
-
-
-The appendices contain information which is peripheral to the main body of the report. Information typically included are things like parts of the code, tables, proofs, test cases or any other material which would break up the theme of the text if it appeared in situ. You should try to bind all your material in a single volume if possible.\\
-
-\newpage
-
-
 
 
 
 \section{User Guide}
+After the application starts running, the screen will show an interface similar to what is shown in Fig \ref{fig: ScreenshotTango1}, from the picture we can see that the screen will display the live RGB image captured by the color camera, also a few buttons and labels are shown on the Screen. The buttons on the screen are used for: log Tango data to files on tablet, run ElasticFusion use live data on Tango, run ElasticFusion use the Dyson Lab dataset on tablet, run ElasticFusion use saved Tango data without pose, run ElasticFusion use saved Tango data with pose, save the current reconstructed model to the ply file on tablet. The rightmost label is used to display the current processed or logged number of frames. Any function can be start by press the corresponding button once and stop by press it again, however if another function is running an error will pop up to alert the user. To close the application simply exit normally.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango1}
+    \caption{Screenshot of Application on Tango}
+    \label{fig:ScreenshotTango1}
+\end{figure}
 
-
-For projects which result in a new piece of software you should provide a proper user guide providing easily understood instructions on how to use it. A particularly useful approach is to treat the user guide as a walk-through of a typical session, or set of sessions, which collectively display all the features of your system. Technical details of how the package works should be in the body of the report. Keep it concise and simple. The extensive use of diagrams illustrating the package in action prove particularly helpful. The user guide is sometimes included as a chapter in the main body of the report, but is often better in an appendix.\\
 
 
 \newpage

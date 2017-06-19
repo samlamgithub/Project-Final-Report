@@ -38,6 +38,7 @@
 \contentsline {subsection}{\numberline {6.8}Debugging and testing}{56}{subsection.262}
 \contentsline {section}{\numberline {7}Evaluation}{58}{section.275}
 \contentsline {section}{\numberline {8}Conclusions and Future Work}{60}{section.277}
-\contentsline {section}{\numberline {9}Appendix}{62}{section.287}
-\contentsline {section}{\numberline {10}User Guide}{63}{section.288}
-\contentsline {section}{\numberline {11}Bibliography}{64}{section.289}
+\contentsline {section}{\numberline {9}appendix}{61}{section.279}
+\contentsline {subsection}{\numberline {9.1}planned project timeline}{61}{subsection.280}
+\contentsline {section}{\numberline {10}User Guide}{62}{section.290}
+\contentsline {section}{\numberline {11}Bibliography}{63}{section.291}
