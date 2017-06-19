@@ -6,7 +6,7 @@
 \newcommand{\email}{jiahao.lin13@imperial.ac.uk}
 \newcommand{\supervisor}{Dr Stefan Leutenegger}
 \newcommand{\secondmarker}{Professor Andrew Davison}
-\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 
 \usepackage{listings}
 
@@ -833,7 +833,7 @@ Eigen3\footnote{\url{http://eigen.tuxfamily.org/index.php?title=3.0}} source cod
 
 
 \subsubsection{Eigen}
-In the Android application developed on Tango tablet, Boost\footnote{\url{http://www.boost.org/}} is mainly use for manage thread, such as creating new thread to compress RGB image and depth data in the data logging function, or creating new thread to run ElasticFusion program. The version of Boost used in the application is 1.53.0\footnote{\url{http://www.boost.org/doc/libs/1_53_0/}}, the source code is downloaded from Github\footnote{\url{https://github.com/emileb/Boost-for-Android-Prebuilt}}, which is a built version of Boost for Android using the code from \url{https://github.com/sorccu/Boost-for-Android}. The Boost library is compiled into a static library and it's linked to the main application in the \textit{Android.mk} makefile. 
+In the Android application developed on Tango tablet, Boost\footnote{\url{http://www.boost.org/}} is mainly use for manage thread, such as creating new thread to compress RGB image and depth data in the data logging function, or creating new thread to run ElasticFusion program. The version of Boost used in the application is 1.53.0\footnote{\url{http://www.boost.org/doc/libs/1_53_0/}}, the source code is downloaded from Github\footnote{\url{https://github.com/emileb/Boost-for-Android-Prebuilt}}, which is a built version of Boost for Android using the code from \url{https://github.com/sorccu/Boost-for-Android}. The Boost library is compiled into a static library and it's linked to the main application in the \textit{Android.mk} makefile.
 
 
 \newpage
@@ -842,11 +842,12 @@ In the Android application developed on Tango tablet, Boost\footnote{\url{http:/
 
 \subsection{Running ElasticFusion on Tango}
 
-After the ElasticFusion program is compiled on the Tango tablet, actual functions need to be implemented to run the ElasticFusion program using different data sources. In the Android application developed in this project, the ElasticFusion can be either run using the live RGBD and pose data from the cameras and IMU sensor on board, or run using the \textit{dyson_lab.klg} dataset that was used as the example in ElasticFusion paper\footcite{whelan2016elasticfusion}, or running using the Tango RGBD and pose data saved earlier in files. However, they are all implemented in similar way by starting a new thread to run ElasticFusion. \\
+After the ElasticFusion program is compiled on the Tango tablet, actual functions need to be implemented to run the ElasticFusion program using different data sources. In the Android application developed in this project, the ElasticFusion can be either run using the live RGBD and pose data from the cameras and IMU sensor on board, or run using the \verb|dyson_lab.klg| dataset that was used as the example in ElasticFusion paper\citep{whelan2016elasticfusion}, or running using the Tango RGBD and pose data saved earlier in files. However, they are all implemented in similar way by starting a new thread to run ElasticFusion. \\
 
 \subsubsection{Running ElasticFusion using data from Tango}
 To run the ElasticFusion program using the RGBD and pose data from Tango tablet, a similar method like the data logging function is used. When the button for this function is pressed on screen, the function called is passed from the event listener in Java part of the application to the C++ part using the Java Native Interface (JNI) on Android platform. Firstly it is checked that no other function is running before the ElasticFusion thread can start, after that when the function started, the RGBD and pose data from Tango will be put into the circular buffer of \textit{RGBDPosedata} structures in the class for this function.\\
-On the other hand, a new ElasticFusion running thread starts when the button is pressed, firstly a new OpenGL context is created and attached to the current thread as described above, and then the \textit{Resolution} and \textit{Intrinsics} structs from ElasticFusion are configured using Tango camera data acquired use the \textit{\verb|TangoService_getCameraIntrinsics|} function. After that the \textit{ElasticFusion} class is initialised using configurations that makes the program run at fastest speed, such as disable SO(3) pre-alignment, enabling fast odometry by using single level tracking pyramid, disable pose bootstrap, and disable loop closure detection function. Also the \textit{confidenceThreshold} value is set to 0.45 instead of the default value 10.0, the reason for doing it will be explain later. Before the ElasticFusion can process any data, OpenGL ES is configured using the code shown below in Table \ref{table:OpenGL ES configuration}.\\
+On the other hand, a new ElasticFusion running thread starts when the button is pressed, firstly a new OpenGL context is created and attached to the current thread as described above, and then the \textit{Resolution} and \textit{Intrinsics} structs from ElasticFusion are configured using Tango camera data acquired use the \\
+\verb|TangoService_getCameraIntrinsics| function. After that the \textit{ElasticFusion} class is initialised using configurations that makes the program run at fastest speed, such as disable SO(3) pre-alignment, enabling fast odometry by using single level tracking pyramid, disable pose bootstrap, and disable loop closure detection function. Also the \textit{confidenceThreshold} value is set to 0.45 instead of the default value 10.0, the reason for doing it will be explain later. Before the ElasticFusion can process any data, OpenGL ES is configured using the code shown below in Table \ref{table:OpenGL ES configuration}.\\
 \begin{table}
 \centering
 \caption{OpenGL ES configuration}
@@ -881,7 +882,7 @@ void processFrame(const unsigned char *rgb, const unsigned short *depth,
                     const float weightMultiplier = 1.f,
                     const bool bootstrap = false);
 \end{lstlisting}
-After a frame is processed, the state of ElasticFusion program can be checked by getting some critical values store in it such as the current number of surfels in the global map or the number of frames storing in the fern database. These data is logged out and can be viewed using the \textit{adb logcat} command on computer if the Tango tablet is 
+After a frame is processed, the state of ElasticFusion program can be checked by getting some critical values store in it such as the current number of surfels in the global map or the number of frames storing in the fern database. These data is logged out and can be viewed using the \textit{adb logcat} command on computer if the Tango tablet is
 connecting to it.\\
 The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.
 
