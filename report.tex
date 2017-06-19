@@ -86,8 +86,7 @@ In the original design for this project, if the development of this solution is 
 \\
 In the solution, an Android application is developed using Android Native Development Kit (NDK)\footnote{\url{https://developer.android.com/ndk/index.html}}, which allows the use of Tango C API\footnote{\url{https://developers.google.com/tango/apis/c/}} to acquire depth camera data and 3D pose data, also makes it possible to reuse the existing code for ElasticFusion that is written in C++. Therefore most of the application is written in C++, with a few Java code for the Android application. The application uses the code for Advanced Estimation in Robotics (433H) course practical exercise by Dr Stefan Leutenegger in Department of Computing at Imperial College London as the basic frame work, firstly the code is combined with the logger for ElasticFusion\footnote{\url{https://github.com/mp3guy/Logger1}} to write the RGB, depth and pose data in format required by ElasticFusion acquired from Tango into two files on the Tango tablet, which allows ElasticFusion to be run on desktop using these two files as raw dataset. Then the core function part of code for ElasticFusion is ported and adapted to Android with its dependencies changed or removed, so that ElasticFusion can be run on Android while its source remains in C++. One thing worth notice in here is that this project uses an internal version of ElasticFusion source code at Dyson Robotics Lab in Imperial College London, instead of the open source version on Github\footnote{\url{https://github.com/mp3guy/ElasticFusion}}. The final produced application is able to log the data from sensors on Tango into files, or run ElasticFusion from sensor data in real time, or run ElasticFusion from raw dataset files on the device with or without pose data. This provides various way to do experiments or measure  efficiency during the project. However, due to time and effort limitations, no interface for showing the progress of ElasticFusion running is built, this is different from original planning but the reasons will be explain in detail later. Right now on the screen of the application, interface only shows the image that color camera is taking and a few buttons, screen shot and description will be provided in later section.\\
 \\
-Finally, simple change is made on both desktop version and Android version of ElasticFusion to allow for pose feed into the program to be corrected overtime when global or local loop closure happens. This help maintain consistency between the pose feed into ElasticFusion and the internal pose stored in the program. Since the original ElasticFusion can only estimate pose from RGB-D data, or use an input pose as ground truth pose, or use the input pose as a bootstrap pose for optimization, the adaptation made in this project enables the pose feed into ElasticFusion to be consistent with the true pose while also not waste time to do the camera tracking process when the processing power is not so strong like on the Tango tablet.
-
+Finally, simple change is made on both desktop version and Android version of ElasticFusion to allow for pose feed into the program to be corrected overtime when global or local loop closure happens. This help maintain consistency between the pose feed into ElasticFusion and the internal pose stored in the program. Since the original ElasticFusion can only estimate pose from RGB-D data, or use an input pose as ground truth pose, or use the input pose as a bootstrap pose for optimization, the adaptation made in this project enables the pose feed into ElasticFusion to be consistent with the true pose while also not waste time to do the camera tracking process when the processing power is not so strong like on the Tango tablet.\\
 
 \newpage
 
@@ -498,8 +497,9 @@ In this project an Android application is developed to run on the Tango tablet. 
 \\
 After Eclipse and ADT plugin are installed, Android SDK for API version 19 and the corresponding Android NDK version r13b\footnote{\url{https://developer.android.com/ndk/downloads/revision_history.html}} is downloaded and their path is configured in Eclipse to allow Android NDK application to be developed for the Tango tablet.\\
 \\
-Lastly for using the Tango C API to develop Tango application on the tablet, the Tango Client API, Tango 3D Reconstruction API and the Tango Support API is needed, they can be downloaded from the Tango C API example repository on Github \footnote{\url{https://github.com/googlesamples/tango-examples-c}}. Also contained in the Tango C example repository the \textit{glm(OpenGL Mathematics)} library\footnote{\url{https://github.com/googlesamples/tango-examples-c/tree/master/third_party/glm}} that is used for matrix calculation is also imported along with the Tango C API files.
-
+Lastly for using the Tango C API to develop Tango application on the tablet, the Tango Client API, Tango 3D Reconstruction API and the Tango Support API is needed, they can be downloaded from the Tango C API example repository on Github \footnote{\url{https://github.com/googlesamples/tango-examples-c}}. Also contained in the Tango C example repository the \textit{glm(OpenGL Mathematics)} library\footnote{\url{https://github.com/googlesamples/tango-examples-c/tree/master/third_party/glm}} that is used for matrix calculation is also imported along with the Tango C API files.\\
+\\
+To build the source code of the Android application into an APK file to be installed on the Tango tablet, \textit{Android.mk}\footnote{\url{https://developer.android.com/ndk/guides/android_mk.html}} built system is used. The \textit{Android.mk} file in the \textit{JNI} directory compiles the C++ source source files under Android NDK environment, and links the static library and shared library described in the file to the application. If the Android NDK library path is set up in Eclipse, after importing the project folder into Eclipse, added OpenCV as a library and set up path for NDK include folders, right clicking on the main project directory and choose run configuration will allows Eclipse to build the Application and run on the Tango tablet connected to the computer.\\
 
 
 \subsection{Tango Platform}
@@ -524,7 +524,7 @@ The orientation array defines a quaternion that represents the rotation of the t
 0 & 0 & 0 & 1
 \end{bmatrix} \quad  \in \mathbb{S}\E(3)
 \end{align}
-In the application, to get the pose of Tango device, the API function  is used, this function take a pair of frame reference, which represents the coordinate of frame that pose is in, in this case is \verb|TANGO_COORDINATE_FRAME_START_OF_SERVICE| and , means the pose would be the current device pose with respect to the pose device is in when application start. Another parameter is a callback function, the callback function will be called when a new Tango pose is available, and the pose data will be given in the parameter. The signature of this functions is given below.
+In the application developed, to get the pose of Tango device, the C API function \verb|TangoService_connectOnPoseAvailable| is used, this function take a pair of frame reference, which represents the coordinate of frame that pose is in, in this case is \verb|TANGO_COORDINATE_FRAME_START_OF_SERVICE| and \verb|TANGO_COORDINATE_FRAME_DEVICE|, which means the pose would be the current device pose with respect to the pose device is in when application start. Another parameter is a callback function, the callback function will be called when a new Tango pose is available, and the pose data will be given in the parameter. The signature of this functions is given below.
 \begin{lstlisting}
 TangoErrorType TangoService_connectOnPoseAvailable(
     uint32_t count, const TangoCoordinateFramePair* frames,
@@ -623,6 +623,16 @@ typedef struct TangoCameraIntrinsics {
   double distortion[5];
 } TangoCameraIntrinsics;
 \end{lstlisting}
+
+\newpage
+
+\subsection{Basic running framwwork}
+This application in this project is developed on of the code for Advanced Estimation in Robotics (433H) course practical exercise which was used as a basic frame work, it's an Android application running on the Google Tango tablet that made use of the Tango C API.\\
+\\
+To start the project, all the unnecessary code in the application is removed. The code left in the application simply renders the RGB image acquire from the color camera onto the screen, this is done by creating a \textit{GLSurfaceRenderer} class inherited from the \textit{Renderer} class in Android \textit{GLSurfaceView}, and a \textit{CameraOverlay} inherited from the \textit{SurfaceView} and implements the call back function in Android \textit{SurfaceHolder}.\\
+\\
+To aquire the live RGB image captured by the color camera, the Tango C API is used, by using the \verb|TangoService_connectTextureId| from the API, a created OpenGL ES texture is connected to the color camera, which allows later the caprtured image to be stored in the OpenGL ES texture. After that the OpenGL ES function \textit{glDrawElements} is used to render the image to the screen.\\
+\\
 
 \newpage
 
@@ -922,100 +932,39 @@ Lastly, with RGBD and pose data feed into the ElasticFusion from dataset on Tang
 
 
 \subsection{Combine ElasticFusion with pose from Tango in Loop closure mode}
-
-
-
-
-
+Beside to get the ElasticFusion program running on the Tango tablet, one other objective of this project is to find a way to allow the ElasticFusion program can be run in loop closure detection mode with input pose estimated but no use it to bootstrap the camera tracking process. This allows allow the estimated pose input to ElasticFusion to be used in loop closure mode when the pose estimated may not be very accurate but extra processing time and power can be saved, which is the perfect case for running ElasticFusion on Google Tango tablet, since previously for reduce processing time and increase frame rate the loop closure detection of ElasticFusion is disabled, but having this adaptation at least made it theoretically possible. \\
+\\
+In the ElasticFusion\citep{whelan2016elasticfusion} paper, When local or global loop closure happens, the predicted surface renderings of current model prediction and frame registered together is brought into alignment by a relative transformation matrix $\mat H \in \mathbb{S}\E(3)$ outputs by the optimization problem, however the changes the current pose stored in the ElasticFusion program, and theoretically if more loop closure happens, as the pose from Tango platform does not correct drifts, the pose input to ElasticFusion will be inconsistent of the true pose of the Tango tablet.\\
+\\
+To correct the pose input to ElasticFusion, an extra correction matrix is store in the \textit{ElasticFusion} class using the \textit{Eigen::Vector4f} structure. This matrix is initialised to be identity matrix, and every time a local or global loop closure happens, the relative transformation matrix $\mat H$ matrix calculated is multiplied to the correction matrix to accumulate the difference. And at the begining of each frame processed, the correction matrix is multiplied to the input pose from Tango to produce the corrected pose which will be used in the 3D reconstruction process. In this way the pose feed into ElasticFusion is always consistent with the pose stored in ElasticFusion, and drifts will be corrected to prevent error in pose estimated to build up.\\
+\\
+This change is not only implemented in the ElasticFusion program on Tango tablet but also made in the original ElasticFusion program on desktop computer, and it's tested on desktop computer using the Dyson Lab dataset. Since the Dyson Lab dataset only contains RGBD data, the dataset is used to run ElasticFusion for one time first with loop closure detection, and make use of the saved pose graph file generated when the ElasticFusion program exits. The saved pose graph file format is slightly different from the format required for input pose dataset, so the program is adapted to generated the pose graph file as a pose dataset file directly. This allows the ElasticFusion program to run using the Dyson Lab RGBD dataset and pose dataset we generated, and so the adaptation of the program can be tested, since in the Dyson Lab dataset there are many local and global loop closures so it's a perfect example to demonstrate the effect made by adaptation.\\
 
 
 \subsection{Debugging and testing}
+To debug and test the Android application developed in this project, the Android log library is linked to the application which allows the logcat\footnote{\url{https://developer.android.com/studio/command-line/logcat.html}} function in Android ADB (Android Debug Bridge)\footnote{\url{https://developer.android.com/studio/command-line/adb.html}} to be used, in the code of application, different levels of message logging can be done by use the functions \textit{LOGI} for info, \textit{LOGW} for warning and \textit{LOGE} for error messages. The definition of these functions using macros are shown below, the parameter of these functions can be used as normal format output for printing.
+\begin{lstlisting}
+#define LOG_TAG "JNI Log"
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOGW(...) __android_log_print(ANDROID_LOG_WARN, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+\end{lstlisting}
+To see the logged messages, the Tango tablet can be connected to computer with ADB installed using USB cable, by typing in \textit{adb logcat} in the command line tool window, the messages will be print out if the Android application is running. Alternatively by opening Eclipse or Android Studio\footnote{\url{https://developer.android.com/studio/index.html}}, the logcat print-outs can be easily filtered and searched which provides a better way for testing.\\
+\\
+If the application crashed, the error and stack trace will be logged out in the logcat tool which allows the function and file where cause the error or crash to be found and analysed.\\
+\\
+To debug the C++ code in the application, GDB\footnote{\url{https://www.gnu.org/software/gdb/}} debugger can be used. In the original code for Advanced Estimation in Robotics (433H) course practical exercise that this application used as basic frame work, the folder \verb|debug_scripts| contains scripts to setup GDB. After the setup script is run, by running the application in Eclipse using the debugging mode, the code can be debugged by pause to inspect status or adding break points.\\
+\\
+The one kind of error that has to be explicitly checked is the OpenGL ES error, since it may not cause the application to crash but the code will just not work. To check for error in the OpenGL ES code, the function \textit{glGetError} and \textit{glCheckFramebufferStatus} are used to detect general OpenGL ES error and incorrect OpenGL ES framebuffer status, their function signatures are given below. These functions have to be manually written in places where the OpenGL ES to be checked.\\
+\begin{lstlisting}
+GLenum glGetError(void);
+GLenum glCheckFramebufferStatus(GLenum target);
+\end{lstlisting}
 
 
 
 \newpage
 
-
-
-
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot1}
-    \caption{Screenshot1}
-    \label{fig:Screenshot1}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot2}
-    \caption{Screenshot2}
-    \label{fig:Screenshot2}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot3}
-    \caption{Screenshot3}
-    \label{fig:Screenshot3}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot9}
-    \caption{Screenshot9}
-    \label{fig:Screenshot9}
-\end{figure}
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot10}
-    \caption{Screenshot10}
-    \label{fig:Screenshot10}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot11}
-    \caption{Screenshot11}
-    \label{fig:Screenshot11}
-\end{figure}
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/Screenshot14}
-    \caption{Screenshot14}
-    \label{fig:Screenshot14}
-\end{figure}
-
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango1}
-    \caption{ScreenshotTango1}
-    \label{fig:ScreenshotTango1}
-\end{figure}
-
-
-
-
-\newpage
-
-
-The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
-
-\begin{figure}
-\centering
-    \includegraphics[angle=90,width=\textwidth,height=\textheight,keepaspectratio]{figures/timeline2}
-   \caption{Graph for project timeline}
-    \label{fig:tiemline2}
-\end{figure}
-
-\newpage
 
 
 \section{Evaluation}
@@ -1141,6 +1090,90 @@ However, extension and optimization could be done if more time is given and basi
 
 
 
+\newpage
+
+
+
+
+The project timeline is shown in Fig \ref{fig:tiemline2} with each task corresponding to a stage above.
+
+\begin{figure}
+\centering
+    \includegraphics[angle=90,width=\textwidth,height=\textheight,keepaspectratio]{figures/timeline2}
+   \caption{Graph for project timeline}
+    \label{fig:tiemline2}
+\end{figure}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot1}
+    \caption{Screenshot1}
+    \label{fig:Screenshot1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot2}
+    \caption{Screenshot2}
+    \label{fig:Screenshot2}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot3}
+    \caption{Screenshot3}
+    \label{fig:Screenshot3}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot9}
+    \caption{Screenshot9}
+    \label{fig:Screenshot9}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot10}
+    \caption{Screenshot10}
+    \label{fig:Screenshot10}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot11}
+    \caption{Screenshot11}
+    \label{fig:Screenshot11}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Screenshot14}
+    \caption{Screenshot14}
+    \label{fig:Screenshot14}
+\end{figure}
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/ScreenshotTango1}
+    \caption{ScreenshotTango1}
+    \label{fig:ScreenshotTango1}
+\end{figure}
+
+
+
+
+
+
+
+
+\newpage
 
 \section{Bibliography}
 
