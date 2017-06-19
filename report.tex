@@ -887,25 +887,29 @@ connecting to it.\\
 \\
 The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.\\
 \\
-In order to show the speed of ElasticFusion running, a frame counter is displayed on the screen in application, every time the ELasticFusion processed a frame, the frame counter is incremented. This is done by when the screen is rendered by using the \verb|request_render}| function, the increment function is called from the C++ part to the Java part of program using Java Native Interface (JNI), this function call in Java then starts a new \textit{Runnable} using the\textit{runOnUiThread} function to increment the counter and set the text of the counter label.\\
+In order to show the speed of ElasticFusion running, a frame counter is displayed on the screen in application, every time the ELasticFusion processed a frame, the frame counter is incremented. This is done by when the screen is rendered by using the \verb|request_render}| function, the increment function is called from the C++ part to the Java part of program using Java Native Interface (JNI), this function call in Java then starts a new \textit{Runnable} using the \textit{runOnUiThread} function to increment the counter and set the text of the counter label. This function is also implemented on all other functions, including the data logging function and others that runs ElasticFusion.\\
+
+
 
 \subsubsection{Running ElasticFusion dataset on Tango}
-
-
-
-
-
-
+Other than use the live RGBD and pose data from the Tango tablet itself, for experimenting and testing purposes, the application developed is also implemented to run the \verb|dyson_lab.klg| dataset that was used as the example in ElasticFusion paper\citep{whelan2016elasticfusion}, the Dyson Lab dataset however, only contains the RGBD data as it is the data recorded using pure 3D sensor camera. This means the camera tracking function that previous has been turn off by inputing the pose directly to ElasticFusion now has to be running, however the main method to implement this function is similar to the previous function, except for the data does not come from Tango device but the dataset file placed on the device manually.\\
+\\
+To be able to read the RGBD data from dataset file, the \textit{RawLogReader} inherited from \textit{LiveLogReader} that is used to read data from dataset files in the \textit{GUI} part of original ElasticFusion program is extracted out and put into the \textit{runDatasetEF} class created for this function. When data is read from the dataset file, it's checked if it's compressed, if the RGBD data is compressed then the depth data is uncompressed using \textit{uncompress} function in zlib library\footnote{\url{http://zlib.net/}} into a byte buffer, and the RGB image data is uncompressed from JPEG format using OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}}. As mentioned above, since after the adaptation the format of image texture in ElasticFusion is in \verb|GL_RGBA| format, but the RGB image data stored in JPEG format in dataset file does not have the Alpha channel, an Alpha value of 255 is manually added to the back of each "RGB" values in the bytebuffer acquired after uncompression, also since the OpenCV library for Android\footnote{\url{http://opencv.org/platforms/android/}} reads data from JPEG image in "BGR" fashion instead of "RGB", the order is corrected when the Alpha channel value is added.\\
+\\
+The same as to run ElasticFusion from data on Tango, when the button for using dataset to run ElasticFusion is pressed, a new thread for this function is started, for each frame it first read the RGBD data from the dataset, and let the ElasticFusion process the data in a synchronise way, instead of using a circular buffer like the previous function did.\\
+\\
+Since the dataset does not contains pose data, the pose is eatimated in this function using the camera tracking process in ElasticFusion, it make use of the CUDA and SuiteSparse function that are mentioned early. In order to monitor the pose estimation when ElasticFusion is running, the current pose stored in ElasticFusion is acquired using the \textit{getCurrPose} function after frame is process, this pose is stored in Eigen structure \textit{Eigen::Vector4f}, representing by the affine transformation matrix. This pose is then logged out to allow for monitoring, and can be viewed by using the ADB Logcat function when connected to a computer.\\
+\\
+The same as the previous function, when running ElasticFusion using dataset on Tango tablet, the global map reconstructed can be saved to a ply file on the Tango tablet, and the live processed frame count is displayed on the screen. However, due to the time limitation in this project, no GUI is built for the application to allow the user to choose which file to run as dataset, instead a fixed file named \textit{dataset.klg} is used as the dataset to run ElasticFusion, and error will be given if the file is not found.\\
 
 
 
 \subsubsection{Running Tango dataset on Tango}
-
-
-
-
-
-
+One of the problem found when try to run the ElasticFusion using live data from Tango tablet is that, since ElasticFusion runs very slowly on the Tango tablet, and the RGBD and pose data is acquired from the latest position in the circular buffer, the actual frame processed by ElasticFusion is not continous, as discovered that averagely for each frame ElasticFusion is processed, seven frame has been putted into the circular buffer. Since the frame rate of Tango data is already slow on the tablet, only about 3 to 6 Hz, a gap of seven frames is already a large discontinuity in data for ElasticFusion, this results in very poor result of ElasticFusion even when the Tango tablet is held very stable and moving very slowly. One of way that may help is to extend the fixed size of circular buffer, however the uncompressed RGB image and depth data takes up a certain amount of space in memory, and the current 50 frames stored in the buffer is already a considerable space occupied in the memory, since only 4GB memory is available on the Tango tablet to share between CPU and GPU.\\
+\\
+Therefore, for experimenting purpose the function is implemented to use the previously saved RGBD and pose data files to run the ElasticFusion program on Tango tablet, since the data is read and used in a synchronise way, the problem describled above would not arise. To do this a similar class is created as in the prevoius function, so new thread can be started to read data from the RGBD and pose files on the tablet and use them to run ElasticFusion. The RGB image data is also processed to correct the order of "RGB" value and alpha channel value is added and depth data is also uncompressed into a byte buffer. For the pose data reading, the files for class \textit{GroundTruthOdometry} are copied from the \textit{GUI} part of original ElasticFusion program to the Android application and adapted, it's used to read the pose data in the file stored in position and quaternion format and convert it to transformation matrix format using the \textit{Eigen::Vector4f} structure. The read pose is then feed to the ElasticFusion program for processing. One thing to be mindful here is that the \textit{Core} ElasticFusion should take the current pose estimation as input instead of a incremental transformation matrix with respect to the last frame. There are errors in original Elasticfusion source code that have confused between these two, as the pose inputted to ElasticFusion can not only be used as a ground truth pose but also can be used as a estimation to bootstrap the optimization in camera tracking stage, the errors are corrected here.\\
+\\
+Lastly, with RGBD and pose data feed into the ElasticFusion from dataset on Tango, the reconstructed global model can also be saved into a ply file on device, and the current processed frame count is displated on screen. Again, due to time limitation no GUI is built for choosing dataset file to run and fixed file names "tangoRGBDData.klg" and "tangoPosedata.klg" are used.\\
 
 
 
@@ -916,7 +920,10 @@ In order to show the speed of ElasticFusion running, a frame counter is displaye
 
 
 
+
 \subsection{Combine ElasticFusion with pose from Tango in Loop closure mode}
+
+
 
 
 

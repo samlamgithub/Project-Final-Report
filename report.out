@@ -31,18 +31,18 @@
 \BOOKMARK [2][]{subsection.246}{6.5 Running ElasticFusion on Tango}{section.75}% 31
 \BOOKMARK [3][]{subsubsection.247}{6.5.1 Running ElasticFusion using data from Tango}{subsection.246}% 32
 \BOOKMARK [3][]{subsubsection.254}{6.5.2 Running ElasticFusion dataset on Tango}{subsection.246}% 33
-\BOOKMARK [3][]{subsubsection.255}{6.5.3 Running Tango dataset on Tango}{subsection.246}% 34
-\BOOKMARK [2][]{subsection.256}{6.6 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.75}% 35
-\BOOKMARK [2][]{subsection.257}{6.7 Debugging and testing}{section.75}% 36
-\BOOKMARK [1][]{section.267}{7 Evaluation}{}% 37
-\BOOKMARK [2][]{subsection.268}{7.1 Reconstruction Accuracy}{section.267}% 38
-\BOOKMARK [2][]{subsection.269}{7.2 depth sensor noise}{section.267}% 39
-\BOOKMARK [2][]{subsection.270}{7.3 Computation power problem}{section.267}% 40
-\BOOKMARK [2][]{subsection.271}{7.4 Optimization problem}{section.267}% 41
-\BOOKMARK [3][]{subsubsection.272}{7.4.1 Software limitation}{subsection.271}% 42
-\BOOKMARK [1][]{section.273}{8 Conclusions and Future Work}{}% 43
-\BOOKMARK [1][]{section.274}{9 Bibliography}{}% 44
-\BOOKMARK [1][]{section.275}{10 Appendix}{}% 45
-\BOOKMARK [1][]{section.276}{11 User Guide}{}% 46
-\BOOKMARK [1][]{section.277}{12 Program Listings}{}% 47
-\BOOKMARK [1][]{section.278}{13 Word Count}{}% 48
+\BOOKMARK [3][]{subsubsection.258}{6.5.3 Running Tango dataset on Tango}{subsection.246}% 34
+\BOOKMARK [2][]{subsection.259}{6.6 Combine ElasticFusion with pose from Tango in Loop closure mode}{section.75}% 35
+\BOOKMARK [2][]{subsection.260}{6.7 Debugging and testing}{section.75}% 36
+\BOOKMARK [1][]{section.270}{7 Evaluation}{}% 37
+\BOOKMARK [2][]{subsection.271}{7.1 Reconstruction Accuracy}{section.270}% 38
+\BOOKMARK [2][]{subsection.272}{7.2 depth sensor noise}{section.270}% 39
+\BOOKMARK [2][]{subsection.273}{7.3 Computation power problem}{section.270}% 40
+\BOOKMARK [2][]{subsection.274}{7.4 Optimization problem}{section.270}% 41
+\BOOKMARK [3][]{subsubsection.275}{7.4.1 Software limitation}{subsection.274}% 42
+\BOOKMARK [1][]{section.276}{8 Conclusions and Future Work}{}% 43
+\BOOKMARK [1][]{section.277}{9 Bibliography}{}% 44
+\BOOKMARK [1][]{section.278}{10 Appendix}{}% 45
+\BOOKMARK [1][]{section.279}{11 User Guide}{}% 46
+\BOOKMARK [1][]{section.280}{12 Program Listings}{}% 47
+\BOOKMARK [1][]{section.281}{13 Word Count}{}% 48
