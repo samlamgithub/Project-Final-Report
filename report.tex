@@ -608,8 +608,7 @@ TangoErrorType TangoSupport_calculateRelativePose(double base_timestamp, TangoCo
 \end{lstlisting}
 In the ElasticFusion program, the camera intrinsics data have to be provided for image processing, these information can be acquired directly on Tango using the Tango API, function \verb|TangoService_getCameraIntrinsics| returns a \verb|TangoCameraIntrinsics| struct instance corresponds to the input camera id. The Intrinsics struct contains the image width and height, focal length, and distortion coefficients. These information is later being input to the ElasticFusion. The function signature and struct definition is given below.\\
 \begin{lstlisting}
-TangoErrorType TangoService_getCameraIntrinsics(TangoCameraId cameraid,
-    TangoCameraIntrinsics* intrinsics);
+TangoErrorType TangoService_getCameraIntrinsics(TangoCameraId cameraid, TangoCameraIntrinsics* intrinsics);
 \end{lstlisting}
 \begin{lstlisting}
 typedef struct TangoCameraIntrinsics {
@@ -847,23 +846,44 @@ After the ElasticFusion program is compiled on the Tango tablet, actual function
 
 \subsubsection{Running ElasticFusion using data from Tango}
 To run the ElasticFusion program using the RGBD and pose data from Tango tablet, a similar method like the data logging function is used. When the button for this function is pressed on screen, the function called is passed from the event listener in Java part of the application to the C++ part using the Java Native Interface (JNI) on Android platform. Firstly it is checked that no other function is running before the ElasticFusion thread can start, after that when the function started, the RGBD and pose data from Tango will be put into the circular buffer of \textit{RGBDPosedata} structures in the class for this function.\\
-On the other hand
-
-
-
-glReadPixels
-
-glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-  glPixelStorei(GL_PACK_ALIGNMENT, 1);
-
-  glEnable(GL_DEPTH_TEST);
-  glDepthMask(GL_TRUE);
-  glDepthFunc(GL_LESS);
-
-  Eigen::Matrix4f
-
-
-confidenceThreshold
+On the other hand, a new ElasticFusion running thread starts when the button is pressed, firstly a new OpenGL context is created and attached to the current thread as described above, and then the \textit{Resolution} and \textit{Intrinsics} structs from ElasticFusion are configured using Tango camera data acquired use the \textit{\verb|TangoService_getCameraIntrinsics|} function. After that the \textit{ElasticFusion} class is initialised using configurations that makes the program run at fastest speed, such as disable SO(3) pre-alignment, enabling fast odometry by using single level tracking pyramid, disable pose bootstrap, and disable loop closure detection function. Also the \textit{confidenceThreshold} value is set to 0.45 instead of the default value 10.0, the reason for doing it will be explain later. Before the ElasticFusion can process any data, OpenGL ES is configured using the code shown below in Table \ref{table:OpenGL ES configuration}.\\
+\begin{table}
+\centering
+\caption{OpenGL ES configuration}
+\label{table:OpenGL ES configuration}
+\begin{tabular}{|r|l|}
+  \hline
+ glReadPixels \\
+   \hline
+ \verb| glPixelStorei(GL_UNPACK_ALIGNMENT, 1);  | \\
+   \hline
+ \verb|   glPixelStorei(GL_PACK_ALIGNMENT, 1);  | \\
+   \hline
+  \verb|  glEnable(GL_DEPTH_TEST);| \\
+    \hline
+  \verb|  glDepthMask(GL_TRUE);| \\
+    \hline
+  \verb|  glDepthFunc(GL_LESS);  | \\
+    \hline
+\end{tabular}
+\end{table}
+After the set up is done, inside a whileloop the latest RGBD and pose data structure instance from the circular buffer is read out if new data is available. Then the RGBD and pose data is converted into the correct format for ElasticFusion to process.\\
+\\
+In the adaptation of OpenGL code to OpenGL ES code, the format of RGB image has to be changed from \verb|GL_RGB| to \verb|GL_RGBA| in order to match the limitation of OpenGL ES, therefore in order to use the color image data in \verb|GL_RGBA| format when the image data is read out in the \textit{GlCameraFrame} class using the \textit{glReadPixels} function, it's read out in \verb|GL_RGBA| format instead of the \verb|GL_RGB| format used in data logging function.\\
+\\
+In the data processing stage, the depth data is brought into alignment with the camera data coordinate of frame,  upsampled use the same method as in data logging function and converted to millimetre scale to produce a depth map, and the pose data is converted into a \textit{Eigen::Matrix4f} structure for ElasticFusion.\\
+\\
+Then the data is processed by calling the \textit{processFrame} function of ElasticFusion with RGB image data, depth data, pose and timestamp, which the function signature is shown below.
+\\
+\begin{lstlisting}
+void processFrame(const unsigned char *rgb, const unsigned short *depth,
+                    const int64_t &timestamp, const Eigen::Matrix4f *inPose = 0,
+                    const float weightMultiplier = 1.f,
+                    const bool bootstrap = false);
+\end{lstlisting}
+After a frame is processed, the state of ElasticFusion program can be checked by getting some critical values store in it such as the current number of surfels in the global map or the number of frames storing in the fern database. These data is logged out and can be viewed using the \textit{adb logcat} command on computer if the Tango tablet is 
+connecting to it.\\
+The purpose of running ElasticFusion program is to dense 3D reconstruction of the space that the Tango tablet is scanning, therefore the 3D reconstructed map by ElasticFusion must be able to saved in a ply file for viewing or other usage as the desktop version does. On the application developed this can be done by simply pressing the "save" button on screen, this will set a thread safe flag using mutex lock, so that after a data frame is processing when the ElasticFusion thread checks this flag, it will save the map if the flag is set. The saving of is map into ply file is the same as in original ElasticFusion program, the map is downloaded as 3D points from the \textit{Globalmodel} class and then each point's confidence value is checked against the \textit{confidenceThreshold} value set before, if the point's confidence value is above the threshold then it's saved to the file. The saved ply file is supposed to be able to view on applications on the Tango tablet such as "MeshLab for Android", however no attempt is successful for unknown reason.
 
 \subsubsection{Running ElasticFusion dataset on Tango}
 
